@@ -4,11 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using CapaNegocio;
 
-namespace CapaPresentacion
+namespace CapaPresentacion.Acceso
 {
-    public partial class _Default : Page
+    public partial class AccesoDenegado : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

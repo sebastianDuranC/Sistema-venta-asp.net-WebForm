@@ -1,0 +1,12 @@
+{
+  "name": "webformelfogon",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tailwindcss --config ./CapaPresentacion/tailwind.config.js -i ./CapaPresentacion/src/input.css -o ./CapaPresentacion/css/tailwind.css --watch --verbose",
+    "build:prod": "tailwindcss --config ./CapaPresentacion/tailwind.config.js -i ./CapaPresentacion/src/input.css -o ./CapaPresentacion/css/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
