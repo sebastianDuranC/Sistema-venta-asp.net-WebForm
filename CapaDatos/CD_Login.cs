@@ -61,19 +61,8 @@ namespace CapaDatos
                     // Comparamos si el rolID tiene permisos en el formularioID
                     comandoQuery.Parameters.AddWithValue("@RolId", rolId);
                     comandoQuery.Parameters.AddWithValue("@FormularioId", formularioId);
-                    leer = comandoQuery.ExecuteReader();
-                    int tienePermiso = 0;
-                    if (leer.Read())
-                    {
-                        tienePermiso = Convert.ToInt32(comandoQuery.ExecuteScalar()); //Si es 1 el rol tiene permisos al formulario si es 0 entonces no
-                    }
-                    leer.Close();
+                    int tienePermiso = Convert.ToInt32(comandoQuery.ExecuteScalar()); //Si es 1 el rol tiene permisos al formulario si es 0 entonces no
                     return tienePermiso > 0;
-                }
-                catch (Exception)
-                {
-
-                    throw;
                 }
                 finally
                 {
