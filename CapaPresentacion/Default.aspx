@@ -1,44 +1,53 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CapaPresentacion._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">Sistema de venta El Fogón - Default</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
-
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="flex flex-col justify-between rounded-xl bg-white p-6 shadow">
+            <span class="text-sm text-gray-500">Ventas del Día</span>
+            <span class="text-3xl font-bold text-[#212f3d]">Bs. 0</span>
         </div>
-    </main>
-
+        <div class="flex flex-col justify-between rounded-xl bg-white p-6 shadow">
+            <span class="text-sm text-gray-500">Total Ingreso del Mes</span>
+            <span class="text-3xl font-bold text-[#212f3d]">Bs. 0</span>
+        </div>
+        <div class="flex flex-col justify-between rounded-xl bg-white p-6 shadow">
+            <span class="text-sm text-gray-500">Platos del Día</span>
+            <span class="text-3xl font-bold text-[#212f3d]">0</span>
+        </div>
+    </div>
+    <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="rounded-xl bg-white p-6 shadow">
+            <span class="font-semibold">Ventas Diarias</span>
+            <div class="flex h-32 items-center justify-center text-gray-300">[Gráfica]</div>
+        </div>
+        <div class="rounded-xl bg-white p-6 shadow">
+            <span class="font-semibold">Top 5 Productos</span>
+            <div class="flex h-32 items-center justify-center text-gray-300">[Lista de productos]</div>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="rounded-xl bg-white p-6 shadow">
+            <span class="font-semibold">Tipos de Venta</span>
+            <div class="flex h-24 items-center justify-center text-gray-300">[Gráfica]</div>
+        </div>
+        <div class="rounded-xl bg-white p-6 shadow">
+            <span class="font-semibold">Últimos Pedidos</span>
+            <div class="overflow-x-auto">
+                <table class="mt-2 min-w-full text-left text-sm">
+                    <thead>
+                        <tr>
+                            <th class="font-bold">Cliente</th>
+                            <th class="font-bold">Tipo</th>
+                            <th class="font-bold">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-gray-400">
+                            <td colspan="3">Sin datos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

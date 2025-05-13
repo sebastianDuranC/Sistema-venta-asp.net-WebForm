@@ -1,45 +1,46 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="CapaPresentacion.Acceso.Login" %>
 
 <!DOCTYPE html>
-<html class="h-full bg-gray-50">
+<html class="h-full bg-gray-100">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Sistema de Venta</title>
-    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body class="flex h-full items-center justify-center">
-    <form id="form1" runat="server" class="w-full max-w-md">
-        <div class="rounded-lg bg-white px-10 py-8 shadow-lg">
-            <div class="mb-8 text-center">
-                <h2 class="text-2xl font-semibold text-gray-800">Inicio de sesión</h2>
+<body class="flex min-h-screen items-center justify-center">
+    <form id="form1" runat="server" class="min-w-48 max-w-md">
+        <div class="rounded-lg border border-gray-200 bg-white p-8 shadow-md">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-gray-800">Inicio de sesión</h2>
+                <p class="mt-3 text-red-600">Ingresa tus credenciales para acceder</p>
             </div>
 
-            <div class="space-y-6">
+            <div class="space-y-8">
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-gray-700">Usuario</label>
+                    <label class="mb-3 block text-gray-700">Usuario</label>
                     <asp:TextBox ID="txtUsuario" runat="server" 
-                        CssClass="w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        CssClass="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-gray-500"
                         placeholder="Ingrese su usuario">
                     </asp:TextBox>
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-gray-700">Contraseña</label>
+                    <label class="mb-3 block text-gray-700">Contraseña</label>
                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"
-                        CssClass="w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        CssClass="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-gray-500"
                         placeholder="Ingrese su contraseña">
                     </asp:TextBox>
                 </div>
 
-                <div>
+                <div class="mt-10">
                     <asp:Button ID="btnIngresar" runat="server" Text="Ingresar al sistema" 
-                        CssClass="w-full rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        CssClass="w-full rounded-lg bg-gray-800 p-3 font-medium text-white hover:bg-gray-700"
                         OnClick="btnIngresar_Click" />
                 </div>
 
                 <asp:Panel ID="pnlMensaje" runat="server" Visible="false" 
-                    CssClass="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                    CssClass="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-red-600">
                     <asp:Label ID="lblMensaje" runat="server" />
                 </asp:Panel>
             </div>
