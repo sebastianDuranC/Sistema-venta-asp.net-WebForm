@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="CapaPresentacion.Form.Index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Permisos.aspx.cs" Inherits="CapaPresentacion.Form.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     Formularios
      <h3 class=""> Registrar nuevo formularios</h3>

@@ -15,7 +15,7 @@ namespace CapaEntidades
         public int CategoriaId { get; set; }
         public int ProveedorId { get; set; }
         public string FotoUrl { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
         public int UnidadesMedidaId { get; set; }
 
         public virtual Categoria Categoria { get; set; }

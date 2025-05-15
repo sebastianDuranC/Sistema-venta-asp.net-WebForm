@@ -10,7 +10,7 @@ namespace CapaEntidades
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual ICollection<Producto> Productos { get; set; }
         public virtual ICollection<Insumo> Insumos { get; set; }

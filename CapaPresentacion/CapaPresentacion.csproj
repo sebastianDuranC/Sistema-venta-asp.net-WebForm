@@ -1204,8 +1204,8 @@
     <Content Include="node_modules\update-browserslist-db\package.json" />
     <Content Include="node_modules\update-browserslist-db\README.md" />
     <Content Include="node_modules\update-browserslist-db\utils.js" />
-    <Content Include="Pages\form\Index.aspx" />
-    <Content Include="Pages\rolpermisosmapping\Index.aspx" />
+    <Content Include="Pages\Permisos\Permisos.aspx" />
+    <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
     <Content Include="postcss.config.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -1332,19 +1332,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Pages\form\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="Pages\Permisos\Permisos.aspx.cs">
+      <DependentUpon>Permisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\form\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="Pages\Permisos\Permisos.aspx.designer.cs">
+      <DependentUpon>Permisos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\rolpermisosmapping\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="Pages\RolPermisos\RolPermisos.aspx.cs">
+      <DependentUpon>RolPermisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\rolpermisosmapping\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="Pages\RolPermisos\RolPermisos.aspx.designer.cs">
+      <DependentUpon>RolPermisos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

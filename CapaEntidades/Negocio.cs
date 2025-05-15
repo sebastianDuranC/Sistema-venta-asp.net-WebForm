@@ -12,7 +12,7 @@ namespace CapaEntidades
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string LogoUrl { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }

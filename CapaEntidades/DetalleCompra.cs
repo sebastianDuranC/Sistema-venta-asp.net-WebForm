@@ -13,7 +13,7 @@ namespace CapaEntidades
         public int InsumoId { get; set; }
         public decimal Cantidad { get; set; }
         public decimal Costo { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual Compra Compra { get; set; }
         public virtual Insumo Insumo { get; set; }

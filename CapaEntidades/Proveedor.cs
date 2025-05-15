@@ -11,7 +11,7 @@ namespace CapaEntidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Contacto { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual ICollection<Insumo> Insumos { get; set; }
     }

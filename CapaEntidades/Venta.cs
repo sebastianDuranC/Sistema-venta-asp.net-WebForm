@@ -15,7 +15,7 @@ namespace CapaEntidades
         public int? ClienteId { get; set; }
         public int UsuarioId { get; set; }
         public int MetodoPagoId { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual Usuario Usuario { get; set; }

@@ -14,7 +14,7 @@ namespace CapaEntidades
         public decimal? Stock { get; set; }
         public int CategoriaId { get; set; }
         public string FotoUrl { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual ICollection<DetalleVenta> DetallesVenta { get; set; }

@@ -166,7 +166,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Compra.cs" />
     <Compile Include="DetalleVenta.cs" />
-    <Compile Include="Form.cs" />
+    <Compile Include="Permisos.cs" />
     <Compile Include="MetodoPago.cs" />
     <Compile Include="MovimientoInventario.cs" />
     <Compile Include="Negocio.cs" />
@@ -174,7 +174,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Rol.cs" />
-    <Compile Include="RolPermisosMapping.cs" />
+    <Compile Include="RolPermisos.cs" />
     <Compile Include="UnidadesMedida.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Venta.cs" />

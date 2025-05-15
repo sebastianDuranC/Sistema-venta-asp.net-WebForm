@@ -15,7 +15,7 @@ namespace CapaEntidades
         public decimal Cantidad { get; set; }
         public string Observacion { get; set; }
         public int UsuarioId { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual Insumo Insumo { get; set; }
         public virtual Usuario Usuario { get; set; }

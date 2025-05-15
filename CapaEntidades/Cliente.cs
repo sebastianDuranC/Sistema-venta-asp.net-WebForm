@@ -13,7 +13,7 @@ namespace CapaEntidades
         public bool EsComerciante { get; set; }
         public string NumeroLocal { get; set; }
         public string Pasillo { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual ICollection<Venta> Ventas { get; set; }
     }

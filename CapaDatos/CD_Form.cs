@@ -12,7 +12,7 @@ namespace CapaDatos
     public class CD_Form
     {
         private CD_Conexion conexion = new CD_Conexion();
-        SqlCommand comandoQuery = new SqlCommand(); //Obj para utilizar las sentencias sql (insert, update, delete, select, procedure stored)
+        SqlCommand comandoQuery = new SqlCommand();
         public bool RegistrarForm(string nombreForm, string formRuta)
         {
             comandoQuery.Connection = conexion.AbrirBd();
@@ -30,28 +30,27 @@ namespace CapaDatos
             return true;
         }
 
-        public List<Form> ObtenerForm()
+        public List<Permisos> ObtenerForm()
         {
-            List<Form> values = new List<Form>();
+            List<Permisos> values = new List<Permisos>();
             comandoQuery.Connection = conexion.AbrirBd();
             comandoQuery.CommandText = "sp_ObtenerForm";
             comandoQuery.CommandType = CommandType.StoredProcedure;
             SqlDataReader reader = comandoQuery.ExecuteReader();
             while (reader.Read())
             {
-                values.Add(new Form
+                values.Add(new Permisos
                 {
                     Id = Convert.ToInt32(reader["Id"]),
                     FormNombre = reader["FormNombre"].ToString(),
                     FormRuta = reader["FormRuta"].ToString(),
-                    EstadoId = Convert.ToBoolean(reader["EstadoId"])
+                    Estado = Convert.ToBoolean(reader["Estado"])
                 });
             }
             comandoQuery.Connection = conexion.CerrarBd();
             return values;
         }
 
-        // dE LA TABLA Form
         public int ObtenerFormularioIdNombre(string currentNombreForm)
         {
             comandoQuery.Connection = conexion.AbrirBd();

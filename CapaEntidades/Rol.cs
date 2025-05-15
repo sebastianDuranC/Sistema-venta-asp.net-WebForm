@@ -10,9 +10,9 @@ namespace CapaEntidades
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public bool EstadoId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; }
-        public virtual ICollection<RolPermisosMapping> RolPermisosMappings { get; set; }
+        public virtual ICollection<RolPermisos> RolPermisos { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace CapaDatos
             leer = comandoQuery.ExecuteReader();
             if (leer.Read())
             {
-                esPermitido = Convert.ToBoolean(leer["EstadoId"]);
+                esPermitido = Convert.ToBoolean(leer["Estado"]);
             }
             conexion.CerrarBd();
             return esPermitido;

@@ -32,7 +32,7 @@ namespace CapaNegocio
             }
         }
 
-        public List<Form> obtenerForm()
+        public List<Permisos> obtenerForm()
         {
             try
             {
