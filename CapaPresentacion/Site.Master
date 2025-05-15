@@ -38,20 +38,20 @@
             <div id="sidebar" class="w-64 rounded-2xl bg-[#212f3d] py-4 text-white transition-all duration-300 flex flex-col">
                 <!-- Toggle -->
                 <div class="mb-4 flex h-12 cursor-pointer items-center justify-center" onclick="toggleSidebar()">
-                    <img src="wwwroot/images/icons8-menú-60.png" class="h-8 w-8 transition-transform duration-300" id="sidebar-toggle-icon" alt="Menú" />
+                    <img src="/wwwroot/images/icons8-menú-60.png" class="h-8 w-8 transition-transform duration-300" id="sidebar-toggle-icon" alt="Menú" />
                 </div>
                 <!-- Menú principal -->
                 <nav class="flex-grow space-y-1">
                     <a href="~/" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="wwwroot/images/icons8-dashboard-layout-48.png" alt="Dashboard" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-dashboard-layout-48.png" alt="Dashboard" class="h-6 w-6" />
                         <span class="menu-text ml-4 whitespace-nowrap">Dashboard</span>
                     </a>
                     <!-- Ventas -->
                     <div class="menu-group">
                         <div onclick="toggleSubmenu('ventas-submenu')" class="menu-item flex cursor-pointer items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                            <img src="wwwroot/images/icons8-comida-real-para-comidas-96.png" alt="Ventas" class="h-6 w-6" />
+                            <img src="/wwwroot/images/icons8-comida-real-para-comidas-96.png" alt="Ventas" class="h-6 w-6" />
                             <span class="menu-text ml-4 whitespace-nowrap">Ventas</span>
-                            <img src="wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
+                            <img src="/wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
                         </div>
                         <div id="ventas-submenu" class="submenu hidden pl-12">
                             <a href="#" class="submenu-item block py-2 hover:text-gray-300">Platos</a>
@@ -63,9 +63,9 @@
                     <!-- Compras -->
                     <div class="menu-group">
                         <div onclick="toggleSubmenu('compras-submenu')" class="menu-item flex cursor-pointer items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                            <img src="wwwroot/images/icons8-comprar-50.png" alt="Compras" class="h-6 w-6" />
+                            <img src="/wwwroot/images/icons8-comprar-50.png" alt="Compras" class="h-6 w-6" />
                             <span class="menu-text ml-4 whitespace-nowrap">Compras</span>
-                            <img src="wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
+                            <img src="/wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
                         </div>
                         <div id="compras-submenu" class="submenu hidden pl-12">
                             <a href="#" class="submenu-item block py-2 hover:text-gray-300">Registrar</a>
@@ -75,9 +75,9 @@
                     <!-- Inventario -->
                     <div class="menu-group">
                         <div onclick="toggleSubmenu('inventario-submenu')" class="menu-item flex cursor-pointer items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                            <img src="wwwroot/images/icons8-inventario-100.png" alt="Inventario" class="h-6 w-6" />
+                            <img src="/wwwroot/images/icons8-inventario-100.png" alt="Inventario" class="h-6 w-6" />
                             <span class="menu-text ml-4 whitespace-nowrap">Inventario</span>
-                            <img src="wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
+                            <img src="/wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
                         </div>
                         <div id="inventario-submenu" class="submenu hidden pl-12">
                             <a href="#" class="submenu-item block py-2 hover:text-gray-300">Stock</a>
@@ -85,20 +85,20 @@
                         </div>
                     </div>
                     <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="wwwroot/images/icons8-usuario-60.png" alt="Sucursal" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-usuario-60.png" alt="Sucursal" class="h-6 w-6" />
                         <span class="menu-text ml-4 whitespace-nowrap">Sucursal</span>
                     </a>
                     <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="wwwroot/images/icons8-informe-gráfico-100.png" alt="Reporte" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-informe-gráfico-100.png" alt="Reporte" class="h-6 w-6" />
                         <span class="menu-text ml-4 whitespace-nowrap">Reporte</span>
                     </a>
                     <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="wwwroot/images/icons8-settings-100.png" alt="Configuracion" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-settings-100.png" alt="Configuracion" class="h-6 w-6" />
                         <span class="menu-text ml-4 whitespace-nowrap">Configuracion</span>
                     </a>
                     <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="wwwroot/images/icons8-salida-48.png" alt="Salir" class="h-6 w-6" />
-                        <span class="menu-text ml-4 whitespace-nowrap">Salir</span>
+                        <img src="/wwwroot/images/icons8-salida-48.png" alt="Salir" class="h-6 w-6" />
+                        <asp:Button Text="Cerrar Sesion" runat="server" ID="cerrarSesion" OnClick="cerrarSesion_Click" CssClass="menu-text ml-4 whitespace-nowrap"/>
                     </a>
                 </nav>
             </div>

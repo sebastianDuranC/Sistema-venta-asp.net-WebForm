@@ -9,9 +9,9 @@ namespace CapaNegocio
 {
     public class CN_Login
     {
-        private CD_Login datos = new CD_Login();
+        private CD_Login CD_Datos = new CD_Login();
 
-        public bool UsuarioDatos(string usuario, string password)
+        public bool ValidarCredencialesUsuario(string usuario, string password)
         {
             try
             {
@@ -19,24 +19,23 @@ namespace CapaNegocio
                 {
                     return false;
                 }
-                return datos.LoginUsuario(usuario, password);
+                return CD_Datos.ValidarCredencialesUsuario(usuario, password);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception ("Error al intentar iniciar sesión: " + ex);
             }
         }
-        public bool TienePermiso(string currentUsuario, string currentNombreForm)
+        public bool UsuarioTienePermisoForm(string currentUsuario, string currentNombreForm)
         {
+            CD_RolPermisos cD_RolPermisos = new CD_RolPermisos(); 
             try
             {
-                return datos.TienePermiso(currentUsuario, currentNombreForm);
+                return cD_RolPermisos.UsuarioTienePermisoForm(currentUsuario, currentNombreForm);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Error al intentar saber el permiso al form: " + ex);
             }
         }
     }

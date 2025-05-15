@@ -18,26 +18,19 @@ namespace CapaPresentacion.Acceso
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string usuario = txtUsuario.Text.Trim();
-                string password = txtPassword.Text.Trim();
+            string usuario = txtUsuario.Text.Trim();
+            string password = txtPassword.Text.Trim();
 
-                CN_Login negocio = new CN_Login();
-                if (negocio.UsuarioDatos(usuario, password))
-                {
-                    FormsAuthentication.SetAuthCookie(usuario, false);
-                    Session["usuario"] = usuario;
-                    Response.Redirect("~/Default.aspx");
-                }
-                else
-                {
-                    MostrarMensaje("Usuario o contraseña incorrectos");
-                }
-            }
-            catch (Exception ex)
+            CN_Login CN_negocio = new CN_Login();
+            if (CN_negocio.ValidarCredencialesUsuario(usuario, password))
             {
-                MostrarMensaje("Error al intentar iniciar sesión: " + ex.Message);
+                FormsAuthentication.SetAuthCookie(usuario, false);
+                Session["usuario"] = usuario;
+                Response.Redirect("~/Default.aspx");
+            }
+            else
+            {
+                MostrarMensaje("Usuario o contraseña incorrectos");
             }
         }
 

@@ -9,11 +9,11 @@
     <link href="~/css/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="flex min-h-screen items-center justify-center">
-    <form id="form1" runat="server" class="min-w-48 max-w-md">
+    <form id="form1" runat="server" class="max-w-md">
         <div class="rounded-lg border border-gray-200 bg-white p-8 shadow-md">
             <div class="mb-10 text-center">
                 <h2 class="text-3xl font-bold text-gray-800">Inicio de sesión</h2>
-                <p class="mt-3 text-red-600">Ingresa tus credenciales para acceder</p>
+                <p class="mt-3 text-gray-600">Ingresa tus credenciales para acceder</p>
             </div>
 
             <div class="space-y-8">

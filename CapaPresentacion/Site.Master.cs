@@ -28,15 +28,15 @@ namespace CapaPresentacion
             string currentNombreForm = "~" + Request.Url.AbsolutePath + ".aspx";
 
             CN_Login CN_Login = new CN_Login();
-            if (!CN_Login.TienePermiso(currentUsuario, currentNombreForm))
+            if (!CN_Login.UsuarioTienePermisoForm(currentUsuario, currentNombreForm))
             {
                 Response.Redirect("~/Acceso/AccesoDenegado.aspx");
                 return;
             }
-            // Si tiene permiso, deja que la página siga cargando
+            //Si tiene permiso, deja que la página siga cargando
         }
 
-        protected void Unnamed_Click(object sender, EventArgs e)
+        protected void cerrarSesion_Click(object sender, EventArgs e)
         {
             if (Session["usuario"] != null)
             {

@@ -50,5 +50,23 @@ namespace CapaDatos
             comandoQuery.Connection = conexion.CerrarBd();
             return values;
         }
+
+        // dE LA TABLA Form
+        public int ObtenerFormularioIdNombre(string currentNombreForm)
+        {
+            comandoQuery.Connection = conexion.AbrirBd();
+            comandoQuery.CommandText = "sp_ObtenerFormularioIdNombre";
+            comandoQuery.CommandType = CommandType.StoredProcedure;
+            comandoQuery.Parameters.Clear();
+
+            comandoQuery.Parameters.AddWithValue("@FormNombre", currentNombreForm);
+            object resultado = comandoQuery.ExecuteScalar();
+            if (resultado != null && resultado != DBNull.Value)
+            {
+                return Convert.ToInt32(resultado);
+            }
+            conexion.CerrarBd();
+            return -1; // Si no se encuentra el formulario, devolvemos -1
+        }
     }
 }

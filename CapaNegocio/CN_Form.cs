@@ -28,7 +28,6 @@ namespace CapaNegocio
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -39,9 +38,9 @@ namespace CapaNegocio
             {
                 return form.ObtenerForm();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Error al obtener la lista de formularios", ex);
+                throw;
             }
         }
     }
