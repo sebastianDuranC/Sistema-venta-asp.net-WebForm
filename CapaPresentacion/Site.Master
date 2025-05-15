@@ -5,128 +5,93 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - El Fogón</title>
-    <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
+    <title><%: Page.Title %> - POS Restaurante</title>
+    <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css"/>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <style>
-        /* Oculta el texto cuando el sidebar está colapsado */
-        #sidebar.w-20 .menu-text {
-            display: none;
-        }
-        #sidebar.w-20 .submenu {
+        #sidebar.w-20 .menu-text,
+        #sidebar.w-20 .submenu,
+        #sidebar.w-20 .submenu-arrow {
             display: none !important;
         }
-        #sidebar.w-20 .submenu-arrow {
-            display: none;
+        #sidebar.w-20 .menu-text {
+            opacity: 0;
         }
     </style>
 </head>
 <body class="h-full">
     <form runat="server">
-        <asp:ScriptManager runat="server">
-            <Scripts>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-            </Scripts>
-        </asp:ScriptManager>
+        <asp:ScriptManager runat="server" />
 
-        <div class="flex min-h-screen gap-4 bg-gray-200 p-5">
+        <div class="flex min-h-screen bg-red-100 transition-all duration-300">
             <!-- Sidebar -->
-            <div id="sidebar" class="w-64 rounded-2xl bg-[#212f3d] py-4 text-white transition-all duration-300 flex flex-col">
-                <!-- Toggle -->
-                <div class="mb-4 flex h-12 cursor-pointer items-center justify-center" onclick="toggleSidebar()">
-                    <img src="/wwwroot/images/icons8-menú-60.png" class="h-8 w-8 transition-transform duration-300" id="sidebar-toggle-icon" alt="Menú" />
+            <aside id="sidebar" class="w-64 bg-secondary shadow-lg transition-all duration-300 flex flex-col justify-between">
+                <!-- Header: Logo + toggle -->
+                <div class="flex items-center gap-3 px-6 py-4 border-b">
+                    <img src="/wwwroot/images/icons8-menú-60.png" alt="Menú" class="h-6 w-6 cursor-pointer transition-transform duration-300" id="sidebar-toggle-icon" onclick="toggleSidebar()" />
+                    <span class="text-xl font-bold text-white select-none menu-text">POS El Fogón</span>
                 </div>
-                <!-- Menú principal -->
-                <nav class="flex-grow space-y-1">
-                    <a href="~/" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="/wwwroot/images/icons8-dashboard-layout-48.png" alt="Dashboard" class="h-6 w-6" />
-                        <span class="menu-text ml-4 whitespace-nowrap">Dashboard</span>
+
+                <!-- Navegación -->
+                <nav class="flex flex-col gap-1 px-2 py-4">
+                    <a href="~/" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-dashboard-layout-48.png" class="h-6 w-6" />
+                        <span class="menu-text">Dashboard</span>
                     </a>
-                    <!-- Ventas -->
-                    <div class="menu-group">
-                        <div onclick="toggleSubmenu('ventas-submenu')" class="menu-item flex cursor-pointer items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                            <img src="/wwwroot/images/icons8-comida-real-para-comidas-96.png" alt="Ventas" class="h-6 w-6" />
-                            <span class="menu-text ml-4 whitespace-nowrap">Ventas</span>
-                            <img src="/wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
-                        </div>
-                        <div id="ventas-submenu" class="submenu hidden pl-12">
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Platos</a>
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Ventas</a>
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Clientes</a>
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Detalle</a>
-                        </div>
-                    </div>
-                    <!-- Compras -->
-                    <div class="menu-group">
-                        <div onclick="toggleSubmenu('compras-submenu')" class="menu-item flex cursor-pointer items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                            <img src="/wwwroot/images/icons8-comprar-50.png" alt="Compras" class="h-6 w-6" />
-                            <span class="menu-text ml-4 whitespace-nowrap">Compras</span>
-                            <img src="/wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
-                        </div>
-                        <div id="compras-submenu" class="submenu hidden pl-12">
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Registrar</a>
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Historial</a>
-                        </div>
-                    </div>
-                    <!-- Inventario -->
-                    <div class="menu-group">
-                        <div onclick="toggleSubmenu('inventario-submenu')" class="menu-item flex cursor-pointer items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                            <img src="/wwwroot/images/icons8-inventario-100.png" alt="Inventario" class="h-6 w-6" />
-                            <span class="menu-text ml-4 whitespace-nowrap">Inventario</span>
-                            <img src="/wwwroot/images/icons8-flecha-abajo-24.png" alt="Flecha" class="submenu-arrow ml-auto h-4 w-4 transform transition-transform" />
-                        </div>
-                        <div id="inventario-submenu" class="submenu hidden pl-12">
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Stock</a>
-                            <a href="#" class="submenu-item block py-2 hover:text-gray-300">Movimientos</a>
-                        </div>
-                    </div>
-                    <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="/wwwroot/images/icons8-usuario-60.png" alt="Sucursal" class="h-6 w-6" />
-                        <span class="menu-text ml-4 whitespace-nowrap">Sucursal</span>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-comida-real-para-comidas-96.png" class="h-6 w-6" />
+                        <span class="menu-text">Ventas</span>
                     </a>
-                    <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="/wwwroot/images/icons8-informe-gráfico-100.png" alt="Reporte" class="h-6 w-6" />
-                        <span class="menu-text ml-4 whitespace-nowrap">Reporte</span>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-inventario-100.png" class="h-6 w-6" />
+                        <span class="menu-text">Productos</span>
                     </a>
-                    <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="/wwwroot/images/icons8-settings-100.png" alt="Configuracion" class="h-6 w-6" />
-                        <span class="menu-text ml-4 whitespace-nowrap">Configuracion</span>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-inventario-100.png" class="h-6 w-6" />
+                        <span class="menu-text">Inventario</span>
                     </a>
-                    <a href="#" class="menu-item flex items-center px-4 py-2 transition-colors duration-200 hover:bg-white/20">
-                        <img src="/wwwroot/images/icons8-salida-48.png" alt="Salir" class="h-6 w-6" />
-                        <asp:Button Text="Cerrar Sesion" runat="server" ID="cerrarSesion" OnClick="cerrarSesion_Click" CssClass="menu-text ml-4 whitespace-nowrap"/>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-comprar-50.png" class="h-6 w-6" />
+                        <span class="menu-text">Compras</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-usuario-60.png" class="h-6 w-6" />
+                        <span class="menu-text">Usuarios</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-settings-100.png" class="h-6 w-6" />
+                        <span class="menu-text">Configuración</span>
                     </a>
                 </nav>
-            </div>
-            <!-- Contenido principal -->
-            <main class="flex-1 flex items-center justify-center rounded-2xl bg-white p-6 min-h-[80vh]">
+
+                <!-- Cerrar sesión -->
+                <div class="p-4 border-t">
+                    <a href="#" class="flex items-center gap-2 px-3 py-2 hover:bg-red-600 text-white rounded-lg shadow transition font-medium">
+                        <img src="/wwwroot/images/icons8-salida-48.png" class="h-5 w-5" />
+                        <span class="menu-text"><asp:Button Text="Cerrar Sesion" runat="server" OnClick="cerrarSesion_Click" CssClass="bg-transparent border-0 p-0 m-0 text-white hover:text-white focus:outline-none" /></span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 flex flex-col items-center justify-start p-8 bg-contentbg transition-all duration-300 text-primary">
                 <div class="w-full max-w-7xl">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
             </main>
         </div>
+
+        <!-- Script para el sidebar -->
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const icon = document.getElementById('sidebar-toggle-icon');
+                sidebar.classList.toggle('w-64');
+                sidebar.classList.toggle('w-20');
+                icon.classList.toggle('rotate-180');
+            }
+        </script>
     </form>
-
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const icon = document.getElementById('sidebar-toggle-icon');
-            sidebar.classList.toggle('w-64');
-            sidebar.classList.toggle('w-20');
-            icon.classList.toggle('rotate-180');
-        }
-
-        function toggleSubmenu(id) {
-            const submenu = document.getElementById(id);
-            const arrow = submenu.previousElementSibling.querySelector('.submenu-arrow');
-            submenu.classList.toggle('hidden');
-            arrow.classList.toggle('rotate-180');
-        }
-    </script>
 </body>
 </html>

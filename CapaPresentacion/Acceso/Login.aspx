@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Sistema de Venta</title>
-    <link href="~/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="flex min-h-screen items-center justify-center">
     <form id="form1" runat="server" class="max-w-md">

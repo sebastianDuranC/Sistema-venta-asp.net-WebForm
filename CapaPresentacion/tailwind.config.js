@@ -1,15 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        './**/*.aspx',
-        './**/*.ascx',
-        './**/*.Master',
-        './**/*.aspx.cs',
-        './**/*.master.cs'
-    ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    content: ["./**/*.aspx", "./**/*.ascx", "./**/*.Master"], // Adjust paths as needed
+    theme: {
+        extend: {
+            colors: {
+                primary: '#080708', // Para texto, botones y títulos
+                secondary: '#DF2935', // Para el fondo del panel izquierdo
+                contentbg: '#E6E8E6', // Para el fondo del contenido derecho
+            },
+        },
+    },
+    plugins: [],
 }
-

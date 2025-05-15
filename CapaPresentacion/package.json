@@ -1,18 +1,11 @@
 {
-  "name": "capapresentacion",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "build:css": "npx tailwindcss -i ./wwwroot/tailwind.css -o ./css/styles.css --minify",
-    "watch:css": "npx tailwindcss -i ./wwwroot/tailwind.css -o ./css/styles.css --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.6"
+    "tailwindcss": "^3.4.17"
+  },
+  "scripts": {
+    "build": "tailwindcss -i ./wwwroot/site.css -o ./wwwroot/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./wwwroot/site.css -o ./wwwroot/css/tailwind.css --watch=always"
   }
 }
