@@ -10,7 +10,7 @@ namespace CapaEntidades
     {
         public int Id { get; set; }
         public int RolId { get; set; }
-        public int FormId { get; set; }
+        public int PermisosId { get; set; }
         public bool Estado { get; set; }
 
         public virtual Rol Rol { get; set; }

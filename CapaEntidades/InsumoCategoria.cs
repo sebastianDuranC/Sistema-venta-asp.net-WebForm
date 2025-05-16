@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace CapaEntidades
 {
-    public class Permisos
+    public class InsumoCategoria
     {
         public int Id { get; set; }
-        public string FormNombre { get; set; }
-        public string FormRuta { get; set; }
+        public string Nombre { get; set; }
         public bool Estado { get; set; }
 
-        public virtual ICollection<RolPermisos> RolesPermisos { get; set; }
+        public virtual ICollection<Insumo> Insumos { get; set; }
     }
 }

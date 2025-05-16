@@ -48,42 +48,33 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
         protected void btnRolPermisos_Click(object sender, EventArgs e)
         {
             int totalUpdates = 0;
-            try
+            if (Session["usuario"] != null)
             {
-                if (Session["usuario"] != null)
+                foreach (RepeaterItem rolItem in rptRoles.Items)
                 {
-                    foreach (RepeaterItem rolItem in rptRoles.Items)
+                    int rolId = Convert.ToInt32(((Label)rolItem.FindControl("lblRolId")).Text);
+                    Repeater rptForm = (Repeater)rolItem.FindControl("rptForm");
+                    foreach (RepeaterItem formItem in rptForm.Items)
                     {
-                        int rolId = Convert.ToInt32(((Label)rolItem.FindControl("lblRolId")).Text);
-                        Repeater rptForm = (Repeater)rolItem.FindControl("rptForm");
-                        foreach (RepeaterItem formItem in rptForm.Items)
-                        {
-                            int formId = Convert.ToInt32(((HiddenField)formItem.FindControl("hdnFormId")).Value);
-                            CheckBox checkBoxPermisos = (CheckBox)formItem.FindControl("checkFormPermisos");
-                            bool isChecked = checkBoxPermisos.Checked;
+                        int formId = Convert.ToInt32(((HiddenField)formItem.FindControl("hdnFormId")).Value);
+                        CheckBox checkBoxPermisos = (CheckBox)formItem.FindControl("checkFormPermisos");
+                        bool isChecked = checkBoxPermisos.Checked;
 
-                            CN_RolPermisos permisosNegocio = new CN_RolPermisos();
-                            // Si tu método ActualizarRolPermisos puede devolver un bool/int de éxito, úsalo aquí
-                            permisosNegocio.ActualizarRolPermisos(rolId, formId, isChecked);
-                            totalUpdates++;
-                        }
+                        CN_RolPermisos permisosNegocio = new CN_RolPermisos();
+                        permisosNegocio.ActualizarRolPermisos(rolId, formId, isChecked);
+                        totalUpdates++;
                     }
                 }
-
-                if (totalUpdates > 0)
-                {
-                    lblMensaje.Text = "Permisos guardados correctamente.";
-                    lblMensaje.ForeColor = System.Drawing.Color.Green;
-                }
-                else
-                {
-                    lblMensaje.Text = "¡Error al guardar permisos!";
-                    lblMensaje.ForeColor = System.Drawing.Color.Red;
-                }
             }
-            catch (Exception ex)
+
+            if (totalUpdates > 0)
             {
-                lblMensaje.Text = "Error al guardar permisos: " + ex.Message;
+                lblMensaje.Text = "Permisos guardados correctamente.";
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblMensaje.Text = "¡Error al guardar permisos!";
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
             }
         }

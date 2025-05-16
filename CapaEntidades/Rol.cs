@@ -13,6 +13,6 @@ namespace CapaEntidades
         public bool Estado { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; }
-        public virtual ICollection<RolPermisos> RolPermisos { get; set; }
+        public virtual ICollection<RolPermisos> RolesPermisos { get; set; }
     }
 }

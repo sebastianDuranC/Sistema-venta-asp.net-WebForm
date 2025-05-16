@@ -12,13 +12,14 @@ namespace CapaEntidades
         public string Nombre { get; set; }
         public decimal? Costo { get; set; }
         public decimal? Stock { get; set; }
-        public int CategoriaId { get; set; }
+        public decimal? StockMinimo { get; set; }
+        public int InsumoCategoriaId { get; set; }
         public int ProveedorId { get; set; }
         public string FotoUrl { get; set; }
         public bool Estado { get; set; }
         public int UnidadesMedidaId { get; set; }
 
-        public virtual Categoria Categoria { get; set; }
+        public virtual InsumoCategoria InsumoCategoria { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual UnidadesMedida UnidadesMedida { get; set; }
         public virtual ICollection<DetalleCompra> DetallesCompra { get; set; }

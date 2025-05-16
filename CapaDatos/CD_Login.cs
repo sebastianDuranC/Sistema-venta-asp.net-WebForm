@@ -45,7 +45,6 @@ namespace CapaDatos
 
             comandoQuery.Parameters.AddWithValue("@Nombre", currentUsuario);
             object resultado = comandoQuery.ExecuteScalar();
-            //VALIDAMOS QUE NOSEA NULL
             if (resultado != null && resultado != DBNull.Value)
             {
                 return Convert.ToInt32(resultado);

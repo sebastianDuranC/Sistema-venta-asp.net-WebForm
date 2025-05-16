@@ -158,7 +158,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categoria.cs" />
+    <Compile Include="InsumoCategoria.cs" />
+    <Compile Include="ProductoCategoria.cs" />
     <Compile Include="ComposicionProducto.cs" />
     <Compile Include="ConfiguracionDescartables.cs" />
     <Compile Include="DetalleCompra.cs" />
