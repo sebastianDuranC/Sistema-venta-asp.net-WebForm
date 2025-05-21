@@ -8,7 +8,6 @@
     <title><%: Page.Title %>El Fogón</title>
     <link href="/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" />
     <style>
@@ -22,23 +21,17 @@
             opacity: 0;
         }
     </style>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
-
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <script src="/Scripts/jquery-3.7.1.min.js"></script>
+
     <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <!-- DataTables Buttons -->
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-    <!-- JSZip for Excel export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <!-- pdfmake for PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="/Scripts/DataTables/dataTables.buttons.min.js"></script>
+    <script src="/Scripts/DataTables/buttons.html5.min.js"></script>
+    <script src="/Scripts/DataTables/jszip.min.js"></script>
+    <script src="/Scripts/DataTables/pdfmake.min.js"></script>
+    <script src="/Scripts/DataTables/vfs_fonts.js"></script>
 </head>
 <body class="h-full">
     <form runat="server">
@@ -54,58 +47,62 @@
                 </div>
 
                 <!-- Navegación -->
-                <nav class="flex flex-col gap-1 px-2 py-4">
+                <nav class="flex flex-col gap-1 px-2">
                     <a href="/Default.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-dashboard-layout-48.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Dashboard</span>
                     </a>
                     <a href="/Pages/Ventas/Ventas.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-comida-real-para-comidas-96.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-porcentaje-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Ventas</span>
                     </a>
                     <a href="/Pages/Insumos/Insumos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-inventario-100.png" class="h-6 w-6" />
-                        <span class="menu-text">Insumos</span>
+                        <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-[28px] w-[28px]" />
+                        <span class="menu-text">Productos</span>
                     </a>
                     <a href="/Pages/Productos/Productos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-inventario-100.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Inventario</span>
                     </a>
                     <a href="/Pages/Compras/Compras.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-comprar-50.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Compras</span>
                     </a>
                     <a href="/Pages/Usuarios/Usuarios.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-usuario-60.png" class="h-6 w-6" />
-                        <span class="menu-text">Usuarios</span>
+                        <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="h-[28px] w-[28px]" />
+                        <span class="menu-text">Administracion</span>
                     </a>
                     <a href="/Pages/Permisos/Permisos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-usuario-60.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Permisos</span>
                     </a>
                     <a href="/Pages/RolPermisos/RolPermisos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-usuario-60.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">RolPermisos</span>
                     </a>
                     <a href="/Pages/Configuracion/Configuracion.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-settings-100.png" class="h-6 w-6" />
+                        <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Configuración</span>
                     </a>
                 </nav>
 
                 <!-- Cerrar sesión -->
                 <div class="p-4 border-t">
-                    <a href="#" class="flex items-center gap-2 px-3 py-2 hover:bg-red-600 text-white rounded-lg shadow transition font-medium">
-                        <img src="/wwwroot/images/icons8-salida-48.png" class="h-5 w-5" />
-                        <span class="menu-text">
-                            <asp:Button Text="Cerrar Sesion" runat="server" OnClick="cerrarSesion_Click" CssClass="bg-transparent border-0 p-0 m-0 text-white hover:text-white focus:outline-none" /></span>
-                    </a>
+                    <button
+                        type="submit"
+                        runat="server"
+                        onserverclick="cerrarSesion_Click"
+                        class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium shadow transition duration-200 focus:outline-none"
+                        style="outline: none; border: none;">
+                        <img src="/wwwroot/images/icons8-salida-100.png" class="h-5 w-5" alt="Cerrar Sesión" />
+                        <span class="menu-text">Cerrar Sesión</span>
+                    </button>
                 </div>
             </aside>
 
             <!-- Main Content -->
-            <main class="flex-1 flex flex-col items-center justify-start p-8 bg-contentbg transition-all duration-300 text-primary">
-                <div class="w-full max-w-7xl">
+            <main class="flex-1 flex flex-col justify-start p-8 bg-contentbg transition-all duration-300 text-primary">
+                <div class="w-full">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -114,8 +111,6 @@
 
         <!-- Script para el sidebar -->
         <script>
-
-
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
                 const icon = document.getElementById('sidebar-toggle-icon');
@@ -124,16 +119,6 @@
                 icon.classList.toggle('rotate-180');
             }
         </script>
-        <!-- jQuery -->
-        <script src="/Scripts/jquery-3.7.1.min.js"></script>
-
-        <!-- DataTables JS -->
-        <script src="/Scripts/DataTables/jquery.dataTables.min.js"></script>
-        <script src="/Scripts/DataTables/dataTables.buttons.min.js"></script>
-        <script src="/Scripts/DataTables/buttons.html5.min.js"></script>
-        <script src="/Scripts/DataTables/jszip.min.js"></script>
-        <script src="/Scripts/DataTables/pdfmake.min.js"></script>
-        <script src="/Scripts/DataTables/vfs_fonts.js"></script>
     </form>
 </body>
 </html>

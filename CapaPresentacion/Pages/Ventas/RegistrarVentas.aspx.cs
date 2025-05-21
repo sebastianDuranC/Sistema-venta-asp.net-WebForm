@@ -13,5 +13,11 @@ namespace CapaPresentacion.Pages.Ventas
         {
 
         }
+
+        protected void cancelarVenta_Click(object sender, EventArgs e)
+        {
+            //Volver a la vista de Ventas.asp
+            Response.Redirect("/Pages/Ventas/Ventas.aspx");
+        }
     }
 }

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./**/*.aspx", "./**/*.ascx", "./**/*.Master"], // Adjust paths as needed
+    content: ["./**/*.aspx", "./**/*.Master"], // Adjust paths as needed
     theme: {
         extend: {
             colors: {
