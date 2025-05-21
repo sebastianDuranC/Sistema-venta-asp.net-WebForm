@@ -24,7 +24,6 @@ namespace CapaEntidades
         public virtual UnidadesMedida UnidadesMedida { get; set; }
         public virtual ICollection<DetalleCompra> DetallesCompra { get; set; }
         public virtual ICollection<MovimientoInventario> MovimientosInventario { get; set; }
-        public virtual ICollection<ComposicionProducto> ComposicionesProducto { get; set; }
-        public virtual ICollection<ConfiguracionDescartables> ConfiguracionesDescartables { get; set; }
+        public virtual ICollection<ProductoInsumo> ProductosInsumo { get; set; }
     }
 }

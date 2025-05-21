@@ -45,6 +45,7 @@
     <Compile Include="CN_Login.cs" />
     <Compile Include="CN_Rol.cs" />
     <Compile Include="CN_RolPermisos.cs" />
+    <Compile Include="CN_Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

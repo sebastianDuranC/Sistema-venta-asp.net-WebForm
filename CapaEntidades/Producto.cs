@@ -19,7 +19,6 @@ namespace CapaEntidades
 
         public virtual ProductoCategoria ProductoCategoria { get; set; }
         public virtual ICollection<DetalleVenta> DetallesVenta { get; set; }
-        public virtual ICollection<ComposicionProducto> ComposicionesProducto { get; set; }
-        public virtual ICollection<ConfiguracionDescartables> ConfiguracionesDescartables { get; set; }
+        public virtual ICollection<ProductoInsumo> ProductosInsumo { get; set; }
     }
 }
