@@ -18,7 +18,10 @@ namespace CapaPresentacion.Pages.Ventas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+
+            }
         }
 
         protected void crearVentas_Click(object sender, EventArgs e)
