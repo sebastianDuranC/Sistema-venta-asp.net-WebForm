@@ -44,6 +44,7 @@ namespace CapaPresentacion.Pages.Ventas
             rptProductos.DataBind();
         }
 
+        //Metodo para obtener los clientes para generar venta
         private void cargarClientes()
         {
             CN_Cliente cN_Cliente = new CN_Cliente();
