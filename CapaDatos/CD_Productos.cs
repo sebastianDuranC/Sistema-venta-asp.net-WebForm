@@ -13,6 +13,38 @@ namespace CapaDatos
     {
         private CD_Conexion conexion = new CD_Conexion();
 
+
+        public Producto ObtenerProductoPorId(int id)
+        {
+            Producto producto = null;
+            SqlConnection con = conexion.AbrirBd();
+            using (SqlCommand cmd = new SqlCommand("SELECT Id, Nombre, Precio, Stock, StockMinimo, ProductoCategoriaId, FotoUrl, Estado FROM Producto WHERE Id = @id", con))
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        producto = new Producto
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Nombre = dr["Nombre"].ToString(),
+                            Precio = Convert.ToDecimal(dr["Precio"]),
+                            Stock = dr["Stock"] != DBNull.Value ? Convert.ToInt32(dr["Stock"]) : (int?)null,
+                            StockMinimo = dr["StockMinimo"] != DBNull.Value ? Convert.ToInt32(dr["StockMinimo"]) : (int?)null,
+                            ProductoCategoriaId = Convert.ToInt32(dr["ProductoCategoriaId"]),
+                            FotoUrl = dr["FotoUrl"].ToString(),
+                            Estado = Convert.ToBoolean(dr["Estado"])
+                        };
+                    }
+                }
+            }
+            conexion.CerrarBd();
+            return producto;
+        }
+
         public List<Producto> ObtenerProductosVenta()
         {
             List<Producto> lista = new List<Producto>();

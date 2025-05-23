@@ -40,5 +40,18 @@ namespace CapaNegocio
             return datos.RegistrarVentas(enLocal, clienteId, usuarioId, metodoPagoId, dtDetalle);
         }
 
+        public int ObtenerIdUsuario(string nombreUsuario)
+        {
+            try
+            {
+                CD_Login datos = new CD_Login();
+                return datos.ObtenerRolIdNombre(nombreUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en la capa de negocio al obtener el ID de usuario: " + ex.Message);
+            }
+        }
+
     }
 }

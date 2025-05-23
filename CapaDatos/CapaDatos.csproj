@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD_Cliente.cs" />
     <Compile Include="CD_Conexion.cs" />
     <Compile Include="CD_Form.cs" />
     <Compile Include="CD_Login.cs" />
