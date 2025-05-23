@@ -231,6 +231,7 @@ namespace CapaPresentacion.Pages.Ventas
                 CN_Cliente cN_Cliente = new CN_Cliente();
                 Cliente cliente = cN_Cliente.ObtenerClientes().FirstOrDefault(c => c.Id == clienteId);
 
+                //- Si el cliente es comerciante, mostrar los campos de número de local y pasillo
                 if (cliente != null)
                 {
                     txtNumeroLocalCliente.Text = cliente.NumeroLocal;
