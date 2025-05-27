@@ -44,7 +44,7 @@ namespace CapaPresentacion.Pages.Ventas
             rptProductos.DataBind();
         }
 
-        //Metodo para obtener los clientes para generar venta
+        //Metodo para obtener los clientes para generar ventas
         private void cargarClientes()
         {
             CN_Cliente cN_Cliente = new CN_Cliente();
@@ -151,7 +151,7 @@ namespace CapaPresentacion.Pages.Ventas
                     return;
                 }
 
-                int enLocal = RadioButtonList1.SelectedValue == "Local" ? 1 : 0;
+                int enLocal = rbLocal.SelectedValue == "Local" ? 1 : 0;
                 CN_Venta objVentas = new CN_Venta();
 
                 bool resultado = objVentas.RegistrarVentas(

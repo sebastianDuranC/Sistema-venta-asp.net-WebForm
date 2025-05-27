@@ -108,6 +108,7 @@
     <Content Include="Global.asax" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
     <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
+    <Content Include="Pages\Ventas\DetalleVentas.aspx" />
     <Content Include="Pages\Ventas\EditarVentas.aspx" />
     <Content Include="Pages\Ventas\RegistrarVentas.aspx" />
     <Content Include="Pages\Ventas\Ventas.aspx" />
@@ -170,6 +171,7 @@
     <Content Include="package.json" />
     <Content Include="Scripts\DataTables\es-ES.json" />
     <Content Include="Pages\Ventas\VentaDataHandler.ashx" />
+    <Content Include="Pages\Ventas\EliminarVentaHandler.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -245,12 +247,22 @@
     <Compile Include="Pages\RolPermisos\RolPermisos.aspx.designer.cs">
       <DependentUpon>RolPermisos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Ventas\DetalleVentas.aspx.cs">
+      <DependentUpon>DetalleVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Ventas\DetalleVentas.aspx.designer.cs">
+      <DependentUpon>DetalleVentas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Ventas\EditarVentas.aspx.cs">
       <DependentUpon>EditarVentas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Ventas\EditarVentas.aspx.designer.cs">
       <DependentUpon>EditarVentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Ventas\EliminarVentaHandler.ashx.cs">
+      <DependentUpon>EliminarVentaHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Ventas\RegistrarVentas.aspx.cs">
       <DependentUpon>RegistrarVentas.aspx</DependentUpon>

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CN_Cliente.cs" />
+    <Compile Include="CN_DetalleVentas.cs" />
     <Compile Include="CN_MetodoPagos.cs" />
     <Compile Include="CN_Form.cs" />
     <Compile Include="CN_Login.cs" />

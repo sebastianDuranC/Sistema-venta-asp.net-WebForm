@@ -31,7 +31,7 @@
                     <input type="text" id="buscarProductos" placeholder="Buscar productos..." class="w-full rounded-md border px-3 py-2" onkeyup="filtrarProductos()">
                 </div>
                 <div class="mb-4 flex space-x-2">
-                    <button class="rounded-md bg-blue-500 px-4 py-2 text-white">Todos</button>
+                    <button class="rounded-md bg-secondary px-4 py-2 text-white">Todos</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Platos</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Bebidas</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Complementos</button>
@@ -58,7 +58,7 @@
                     <!-- Tipo de pedido -->
                     <div class="flex-1">
                         <label class="mb-1 block text-lg font-medium text-gray-700">Tipo de pedido</label>
-                        <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" CssClass="rbl flex gap-4">
+                        <asp:RadioButtonList ID="rbLocal" runat="server" RepeatDirection="Horizontal" CssClass="rbl flex gap-4">
                             <asp:ListItem Text="Llevar" Value="Llevar"></asp:ListItem>
                             <asp:ListItem Text="Local" Value="Local" Selected="True"></asp:ListItem>
                         </asp:RadioButtonList>

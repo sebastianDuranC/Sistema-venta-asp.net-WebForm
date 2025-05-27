@@ -4,7 +4,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="flex items-center justify-between">
             <h1 class="mb-6 mt-6 text-3xl font-bold text-gray-800">Gestión de Ventas</h1>
-            <asp:Button Text="Crear venta" runat="server"  class="rounded-lg bg-primary p-2 text-white" ID="crearVentas" OnClick="crearVentas_Click"/>
+            <asp:Button Text="Crear venta" runat="server" class="rounded-lg bg-primary p-2 text-white" ID="crearVentas" OnClick="crearVentas_Click" />
         </div>
         <div class="rounded-lg bg-white p-6 shadow-lg">
             <table id="tablaVentas" class="display compact" style="width: 100%">
@@ -19,81 +19,191 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <asp:Repeater ID="rptVentas" runat="server">
-                    <ItemTemplate>
-                        <tr>
-                            <td><%# Eval("VentaId") %></td>
-                            <td><%# Eval("Fecha", "{0:dd/MM/yyyy HH:mm}") %></td>
-                            <td><%# Eval("Cliente") %></td>
-                            <td><%# Eval("Total", "{0:C}") %></td>
-                            <td><%# Eval("MetodoPago") %></td>
-                            <td><%# Eval("Vendedor") %></td>
-                            <td>
-                                <asp:LinkButton ID="lnkVerDetalle" runat="server"
-                                    CssClass="btn btn-info btn-sm"
-                                    CommandName="VerDetalle"
-                                    CommandArgument='<%# Eval("Id") %>'
-                                    Text="<i class='fas fa-search'></i> Ver"></asp:LinkButton>
-                                <%-- Otros botones para Editar/Eliminar (con sus CommandName/Argument) --%>
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
                 <tbody>
-                    <%-- El Repeater generará las filas aquí si se usa para data inicial.
-             Si es full server-side con DataTables.js, este tbody puede estar vacío inicialmente
-             y DataTables lo poblará vía AJAX. --%>
+                    <%-- DataTables llenará esto con AJAX --%>
                 </tbody>
             </table>
-
         </div>
     </div>
+
     <script>
         $(document).ready(function () {
             $('#tablaVentas').DataTable({
-                processing: true, // Muestra un indicador de "Procesando..."
+                processing: true,
                 ajax: {
-                    url: "VentaDataHandler.ashx", // Un handler HTTP que crearemos
-                    type: "POST" // O "GET", según cómo diseñes tu handler
+                    url: "VentaDataHandler.ashx",
+                    type: "POST"
                 },
-                columns: [ // Define las columnas que DataTables espera y cómo mapearlas desde la respuesta del servidor
+                columns: [
                     { data: "VentaId" },
                     {
-                        data: "Fecha", render: function (data) {
+                        data: "Fecha",
+                        render: function (data) {
                             if (data) {
-                                // Formatear la fecha (DataTables recibe el string JSON de fecha)
                                 var date = new Date(parseInt(data.substr(6)));
-                                return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear();
+                                return ('0' + date.getDate()).slice(-2) + '/' +
+                                    ('0' + (date.getMonth() + 1)).slice(-2) + '/' +
+                                    date.getFullYear() + ' ' +
+                                    ('0' + date.getHours()).slice(-2) + ':' +
+                                    ('0' + date.getMinutes()).slice(-2);
                             }
                             return "";
                         }
                     },
                     { data: "Cliente" },
-                    { data: "Total" },
+                    {
+                        data: "Total",
+                        render: $.fn.dataTable.render.number(',', '.', 2, 'Bs ')
+                    },
                     { data: "MetodoPago" },
                     { data: "Vendedor" },
                     {
-                        data: "Id", // Usamos el Id para el CommandArgument
-                        render: function (data, type, row) {
-                            // Importante: Los botones aquí NO usarán postbacks de ASP.NET directamente.
-                            // Si necesitas postbacks, tendrías que registrar los scripts después de cada dibujo de la tabla.
-                            // Alternativamente, usar AJAX para las acciones o navegar a otra página.
-                            // Para "Ver Detalle", podrías usar un simple enlace o un botón que llame JS.
-                            return `<a href='VentaDetallePage.aspx?VentaId=${data}' class='btn btn-info btn-sm'><i class='fas fa-search'></i> Ver</a>`;
-                            // O un botón que llame a una función JS:
-                            // return `<button onclick='mostrarDetalle(${data})' class='btn btn-info btn-sm'>Ver Detalle</button>`;
+                        data: "VentaId",
+                        render: function (data) {
+                            return `
+                                <div class="flex space-x-2">
+                                    <a href='/Pages/Ventas/DetalleVentas.aspx?VentaId=${data}' 
+                                       class="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </a>
+                                    <a href='/Pages/Ventas/EditarVentas.aspx?VentaId=${data}' 
+                                       class="rounded bg-yellow-500 px-3 py-1 text-black hover:bg-yellow-600">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    <button type="button" onclick="confirmarEliminacion(${data})" 
+                                       class="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </div>`;
                         },
-                        orderable: false // Columna de acciones no ordenable
+                        orderable: false
                     }
                 ],
                 language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.10/i18n/es-ES.json'
+                    url: '/Scripts/DataTables/es-ES.json',
+                    decimal: ","
                 },
-                dom: 'Bfrtip', // 'B' para los botones de exportación
+                dom: '<"flex justify-between items-center mb-4"<"botonesExportar"B><"filtroBusqueda"f>>rtip',
                 buttons: [
-                    'excel', 'pdf'
-                ]
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Exportar a Excel',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        },
+                        customize: function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+                            // Aplicar estilo a todas las celdas
+                            $('row c', sheet).attr('s', '55'); // '55' es un estilo predefinido que incluye envoltura de texto
+
+                            // Centrar texto en la primera fila (cabecera)
+                            $('row:eq(0) c', sheet).attr('s', '51'); // '51' es un estilo predefinido para centrado y negrita
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'Exportar a PDF',
+                        exportOptions: { columns: ':not(:last-child)' },
+                        className: 'bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded',
+                        pageSize: 'A4',
+                        orientation: 'portrait',
+                        customize: function (doc) {
+                            // Establecer márgenes de la página: [izquierda, arriba, derecha, abajo]
+                            doc.pageMargins = [0, 20, 0, 10];
+
+                            // Estilo por defecto para el texto
+                            doc.defaultStyle = {
+                                fontSize: 10,
+                                alignment: 'center'
+                            };
+
+                            // Estilo para los encabezados de la tabla
+                            doc.styles.tableHeader = {
+                                bold: true,
+                                fontSize: 12,
+                                color: 'white',
+                                fillColor: '#EF4444', // Color primario
+                                alignment: 'center',
+                                margin: [0, 5, 0, 5] // Espaciado interno: [izquierda, arriba, derecha, abajo]
+                            };
+
+                            // Estilo para las filas de la tabla
+                            doc.styles.tableBodyOdd = {
+                                margin: [0, 5, 0, 5]
+                            };
+                            doc.styles.tableBodyEven = {
+                                margin: [0, 5, 0, 5]
+                            };
+
+                            // Centrar la tabla utilizando columnas vacías a los lados
+                            var table = doc.content[1];
+                            doc.content[1] = {
+                                columns: [
+                                    { width: '*', text: '' },
+                                    {
+                                        width: 'auto',
+                                        table: table.table,
+                                        layout: table.layout
+                                    },
+                                    { width: '*', text: '' }
+                                ]
+                            };
+                        }
+                    },
+                    {
+                        extend: 'pageLength',
+                        className: 'bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded'
+                    }
+                ],
+                lengthMenu: [[1, 5, 10, -1], ["1 registro", "5 registros", "10 registros", "Todos"]],
+                pageLength: 5
             });
         });
+
+        function confirmarEliminacion(ventaId) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                backdrop: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    eliminarVenta(ventaId);
+                }
+            });
+        }
+
+        function eliminarVenta(ventaId) {
+            $.ajax({
+                type: "POST",
+                url: "/Pages/Ventas/EliminarVentaHandler.ashx",
+                data: { ventaId: ventaId },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Eliminado',
+                            text: response.message,
+                            icon: 'success',
+                            timer: 2000
+                        });
+                        $('#tablaVentas').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire('Error', 'Error de conexión: ' + error, 'error');
+                }
+            });
+        }
     </script>
 </asp:Content>

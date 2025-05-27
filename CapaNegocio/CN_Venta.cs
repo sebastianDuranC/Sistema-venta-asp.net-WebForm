@@ -53,5 +53,36 @@ namespace CapaNegocio
             }
         }
 
+        public DataTable ObtenerVentaPorId(int ventaId)
+        {
+            CD_Ventas cD_Ventas = new CD_Ventas();
+            return cD_Ventas.ObtenerVentaId(ventaId);
+        }
+
+        public DataTable ObtenerDetallesVentaPorVentaId(int ventaId)
+        {
+            CD_DetalleVentas cD_Ventas = new CD_DetalleVentas();
+            return cD_Ventas.ObtenerDetalleVenta(ventaId);
+        }
+
+        public void EditarVenta(Venta venta, List<DetalleVenta> detalles)
+        {
+            CD_Ventas cD_Ventas = new CD_Ventas();
+            cD_Ventas.EditarVenta(venta, detalles);
+        }
+
+        public bool EliminarVenta(int ventaId)
+        {
+            CD_Ventas cd_ventas = new CD_Ventas();
+            try
+            {
+                return cd_ventas.EliminarVenta(ventaId);
+            }
+            catch (ApplicationException ex)
+            {
+                // Errores controlados (venta no existe o ya anulada)
+                throw ex;  // Propagar el mensaje
+            }
+        }
     }
 }

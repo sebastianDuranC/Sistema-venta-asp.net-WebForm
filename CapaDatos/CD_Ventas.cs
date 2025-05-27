@@ -68,5 +68,81 @@ namespace CapaDatos
             }
         }
 
+        public DataTable ObtenerVentaId(int ventaId)
+        {
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand("sp_ObtenerVentaId", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@Id", ventaId);
+
+                    using (SqlDataAdapter adaptador = new SqlDataAdapter(comando))
+                    {
+                        adaptador.Fill(dataTable);
+                    }
+                }
+            }
+            return dataTable;
+        }
+
+        public void EditarVenta(Venta venta, List<DetalleVenta> detalles)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            using (SqlCommand comando = new SqlCommand("sp_EditarVenta", conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                // Parámetro escalar
+                comando.Parameters.AddWithValue("@VentaId", venta.Id);
+
+                // Crear DataTable para el parámetro tipo tabla
+                DataTable dtDetalles = new DataTable();
+                dtDetalles.Columns.Add("ProductoId", typeof(int));
+                dtDetalles.Columns.Add("Cantidad", typeof(decimal));
+                dtDetalles.Columns.Add("Precio", typeof(decimal));
+                dtDetalles.Columns.Add("SubTotal", typeof(decimal));
+
+                foreach (var d in detalles)
+                {
+                    dtDetalles.Rows.Add(d.ProductoId, d.Cantidad, d.Producto?.Precio ?? 0, d.SubTotal);
+                }
+
+                var paramDetalles = comando.Parameters.AddWithValue("@Detalles", dtDetalles);
+                paramDetalles.SqlDbType = SqlDbType.Structured;
+                paramDetalles.TypeName = "DetalleVentaTipo";
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
+        public bool EliminarVenta(int ventaId)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            using (SqlCommand comando = new SqlCommand("sp_EliminarVenta", conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@VentaId", ventaId);
+                conexion.Open();
+                try
+                {
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+                catch (SqlException ex)
+                {
+                    // Capturar errores específicos de RAISERROR
+                    if (ex.Class == 16)  // Errores de usuario
+                        throw new ApplicationException(ex.Message);
+
+                    throw;
+                }
+            }
+        }
+
     }
 }
