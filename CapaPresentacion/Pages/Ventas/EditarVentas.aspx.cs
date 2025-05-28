@@ -11,48 +11,65 @@ namespace CapaPresentacion.Pages.Ventas
 {
     public partial class EditarVentas : System.Web.UI.Page
     {
+        // Instancia de la capa de negocio para manejar operaciones de Venta.
         private CN_Venta _ventaBLL = new CN_Venta();
+        // Campo privado para almacenar el ID de la venta que se está editando.
+        // Se inicializa en Page_Load y se mantiene en postbacks.
         private int _ventaId;
 
+        // Propiedad de ViewState para mantener la lista de 'DetalleVenta' entre postbacks.
+        // Esto es crucial porque el 'Repeater' no maneja automáticamente su estado como el 'GridView'.
         private List<DetalleVenta> DetallesVenta
         {
             get { return (List<DetalleVenta>)ViewState["DetallesVenta"] ?? new List<DetalleVenta>(); }
             set { ViewState["DetallesVenta"] = value; }
         }
 
+        /// <summary>
+        /// Se ejecuta cada vez que la página se carga (primera carga y postbacks).
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Verifica si es la primera vez que la página se carga.
             if (!IsPostBack)
             {
+                // Intenta obtener el 'VentaId' de la cadena de consulta (URL).
                 if (int.TryParse(Request.QueryString["VentaId"], out _ventaId))
                 {
-                    CargarCombos(); // Cargar los DropDownLists primero
-                    CargarDatosVenta(_ventaId);
+                    CargarCombos(); // Carga los DropDownLists (clientes, métodos de pago).
+                    CargarDatosVenta(_ventaId); // Carga la información de la venta y sus detalles.
                 }
                 else
                 {
+                    // Si no se proporciona un 'VentaId' válido en la URL, redirige a la página de listado de ventas.
                     Response.Redirect("~/Pages/Ventas/Ventas.aspx");
                 }
             }
             else
             {
-                // En cada postback, aseguramos que _ventaId esté disponible
+                // En cada postback, aseguramos que '_ventaId' tenga el valor correcto,
+                // ya que las variables privadas no se mantienen automáticamente.
                 if (int.TryParse(Request.QueryString["VentaId"], out int id))
                 {
                     _ventaId = id;
                 }
             }
         }
-       
+
+        /// <summary>
+        /// Carga los datos de los DropDownLists (Clientes y Métodos de Pago).
+        /// </summary>
         private void CargarCombos()
         {
+            // Carga de Clientes
             CN_Cliente cN_Cliente = new CN_Cliente();
             List<Cliente> listaClientes = cN_Cliente.ObtenerClientes();
             ddlClientes.DataSource = listaClientes;
-            ddlClientes.DataTextField = "Nombre";
-            ddlClientes.DataValueField = "Id";
+            ddlClientes.DataTextField = "Nombre"; // Propiedad a mostrar en el DropDownList
+            ddlClientes.DataValueField = "Id";   // Valor asociado a cada elemento del DropDownList
             ddlClientes.DataBind();
 
+            // Carga de Métodos de Pago
             CN_MetodoPagos objMetodoPago = new CN_MetodoPagos();
             List<MetodoPago> listaMetodoPagos = objMetodoPago.ObtenerMetodoPagosParaVenta();
             ddlMetodoPago.DataSource = listaMetodoPagos;
@@ -61,44 +78,40 @@ namespace CapaPresentacion.Pages.Ventas
             ddlMetodoPago.DataBind();
         }
 
+        /// <summary>
+        /// Carga los datos de una venta específica y sus detalles en los controles de la página.
+        /// </summary>
+        /// <param name="ventaId">El ID de la venta a cargar.</param>
         private void CargarDatosVenta(int ventaId)
         {
-            // Obtener datos de la venta desde la capa de negocio
+            // Obtiene los datos de la venta principal (cabecera) de la capa de negocio.
             DataTable dtVenta = _ventaBLL.ObtenerVentaPorId(ventaId);
-            List<Venta> ventaExistente = (from row in dtVenta.AsEnumerable()
-                                          select new Venta()
-                                          {
-                                              Id = Convert.ToInt32(row["VentaId"]),
-                                              Fecha = Convert.ToDateTime(row["Fecha"]),
-                                              Total = Convert.ToDecimal(row["Total"]),
-                                              EnLocal = Convert.ToBoolean(row["EnLocal"]),
-                                              ClienteId = Convert.ToInt32(row["ClienteId"].ToString()),
-                                              UsuarioId = Convert.ToInt32(row["VendedorId"].ToString()),
-                                              MetodoPagoId = Convert.ToInt32(row["MetodoPagoId"].ToString()),
-                                              Estado = Convert.ToBoolean(row["Estado"])
-                                          }).ToList();
-            if (ventaExistente != null)
+
+            if (dtVenta != null && dtVenta.Rows.Count > 0)
             {
-                foreach (var venta in ventaExistente)
-                {
-                    // Seleccionar el cliente y método de pago correctos
-                    ddlClientes.SelectedValue = venta.ClienteId.ToString();
-                    ddlMetodoPago.SelectedValue = venta.MetodoPagoId.ToString();
-                    rdbEnLocal.SelectedValue = venta.EnLocal ? "Local" : "Llevar";
-                    lblTotal.Text = venta.Total.ToString();
-                    lblFecha.Text = "Fecha: " + venta.Fecha.ToString("dd/MM/yyyy");
-                }
+                DataRow rowVenta = dtVenta.Rows[0];
+
+                // Asigna los valores de la venta a los controles de la interfaz.
+                ddlClientes.SelectedValue = rowVenta["ClienteId"].ToString();
+                ddlMetodoPago.SelectedValue = rowVenta["MetodoPagoId"].ToString();
+                // Determina si la venta fue "En Local" o "Para Llevar" y selecciona el RadioButton adecuado.
+                rdbEnLocal.SelectedValue = Convert.ToBoolean(rowVenta["EnLocal"]) ? "Local" : "Llevar";
+                lblTotal.Text = Convert.ToDecimal(rowVenta["Total"]).ToString("N2"); // Formatea el total a 2 decimales.
+                lblFecha.Text = "Fecha: " + Convert.ToDateTime(rowVenta["Fecha"]).ToString("dd/MM/yyyy"); // Formatea la fecha.
             }
 
-            // Para los detalles
+            // Obtiene los detalles de la venta (productos) de la capa de negocio.
             DataTable dtDetalles = _ventaBLL.ObtenerDetallesVentaPorVentaId(ventaId);
+
+            // Convierte el DataTable de detalles a una lista de objetos 'DetalleVenta'.
+            // Esto permite una manipulación más sencilla y un buen enlace con el 'Repeater'.
             List<DetalleVenta> detallesExistentes = (from row in dtDetalles.AsEnumerable()
                                                      select new DetalleVenta()
                                                      {
-                                                         Id = Convert.ToInt32(row["Id"]),
+                                                         Id = Convert.ToInt32(row["Id"]), // ID del detalle de venta
                                                          VentaId = Convert.ToInt32(row["VentaId"]),
                                                          ProductoId = Convert.ToInt32(row["ProductoId"]),
-                                                         Producto = new Producto
+                                                         Producto = new Producto // Crea una instancia de Producto para sus propiedades
                                                          {
                                                              Nombre = row["ProductoNombre"].ToString(),
                                                              Precio = Convert.ToDecimal(row["PrecioUnitario"])
@@ -108,153 +121,183 @@ namespace CapaPresentacion.Pages.Ventas
                                                          Estado = Convert.ToBoolean(row["Estado"])
                                                      }).ToList();
 
-            // Cargar GridView y almacenar en ViewState
-            if (detallesExistentes != null)
-            {
-                DetallesVenta = detallesExistentes;
-                CalcularTotales();
-                gvDetalleVenta.DataSource = DetallesVenta;
-                gvDetalleVenta.DataBind();
-            }
+            // Almacena la lista de detalles en 'ViewState' para que persista entre postbacks.
+            DetallesVenta = detallesExistentes;
+
+            // Enlaza el 'Repeater' con la lista de detalles de venta.
+            rptDetalleVenta.DataSource = DetallesVenta;
+            rptDetalleVenta.DataBind();
+
+            // Recalcula los totales después de cargar todos los detalles.
+            CalcularTotales();
         }
 
-        protected void gvDetalles_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Eliminar")
-            {
-                // Obtener el ProductoId del CommandArgument
-                if (int.TryParse(e.CommandArgument.ToString(), out int productoIdAEliminar))
-                {
-                    
-                    //CalcularTotales(); // Recalcular totales después de eliminar
-                }
-            }
-        }
-
-        protected void gvDetalles_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                // Asegúrate de que el TextBox txtCantidad esté en la columna correcta (índice 1 en este caso)
-                TextBox txtCantidad = (TextBox)e.Row.FindControl("txtCantidad");
-                if (txtCantidad != null)
-                {
-                    // Asignar el atributo onchange para llamar a la función JavaScript
-                    // txtCantidad.Attributes.Add("onchange", "CalcularSubtotal(this);"); // Ya no necesitamos la función JS
-
-                    // Si quieres manejar el cálculo en el servidor directamente
-                    txtCantidad.AutoPostBack = true;
-                    txtCantidad.TextChanged += new EventHandler(txtCantidad_TextChanged);
-                }
-            }
-        }
-
+        /// <summary>
+        /// Maneja el evento 'TextChanged' del TextBox de cantidad dentro de cada fila del 'Repeater'.
+        /// Se dispara cuando el usuario cambia la cantidad y sale del campo (debido a AutoPostBack="true").
+        /// </summary>
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
             TextBox txtCantidad = (TextBox)sender;
-            GridViewRow row = (GridViewRow)txtCantidad.NamingContainer;
-            int rowIndex = row.RowIndex;
+            // Obtiene el 'RepeaterItem' (fila) que contiene el TextBox que disparó el evento.
+            RepeaterItem item = (RepeaterItem)txtCantidad.NamingContainer;
+            int itemIndex = item.ItemIndex; // Obtiene el índice de la fila en el Repeater.
+
+            // Obtiene la lista actual de detalles de venta desde 'ViewState'.
             var detalles = DetallesVenta;
-            int cantidad;
-            if (int.TryParse(txtCantidad.Text, out cantidad) && cantidad > 0)
+            decimal nuevaCantidad;
+
+            // Valida que la cantidad ingresada sea un número válido y positivo.
+            if (decimal.TryParse(txtCantidad.Text, out nuevaCantidad) && nuevaCantidad > 0)
             {
-                detalles[rowIndex].Cantidad = cantidad;
-                detalles[rowIndex].SubTotal = cantidad * detalles[rowIndex].Producto.Precio;
+                // Actualiza la cantidad y recalcula el subtotal para el detalle de venta modificado.
+                detalles[itemIndex].Cantidad = nuevaCantidad;
+                detalles[itemIndex].SubTotal = nuevaCantidad * detalles[itemIndex].Producto.Precio;
+
+                // Actualiza el 'ViewState' con la lista modificada.
                 DetallesVenta = detalles;
-                gvDetalleVenta.DataSource = DetallesVenta;
-                gvDetalleVenta.DataBind();
+
+                // Vuelve a enlazar el 'Repeater' para que los cambios se reflejen en la UI.
+                rptDetalleVenta.DataSource = DetallesVenta;
+                rptDetalleVenta.DataBind();
+
+                // Recalcula los totales generales de la venta (Subtotal, Total).
                 CalcularTotales();
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Por favor ingrese una cantidad válida.');", true);
+                // Muestra un mensaje de error si la cantidad no es válida.
+                MostrarMensaje("Por favor ingrese una cantidad válida (número mayor que cero).", "error");
+                // Opcional: Revertir la cantidad en el TextBox a su valor anterior si la entrada es inválida.
+                // Esto evita que un valor no válido quede en el TextBox.
+                txtCantidad.Text = detalles[itemIndex].Cantidad.ToString();
             }
         }
 
+        /// <summary>
+        /// Recalcula el subtotal y el total general de la venta basándose en los detalles de venta actuales.
+        /// Este método se llama después de cada cambio en la cantidad de un producto o al eliminar un producto.
+        /// </summary>
         private void CalcularTotales()
         {
             decimal subtotal = 0;
+            // Itera sobre todos los detalles de venta para sumar sus subtotales.
             foreach (var detalle in DetallesVenta)
             {
                 subtotal += detalle.SubTotal;
             }
-            lblSubtotal.Text = subtotal.ToString("N2");
+            // Actualiza las etiquetas de subtotal y total en la UI.
+            lblSubtotal.Text = subtotal.ToString("N2"); // Formato de moneda con 2 decimales.
             lblTotal.Text = subtotal.ToString("N2");
-            CalcularCambio();
+
+            // NOTA: El cálculo del cambio ahora se maneja completamente en el lado del cliente (JavaScript).
+            // Por lo tanto, no se llama a CalcularCambio() desde aquí.
         }
 
+        /// <summary>
+        /// Maneja el evento 'TextChanged' del TextBox de 'Monto Pagado por Cliente'.
+        /// Este evento ya no es necesario para el cálculo del cambio en el servidor,
+        /// pero se mantiene por si se necesita alguna otra lógica en el postback.
+        /// La lógica del cálculo del cambio está en JavaScript.
+        /// </summary>
         protected void txtMontoCliente_TextChanged(object sender, EventArgs e)
         {
-            CalcularCambio();
+            // No se llama a CalcularCambio() aquí. La función JavaScript 'calcularCambio()'
+            // se encarga de actualizar el cambio en tiempo real en el cliente.
         }
 
-        private void CalcularCambio()
-        {
-            decimal montoCliente;
-            decimal totalVenta = 0;
-            decimal.TryParse(lblTotal.Text.Replace("$", "").Replace("€", "").Replace(",", "").Trim(), out totalVenta);
-            if (decimal.TryParse(txtMontoCliente.Text, out montoCliente))
-            {
-                decimal cambio = montoCliente - totalVenta;
-                lblCambio.Text = cambio.ToString("N2");
-            }
-            else
-            {
-                lblCambio.Text = "0.00";
-            }
-        }
-
+        /// <summary>
+        /// Maneja el evento 'Click' del botón "Guardar Cambios".
+        /// </summary>
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                // Valida que haya al menos un producto en la venta antes de intentar guardar.
+                if (DetallesVenta.Count == 0)
+                {
+                    MostrarMensaje("No se puede guardar una venta sin productos. Agregue al menos un producto.", "error");
+                    return;
+                }
+
+                // Crea un objeto 'Venta' con los datos actuales de los controles de la página.
                 Venta venta = new Venta
                 {
-                    Id = _ventaId,
+                    Id = _ventaId, // El ID de la venta que se está editando.
                     ClienteId = Convert.ToInt32(ddlClientes.SelectedValue),
                     MetodoPagoId = Convert.ToInt32(ddlMetodoPago.SelectedValue),
-                    EnLocal = Convert.ToBoolean(rdbEnLocal.SelectedValue == "Local" ? 1 : 0),
-                    Fecha = DateTime.Now,
-                    Estado = true
+                    EnLocal = rdbEnLocal.SelectedValue == "Local", // Convierte el valor del RadioButtonList a booleano.
+                    Fecha = DateTime.Now, // La fecha de la venta se actualiza al momento de guardar la edición.
+                    Total = Convert.ToDecimal(lblTotal.Text), // Utiliza el total calculado por el lado del servidor.
+                    Estado = true // Asumimos que la venta sigue activa.
                 };
+
+                // Llama al método en la capa de negocio para editar la venta y sus detalles.
                 _ventaBLL.EditarVenta(venta, DetallesVenta);
-                Response.Redirect("~/Pages/Ventas/Ventas.aspx");
+
+                // Muestra un mensaje de éxito y redirige a la página de listado de ventas.
+                MostrarMensaje("Venta editada exitosamente.", "success");
+                // Redirige a la página 'Ventas.aspx', pasando un mensaje de éxito en la URL.
+                Response.Redirect("~/Pages/Ventas/Ventas.aspx?successMessage=VentaEditada");
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "error",
-                    $"alert('Error al guardar la venta: {ex.Message}');", true);
+                // Captura y muestra cualquier excepción que ocurra durante el proceso de guardado.
+                MostrarMensaje($"Error al guardar la venta: {ex.Message}", "error");
             }
         }
 
-        protected void gvDetalleVenta_RowCommand(object sender, GridViewCommandEventArgs e)
+        /// <summary>
+        /// Maneja los comandos disparados desde los elementos del 'Repeater' (ej. el botón "Eliminar").
+        /// </summary>
+        protected void rptDetalleVenta_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "EliminarFila")
+            // Verifica si el comando es "EliminarDetalle".
+            if (e.CommandName == "EliminarDetalle")
             {
+                // Obtiene el índice de la fila del Repeater desde el CommandArgument.
                 int index = Convert.ToInt32(e.CommandArgument);
-                var detalles = DetallesVenta;
+                var detalles = DetallesVenta; // Obtiene la lista actual de detalles de venta.
+
+                // Verifica que el índice sea válido para evitar errores.
                 if (index >= 0 && index < detalles.Count)
                 {
-                    detalles.RemoveAt(index);
-                    DetallesVenta = detalles;
-                    gvDetalleVenta.DataSource = DetallesVenta;
-                    gvDetalleVenta.DataBind();
+                    detalles.RemoveAt(index); // Elimina el detalle de venta de la lista.
+                    DetallesVenta = detalles; // Actualiza la lista en 'ViewState'.
+
+                    // Vuelve a enlazar el 'Repeater' para reflejar el cambio en la interfaz de usuario.
+                    rptDetalleVenta.DataSource = DetallesVenta;
+                    rptDetalleVenta.DataBind();
+
+                    // Recalcula los totales de la venta después de eliminar un producto.
                     CalcularTotales();
+                    MostrarMensaje("Producto eliminado de la venta.", "info");
                 }
             }
         }
 
-        protected void gvDetalleVenta_RowDataBound(object sender, GridViewRowEventArgs e)
+        /// <summary>
+        /// Muestra un mensaje al usuario en un panel dedicado en la página.
+        /// </summary>
+        /// <param name="mensaje">El texto del mensaje a mostrar.</param>
+        /// <param name="tipo">El tipo de mensaje ("success", "error", "info") para aplicar estilos CSS.</param>
+        private void MostrarMensaje(string mensaje, string tipo)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            lblMensaje.Text = mensaje; // Asigna el texto al Label dentro del panel.
+            pnlMensaje.Visible = true; // Hace visible el panel de mensajes.
+
+            // Asigna clases CSS al panel de mensajes para cambiar su apariencia según el tipo de mensaje.
+            if (tipo == "success")
             {
-                TextBox txtCantidad = new TextBox();
-                txtCantidad.ID = "txtCantidad";
-                txtCantidad.CssClass = "w-16 rounded border border-gray-300 px-2 py-1 text-center";
-                txtCantidad.AutoPostBack = true;
-                txtCantidad.TextChanged += txtCantidad_TextChanged;
-                txtCantidad.Text = DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString();
-                e.Row.Cells[1].Controls.Add(txtCantidad);
+                pnlMensaje.CssClass = "mt-6 p-4 rounded-md bg-green-100 text-green-700 border border-green-200";
+            }
+            else if (tipo == "error")
+            {
+                pnlMensaje.CssClass = "mt-6 p-4 rounded-md bg-red-100 text-red-700 border border-red-200";
+            }
+            else // Para tipo "info" o cualquier otro.
+            {
+                pnlMensaje.CssClass = "mt-6 p-4 rounded-md bg-blue-100 text-blue-700 border border-blue-200";
             }
         }
     }

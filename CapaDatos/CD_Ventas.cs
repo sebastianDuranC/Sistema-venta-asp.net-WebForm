@@ -103,12 +103,11 @@ namespace CapaDatos
                 DataTable dtDetalles = new DataTable();
                 dtDetalles.Columns.Add("ProductoId", typeof(int));
                 dtDetalles.Columns.Add("Cantidad", typeof(decimal));
-                dtDetalles.Columns.Add("Precio", typeof(decimal));
                 dtDetalles.Columns.Add("SubTotal", typeof(decimal));
 
                 foreach (var d in detalles)
                 {
-                    dtDetalles.Rows.Add(d.ProductoId, d.Cantidad, d.Producto?.Precio ?? 0, d.SubTotal);
+                    dtDetalles.Rows.Add(d.ProductoId, d.Cantidad, d.SubTotal);
                 }
 
                 var paramDetalles = comando.Parameters.AddWithValue("@Detalles", dtDetalles);
