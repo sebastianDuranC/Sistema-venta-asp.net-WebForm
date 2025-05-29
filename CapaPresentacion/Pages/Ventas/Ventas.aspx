@@ -85,9 +85,10 @@
                 },
                 dom: '<"flex justify-between items-center mb-4"<"botonesExportar"B><"filtroBusqueda"f>>rtip',
                 buttons: [
-                    {
+                    { //EXCEL
                         extend: 'excelHtml5',
                         text: 'Exportar a Excel',
+                        filename: 'Reporte de ventas',
                         exportOptions: {
                             columns: ':not(:last-child)'
                         },
@@ -101,9 +102,10 @@
                             $('row:eq(0) c', sheet).attr('s', '51'); // '51' es un estilo predefinido para centrado y negrita
                         }
                     },
-                    {
+                    { //PDF
                         extend: 'pdf',
                         text: 'Exportar a PDF',
+                        filename: 'Reporte de ventas',
                         exportOptions: { columns: ':not(:last-child)' },
                         className: 'bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded',
                         pageSize: 'A4',
@@ -112,11 +114,6 @@
                             // Establecer márgenes de la página: [izquierda, arriba, derecha, abajo]
                             doc.pageMargins = [0, 20, 0, 10];
 
-                            // Estilo por defecto para el texto
-                            doc.defaultStyle = {
-                                fontSize: 10,
-                                alignment: 'center'
-                            };
 
                             // Estilo para los encabezados de la tabla
                             doc.styles.tableHeader = {

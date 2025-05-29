@@ -1,143 +1,145 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarVentas.aspx.cs" Inherits="CapaPresentacion.Pages.Ventas.EditarVentas" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container mx-auto rounded-lg bg-white p-6 shadow-md">
-        <h1 class="mb-6 text-3xl font-bold text-gray-800">Editar Venta</h1>
+    <div class="container mx-auto rounded-lg bg-white p-4 shadow">
+        <div class="mb-4 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-primary">Editar Venta</h1>
+            <a href="Ventas.aspx" class="rounded border border-secondary px-4 py-2 font-semibold text-secondary transition hover:bg-secondary hover:text-white">Cancelar</a>
+        </div>
 
-        <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div class="flex-1">
-                <label class="mb-1 block text-lg font-medium text-gray-700">Tipo de cliente</label>
-                <asp:RadioButtonList ID="rblCliente" runat="server" RepeatDirection="Horizontal" CssClass="rbl flex gap-4" OnSelectedIndexChanged="rblCliente_SelectedIndexChanged" AutoPostBack="true">
+        <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+                <label class="mb-1 block text-sm font-medium text-primary">Tipo de cliente</label>
+                <asp:RadioButtonList ID="rblCliente" runat="server" RepeatDirection="Horizontal" CssClass="flex gap-2 text-primary" OnSelectedIndexChanged="rblCliente_SelectedIndexChanged" AutoPostBack="true">
                     <asp:ListItem Text="Normal" Value="Normal"></asp:ListItem>
                     <asp:ListItem Text="Comerciante" Value="Comerciante"></asp:ListItem>
                 </asp:RadioButtonList>
             </div>
-            <asp:Panel ID="pnlClienteComercial" runat="server" Visible="false" CssClass="mb-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <div class="flex flex-col md:flex-row md:gap-4">
-                    <div class="mb-3 flex-1 md:mb-0">
-                        <label for="ddlClientes" class="mb-1 block text-sm font-medium text-gray-700">Cliente:</label>
-                        <asp:DropDownList ID="ddlClientes" runat="server" CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></asp:DropDownList>
+            <asp:Panel ID="pnlClienteComercial" runat="server" Visible="false" CssClass="mb-2 rounded-lg border border-gray-200 bg-gray-50 p-2">
+                <div class="flex flex-col md:flex-row md:gap-2">
+                    <div class="mb-2 flex-1 md:mb-0">
+                        <label for="ddlClientes" class="mb-1 block text-xs font-medium text-primary">Cliente:</label>
+                        <asp:DropDownList ID="ddlClientes" runat="server" CssClass="w-full rounded-md border border-gray-300 px-2 py-1 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"></asp:DropDownList>
                     </div>
                 </div>
             </asp:Panel>
-            <label for="ddlMetodoPago" class="mb-1 block text-sm font-medium text-gray-700">Método de Pago:</label>
-            <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></asp:DropDownList>
+            <div>
+                <label for="ddlMetodoPago" class="mb-1 block text-xs font-medium text-primary">Método de Pago:</label>
+                <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="w-full rounded-md border border-gray-300 px-2 py-1 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"></asp:DropDownList>
+            </div>
         </div>
-        <div class="md:col-span-2">
-            <label class="mb-1 block text-sm font-medium text-gray-700">Tipo de Venta:</label>
-            <asp:RadioButtonList ID="rdbEnLocal" runat="server" RepeatDirection="Horizontal" CssClass="flex space-x-4">
-                <asp:ListItem Text="En Local" Value="Local" CssClass="inline-flex items-center"></asp:ListItem>
-                <asp:ListItem Text="Para Llevar" Value="Llevar" CssClass="inline-flex items-center"></asp:ListItem>
-            </asp:RadioButtonList>
-        </div>
-        <div class="md:col-span-2">
-            <label for="lblFecha" class="mb-1 block text-sm font-medium text-gray-700">Fecha de Venta:</label>
-            <asp:Label ID="lblFecha" runat="server" Text="Fecha: " CssClass="text-lg font-semibold text-gray-900"></asp:Label>
-        </div>
-        </div>
-
-        <div class="mb-8">
-            <h2 class="mb-4 text-2xl font-bold text-gray-800">Productos en la Venta</h2>
-            <div class="overflow-hidden rounded-lg bg-white shadow-md">
-                <table class="min-w-full leading-normal">
-                    <thead>
-                        <tr class="bg-gray-200 text-sm uppercase leading-normal text-gray-700">
-                            <th class="px-6 py-3 text-left">Producto</th>
-                            <th class="px-6 py-3 text-left">Cantidad</th>
-                            <th class="px-6 py-3 text-left">Precio Unitario</th>
-                            <th class="px-6 py-3 text-left">SubTotal</th>
-                            <th class="px-6 py-3 text-left">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <asp:Repeater ID="rptDetalleVenta" runat="server" OnItemCommand="rptDetalleVenta_ItemCommand">
-                            <ItemTemplate>
-                                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                    <td class="whitespace-nowrap px-6 py-3 text-left">
-                                        <asp:Label ID="lblProductoNombre" runat="server" Text='<%# Eval("Producto.Nombre") %>'></asp:Label>
-                                        <asp:HiddenField ID="hdnProductoId" runat="server" Value='<%# Eval("ProductoId") %>' />
-                                        <asp:HiddenField ID="hdnDetalleVentaId" runat="server" Value='<%# Eval("Id") %>' />
-                                        <asp:HiddenField ID="hdnPrecioUnitario" runat="server" Value='<%# Eval("Producto.Precio") %>' />
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:TextBox ID="txtCantidad" runat="server" Text='<%# Eval("Cantidad") %>'
-                                            CssClass="w-20 rounded border border-gray-300 px-2 py-1 text-center"
-                                            AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:Label ID="lblPrecioUnitario" runat="server" Text='<%# Eval("Producto.Precio", "{0:C2}") %>'></asp:Label>
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:Label ID="lblSubTotalDetalle" runat="server" Text='<%# Eval("SubTotal", "{0:C2}") %>'></asp:Label>
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:LinkButton ID="btnEliminar" runat="server" CommandName="EliminarDetalle" CommandArgument='<%# Container.ItemIndex %>'
-                                            CssClass="text-red-600 hover:text-red-900 font-bold">Eliminar</asp:LinkButton>
-                                    </td>
-                                </tr>
-                            </ItemTemplate>
-                            <AlternatingItemTemplate>
-                                <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100">
-                                    <td class="whitespace-nowrap px-6 py-3 text-left">
-                                        <asp:Label ID="lblProductoNombre" runat="server" Text='<%# Eval("Producto.Nombre") %>'></asp:Label>
-                                        <asp:HiddenField ID="hdnProductoId" runat="server" Value='<%# Eval("ProductoId") %>' />
-                                        <asp:HiddenField ID="hdnDetalleVentaId" runat="server" Value='<%# Eval("Id") %>' />
-                                        <asp:HiddenField ID="hdnPrecioUnitario" runat="server" Value='<%# Eval("Producto.Precio") %>' />
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:TextBox ID="txtCantidad" runat="server" Text='<%# Eval("Cantidad") %>'
-                                            CssClass="w-20 rounded border border-gray-300 px-2 py-1 text-center"
-                                            AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:Label ID="lblPrecioUnitario" runat="server" Text='<%# Eval("Producto.Precio", "{0:C2}") %>'></asp:Label>
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:Label ID="lblSubTotalDetalle" runat="server" Text='<%# Eval("SubTotal", "{0:C2}") %>'></asp:Label>
-                                    </td>
-                                    <td class="px-6 py-3 text-left">
-                                        <asp:LinkButton ID="btnEliminar" runat="server" CommandName="EliminarDetalle" CommandArgument='<%# Container.ItemIndex %>'
-                                            CssClass="text-red-600 hover:text-red-900 font-bold">Eliminar</asp:LinkButton>
-                                    </td>
-                                </tr>
-                            </AlternatingItemTemplate>
-                        </asp:Repeater>
-                    </tbody>
-                </table>
+        <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+                <label class="mb-1 block text-xs font-medium text-primary">Tipo de Venta:</label>
+                <asp:RadioButtonList ID="rdbEnLocal" runat="server" RepeatDirection="Horizontal" CssClass="flex gap-2 text-primary">
+                    <asp:ListItem Text="En Local" Value="Local" CssClass="inline-flex items-center"></asp:ListItem>
+                    <asp:ListItem Text="Para Llevar" Value="Llevar" CssClass="inline-flex items-center"></asp:ListItem>
+                </asp:RadioButtonList>
+            </div>
+            <div>
+                <label for="lblFecha" class="mb-1 block text-xs font-medium text-primary">Fecha de Venta:</label>
+                <asp:Label ID="lblFecha" runat="server" Text="Fecha: " CssClass="text-base font-semibold text-primary"></asp:Label>
             </div>
         </div>
 
-        <div class="mb-8 grid grid-cols-1 gap-6 rounded-lg bg-gray-50 p-4 md:grid-cols-2">
-            <div>
-                <label for="lblSubtotal" class="mb-1 block text-sm font-medium text-gray-700">Subtotal:</label>
-                <asp:Label ID="lblSubtotal" runat="server" Text="0.00" CssClass="text-xl font-bold text-gray-900"></asp:Label>
+        <div class="mb-4 rounded-lg bg-white shadow">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="bg-primary uppercase text-white">
+                        <th class="px-3 py-2">Producto</th>
+                        <th class="px-3 py-2">Cantidad</th>
+                        <th class="px-3 py-2">Precio Unitario</th>
+                        <th class="px-3 py-2">SubTotal</th>
+                        <th class="px-3 py-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <asp:Repeater ID="rptDetalleVenta" runat="server" OnItemCommand="rptDetalleVenta_ItemCommand">
+                        <ItemTemplate>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-3 py-2">
+                                    <asp:Label ID="lblProductoNombre" runat="server" Text='<%# Eval("Producto.Nombre") %>'></asp:Label>
+                                    <asp:HiddenField ID="hdnProductoId" runat="server" Value='<%# Eval("ProductoId") %>' />
+                                    <asp:HiddenField ID="hdnDetalleVentaId" runat="server" Value='<%# Eval("Id") %>' />
+                                    <asp:HiddenField ID="hdnPrecioUnitario" runat="server" Value='<%# Eval("Producto.Precio") %>' />
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:TextBox ID="txtCantidad" runat="server" Text='<%# Eval("Cantidad") %>'
+                                        CssClass="w-16 rounded border border-gray-300 px-1 py-1 text-center focus:border-primary focus:ring-primary"
+                                        AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:Label ID="lblPrecioUnitario" runat="server" Text='<%# Eval("Producto.Precio", "{0:C2}") %>'></asp:Label>
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:Label ID="lblSubTotalDetalle" runat="server" Text='<%# Eval("SubTotal", "{0:C2}") %>'></asp:Label>
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:LinkButton ID="btnEliminar" runat="server" CommandName="EliminarDetalle" CommandArgument='<%# Container.ItemIndex %>'
+                                        CssClass="text-secondary hover:underline font-bold">Eliminar</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <AlternatingItemTemplate>
+                            <tr class="border-b bg-gray-50 hover:bg-gray-100">
+                                <td class="px-3 py-2">
+                                    <asp:Label ID="lblProductoNombre" runat="server" Text='<%# Eval("Producto.Nombre") %>'></asp:Label>
+                                    <asp:HiddenField ID="hdnProductoId" runat="server" Value='<%# Eval("ProductoId") %>' />
+                                    <asp:HiddenField ID="hdnDetalleVentaId" runat="server" Value='<%# Eval("Id") %>' />
+                                    <asp:HiddenField ID="hdnPrecioUnitario" runat="server" Value='<%# Eval("Producto.Precio") %>' />
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:TextBox ID="txtCantidad" runat="server" Text='<%# Eval("Cantidad") %>'
+                                        CssClass="w-16 rounded border border-gray-300 px-1 py-1 text-center focus:border-primary focus:ring-primary"
+                                        AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:Label ID="lblPrecioUnitario" runat="server" Text='<%# Eval("Producto.Precio", "{0:C2}") %>'></asp:Label>
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:Label ID="lblSubTotalDetalle" runat="server" Text='<%# Eval("SubTotal", "{0:C2}") %>'></asp:Label>
+                                </td>
+                                <td class="px-3 py-2">
+                                    <asp:LinkButton ID="btnEliminar" runat="server" CommandName="EliminarDetalle" CommandArgument='<%# Container.ItemIndex %>'
+                                        CssClass="text-secondary hover:underline font-bold">Eliminar</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </AlternatingItemTemplate>
+                    </asp:Repeater>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-4 grid grid-cols-2 gap-4">
+            <div class="rounded bg-gray-50 p-3">
+                <label for="lblSubtotal" class="block text-xs text-primary">Subtotal:</label>
+                <asp:Label ID="lblSubtotal" runat="server" Text="0.00" CssClass="text-lg font-bold text-primary"></asp:Label>
             </div>
-            <div>
-                <label for="lblTotal" class="mb-1 block text-sm font-medium text-gray-700">Total de Venta:</label>
-                <asp:Label ID="lblTotal" runat="server" Text="0.00" CssClass="text-2xl font-bold text-indigo-600"></asp:Label>
+            <div class="rounded bg-gray-50 p-3">
+                <label for="lblTotal" class="block text-xs text-primary">Total de Venta:</label>
+                <asp:Label ID="lblTotal" runat="server" Text="0.00" CssClass="text-xl font-bold text-primary"></asp:Label>
             </div>
-            <div>
-                <label for="txtMontoCliente" class="mb-1 block text-sm font-medium text-gray-700">Monto Pagado por Cliente:</label>
+            <div class="rounded bg-gray-50 p-3">
+                <label for="txtMontoCliente" class="block text-xs text-primary">Monto Pagado por Cliente:</label>
                 <asp:TextBox ID="txtMontoCliente" runat="server" TextMode="Number"
-                    CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    CssClass="w-full rounded-md border border-gray-300 px-2 py-1 shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                     onkeyup="calcularCambio();" />
             </div>
-            <div>
-                <label for="lblCambio" class="mb-1 block text-sm font-medium text-gray-700">Cambio:</label>
-                <asp:Label ID="lblCambio" runat="server" Text="0.00" CssClass="text-xl font-bold text-green-600"></asp:Label>
+            <div class="rounded bg-gray-50 p-3">
+                <label for="lblCambio" class="block text-xs text-primary">Cambio:</label>
+                <asp:Label ID="lblCambio" runat="server" Text="0.00" CssClass="text-lg font-bold text-secondary"></asp:Label>
             </div>
         </div>
 
-        <div class="flex justify-end space-x-4">
+        <div class="flex justify-end gap-2">
             <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cambios" OnClick="btnGuardar_Click"
-                CssClass="rounded-md bg-indigo-600 px-6 py-3 font-semibold text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" />
-            <a href="Ventas.aspx" class="rounded-md bg-gray-300 px-6 py-3 font-semibold text-gray-800 shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Cancelar</a>
+                CssClass="rounded bg-primary px-6 py-2 font-semibold text-white shadow transition hover:bg-gray-900" />
         </div>
 
         <asp:Button ID="btnCompletarVenta" runat="server" Text="Completar Venta" Visible="false"
-            CssClass="hidden rounded-md bg-green-600 px-6 py-3 font-semibold text-white shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" />
+            CssClass="hidden rounded bg-green-600 px-6 py-2 font-semibold text-white shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" />
 
-        <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="mt-6 rounded-md p-4 text-sm">
+        <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="mt-4 rounded-md p-2 text-sm">
             <asp:Label ID="lblMensaje" runat="server" CssClass="font-medium"></asp:Label>
         </asp:Panel>
     </div>
