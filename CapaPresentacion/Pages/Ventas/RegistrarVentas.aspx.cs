@@ -85,9 +85,9 @@ namespace CapaPresentacion.Pages.Ventas
             ddlCliente.DataBind();
 
             // Insertar un item por defecto si es necesario, o asegurar que haya un cliente seleccionado
-            if (ddlCliente.Items.Count > 0 && ddlCliente.SelectedValue == string.Empty)
+            if (ddlCliente.Items.Count > 0)
             {
-                ddlCliente.Items.Insert(0, new ListItem("-- Seleccione Cliente --", "0"));
+                ddlCliente.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
                 ddlCliente.SelectedValue = "0"; // Asegura que el valor por defecto sea el seleccionado
             }
             else if (ddlCliente.Items.Count == 0)
@@ -104,7 +104,7 @@ namespace CapaPresentacion.Pages.Ventas
             ddlMetodoPago.DataBind();
 
             // Insertar un item por defecto o asegurar una selección
-            if (ddlMetodoPago.Items.Count > 0 && ddlMetodoPago.SelectedValue == string.Empty)
+            if (ddlMetodoPago.Items.Count > 0)
             {
                 ddlMetodoPago.Items.Insert(0, new ListItem("-- Seleccione Método --", "0"));
                 ddlMetodoPago.SelectedValue = "0";
@@ -148,7 +148,8 @@ namespace CapaPresentacion.Pages.Ventas
                         ProductoId = productoId,
                         Cantidad = 1,
                         SubTotal = producto.Precio,
-                        Producto = producto // Se almacena el objeto Producto completo para mostrar sus detalles.
+                        Producto = producto, // Se almacena el objeto Producto completo para mostrar sus detalles.
+                        Estado = true
                     });
                 }
             }
@@ -320,10 +321,8 @@ namespace CapaPresentacion.Pages.Ventas
                 }
                 else
                 {
-                    // Si es cliente normal, puedes usar un ID de cliente por defecto para "Consumidor Final"
-                    // o un ID que represente un cliente genérico si tu base de datos lo maneja.
-                    // Por simplicidad, asumiremos que "0" o un valor similar representa "consumidor final".
-                    // Asegúrate de que tu capa de negocio maneje esto apropiadamente.
+                    // Si es cliente normal
+                    clienteId = 1; // No se requiere ID de cliente para ventas normales
                 }
 
                 // Determinar si la venta es para llevar (0) o local (1)

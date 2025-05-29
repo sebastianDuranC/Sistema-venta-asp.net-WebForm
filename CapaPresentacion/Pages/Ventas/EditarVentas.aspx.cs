@@ -86,13 +86,26 @@ namespace CapaPresentacion.Pages.Ventas
         {
             // Obtiene los datos de la venta principal (cabecera) de la capa de negocio.
             DataTable dtVenta = _ventaBLL.ObtenerVentaPorId(ventaId);
-
             if (dtVenta != null && dtVenta.Rows.Count > 0)
             {
                 DataRow rowVenta = dtVenta.Rows[0];
 
                 // Asigna los valores de la venta a los controles de la interfaz.
+                // Después de asignar el SelectedValue de ddlClientes, agrega este bloque:
                 ddlClientes.SelectedValue = rowVenta["ClienteId"].ToString();
+
+                int clienteId = Convert.ToInt32(rowVenta["ClienteId"]);
+                if (clienteId == 1)
+                {
+                    rblCliente.SelectedValue = "Normal";
+                    pnlClienteComercial.Visible = false;
+                }
+                else if (clienteId > 1)
+                {
+                    rblCliente.SelectedValue = "Comerciante";
+                    pnlClienteComercial.Visible = true;
+                }
+
                 ddlMetodoPago.SelectedValue = rowVenta["MetodoPagoId"].ToString();
                 // Determina si la venta fue "En Local" o "Para Llevar" y selecciona el RadioButton adecuado.
                 rdbEnLocal.SelectedValue = Convert.ToBoolean(rowVenta["EnLocal"]) ? "Local" : "Llevar";
@@ -116,9 +129,8 @@ namespace CapaPresentacion.Pages.Ventas
                                                              Nombre = row["ProductoNombre"].ToString(),
                                                              Precio = Convert.ToDecimal(row["PrecioUnitario"])
                                                          },
-                                                         Cantidad = Convert.ToDecimal(row["Cantidad"]),
-                                                         SubTotal = Convert.ToDecimal(row["SubTotal"]),
-                                                         Estado = Convert.ToBoolean(row["Estado"])
+                                                         Cantidad = Convert.ToInt32(row["Cantidad"]),
+                                                         SubTotal = Convert.ToDecimal(row["SubTotal"])
                                                      }).ToList();
 
             // Almacena la lista de detalles en 'ViewState' para que persista entre postbacks.
@@ -145,10 +157,10 @@ namespace CapaPresentacion.Pages.Ventas
 
             // Obtiene la lista actual de detalles de venta desde 'ViewState'.
             var detalles = DetallesVenta;
-            decimal nuevaCantidad;
+            int nuevaCantidad;
 
             // Valida que la cantidad ingresada sea un número válido y positivo.
-            if (decimal.TryParse(txtCantidad.Text, out nuevaCantidad) && nuevaCantidad > 0)
+            if (int.TryParse(txtCantidad.Text, out nuevaCantidad) && nuevaCantidad > 0)
             {
                 // Actualiza la cantidad y recalcula el subtotal para el detalle de venta modificado.
                 detalles[itemIndex].Cantidad = nuevaCantidad;
@@ -191,19 +203,6 @@ namespace CapaPresentacion.Pages.Ventas
             lblTotal.Text = subtotal.ToString("N2");
 
             // NOTA: El cálculo del cambio ahora se maneja completamente en el lado del cliente (JavaScript).
-            // Por lo tanto, no se llama a CalcularCambio() desde aquí.
-        }
-
-        /// <summary>
-        /// Maneja el evento 'TextChanged' del TextBox de 'Monto Pagado por Cliente'.
-        /// Este evento ya no es necesario para el cálculo del cambio en el servidor,
-        /// pero se mantiene por si se necesita alguna otra lógica en el postback.
-        /// La lógica del cálculo del cambio está en JavaScript.
-        /// </summary>
-        protected void txtMontoCliente_TextChanged(object sender, EventArgs e)
-        {
-            // No se llama a CalcularCambio() aquí. La función JavaScript 'calcularCambio()'
-            // se encarga de actualizar el cambio en tiempo real en el cliente.
         }
 
         /// <summary>
@@ -220,16 +219,36 @@ namespace CapaPresentacion.Pages.Ventas
                     return;
                 }
 
+                // Validar y obtener el ID del usuario actual
+                int idUsuarioParaVenta;
+                if (Session["usuario"] == null)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Error: Sesión de usuario no válida. Por favor, inicie sesión nuevamente.');", true);
+                    return;
+                }
+                string nombreUsuarioSesion = Session["usuario"].ToString();
+                CN_Venta cnVenta = new CN_Venta();
+                idUsuarioParaVenta = cnVenta.ObtenerIdUsuario(nombreUsuarioSesion);
+
+                if (idUsuarioParaVenta <= 0)
+                {
+                    MostrarMensaje("Error: No se pudo obtener el ID del usuario. Por favor, inicie sesión nuevamente.", "error");
+                    return;
+                }
+
                 // Crea un objeto 'Venta' con los datos actuales de los controles de la página.
                 Venta venta = new Venta
                 {
-                    Id = _ventaId, // El ID de la venta que se está editando.
-                    ClienteId = Convert.ToInt32(ddlClientes.SelectedValue),
+                    Id = _ventaId,
+                    ClienteId = rblCliente.SelectedValue == "Normal"
+                                   ? 1
+                                   : Convert.ToInt32(ddlClientes.SelectedValue),
+                    UsuarioId = idUsuarioParaVenta,
                     MetodoPagoId = Convert.ToInt32(ddlMetodoPago.SelectedValue),
-                    EnLocal = rdbEnLocal.SelectedValue == "Local", // Convierte el valor del RadioButtonList a booleano.
-                    Fecha = DateTime.Now, // La fecha de la venta se actualiza al momento de guardar la edición.
-                    Total = Convert.ToDecimal(lblTotal.Text), // Utiliza el total calculado por el lado del servidor.
-                    Estado = true // Asumimos que la venta sigue activa.
+                    EnLocal = (rdbEnLocal.SelectedValue == "Local"),
+                    Fecha = DateTime.Now,
+                    Total = Convert.ToDecimal(lblTotal.Text.Replace("Bs.", "").Trim()),
+                    Estado = true
                 };
 
                 // Llama al método en la capa de negocio para editar la venta y sus detalles.
@@ -237,13 +256,17 @@ namespace CapaPresentacion.Pages.Ventas
 
                 // Muestra un mensaje de éxito y redirige a la página de listado de ventas.
                 MostrarMensaje("Venta editada exitosamente.", "success");
-                // Redirige a la página 'Ventas.aspx', pasando un mensaje de éxito en la URL.
-                Response.Redirect("~/Pages/Ventas/Ventas.aspx?successMessage=VentaEditada");
+                Response.Redirect("~/Pages/Ventas/Ventas.aspx?successMessage=VentaEditada", false);
+            }
+            catch (ApplicationException ex)
+            {
+                // Captura errores específicos de la aplicación (como los RAISERROR de SQL)
+                MostrarMensaje($"Error al guardar la venta: {ex.Message}", "error");
             }
             catch (Exception ex)
             {
-                // Captura y muestra cualquier excepción que ocurra durante el proceso de guardado.
-                MostrarMensaje($"Error al guardar la venta: {ex.Message}", "error");
+                // Captura cualquier otra excepción no controlada
+                MostrarMensaje($"Error inesperado al guardar la venta: {ex.Message}", "error");
             }
         }
 
@@ -299,6 +322,11 @@ namespace CapaPresentacion.Pages.Ventas
             {
                 pnlMensaje.CssClass = "mt-6 p-4 rounded-md bg-blue-100 text-blue-700 border border-blue-200";
             }
+        }
+
+        protected void rblCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlClienteComercial.Visible = rblCliente.SelectedValue == "Comerciante";
         }
     }
 }

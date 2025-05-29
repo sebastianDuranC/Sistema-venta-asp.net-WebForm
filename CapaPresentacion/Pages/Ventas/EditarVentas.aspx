@@ -1,28 +1,39 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarVentas.aspx.cs" Inherits="CapaPresentacion.Pages.Ventas.EditarVentas" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mx-auto rounded-lg bg-white p-6 shadow-md">
         <h1 class="mb-6 text-3xl font-bold text-gray-800">Editar Venta</h1>
 
         <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-                <label for="ddlClientes" class="mb-1 block text-sm font-medium text-gray-700">Cliente:</label>
-                <asp:DropDownList ID="ddlClientes" runat="server" CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></asp:DropDownList>
-            </div>
-            <div>
-                <label for="ddlMetodoPago" class="mb-1 block text-sm font-medium text-gray-700">Método de Pago:</label>
-                <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></asp:DropDownList>
-            </div>
-            <div class="md:col-span-2">
-                <label class="mb-1 block text-sm font-medium text-gray-700">Tipo de Venta:</label>
-                <asp:RadioButtonList ID="rdbEnLocal" runat="server" RepeatDirection="Horizontal" CssClass="flex space-x-4">
-                    <asp:ListItem Text="En Local" Value="Local" CssClass="inline-flex items-center"></asp:ListItem>
-                    <asp:ListItem Text="Para Llevar" Value="Llevar" CssClass="inline-flex items-center"></asp:ListItem>
+            <div class="flex-1">
+                <label class="mb-1 block text-lg font-medium text-gray-700">Tipo de cliente</label>
+                <asp:RadioButtonList ID="rblCliente" runat="server" RepeatDirection="Horizontal" CssClass="rbl flex gap-4" OnSelectedIndexChanged="rblCliente_SelectedIndexChanged" AutoPostBack="true">
+                    <asp:ListItem Text="Normal" Value="Normal"></asp:ListItem>
+                    <asp:ListItem Text="Comerciante" Value="Comerciante"></asp:ListItem>
                 </asp:RadioButtonList>
             </div>
-            <div class="md:col-span-2">
-                <label for="lblFecha" class="mb-1 block text-sm font-medium text-gray-700">Fecha de Venta:</label>
-                <asp:Label ID="lblFecha" runat="server" Text="Fecha: " CssClass="text-lg font-semibold text-gray-900"></asp:Label>
-            </div>
+            <asp:Panel ID="pnlClienteComercial" runat="server" Visible="false" CssClass="mb-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                <div class="flex flex-col md:flex-row md:gap-4">
+                    <div class="mb-3 flex-1 md:mb-0">
+                        <label for="ddlClientes" class="mb-1 block text-sm font-medium text-gray-700">Cliente:</label>
+                        <asp:DropDownList ID="ddlClientes" runat="server" CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></asp:DropDownList>
+                    </div>
+                </div>
+            </asp:Panel>
+            <label for="ddlMetodoPago" class="mb-1 block text-sm font-medium text-gray-700">Método de Pago:</label>
+            <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></asp:DropDownList>
+        </div>
+        <div class="md:col-span-2">
+            <label class="mb-1 block text-sm font-medium text-gray-700">Tipo de Venta:</label>
+            <asp:RadioButtonList ID="rdbEnLocal" runat="server" RepeatDirection="Horizontal" CssClass="flex space-x-4">
+                <asp:ListItem Text="En Local" Value="Local" CssClass="inline-flex items-center"></asp:ListItem>
+                <asp:ListItem Text="Para Llevar" Value="Llevar" CssClass="inline-flex items-center"></asp:ListItem>
+            </asp:RadioButtonList>
+        </div>
+        <div class="md:col-span-2">
+            <label for="lblFecha" class="mb-1 block text-sm font-medium text-gray-700">Fecha de Venta:</label>
+            <asp:Label ID="lblFecha" runat="server" Text="Fecha: " CssClass="text-lg font-semibold text-gray-900"></asp:Label>
+        </div>
         </div>
 
         <div class="mb-8">
@@ -163,7 +174,7 @@
 
             var pagoStr = document.getElementById('<%= txtMontoCliente.ClientID %>').value;
             // Reemplazar coma por punto para asegurar un parseo correcto en JavaScript
-            var sPagoCleaned = pagoStr.replace(',', '.'); 
+            var sPagoCleaned = pagoStr.replace(',', '.');
             var pago = parseFloat(sPagoCleaned) || 0; // Convertir a número flotante
 
             var cambio = pago - total; // Calcular el cambio

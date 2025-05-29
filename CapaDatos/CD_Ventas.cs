@@ -96,13 +96,18 @@ namespace CapaDatos
             {
                 comando.CommandType = CommandType.StoredProcedure;
 
-                // Parámetro escalar
+                // Parámetros escalares
                 comando.Parameters.AddWithValue("@VentaId", venta.Id);
+                comando.Parameters.AddWithValue("@ClienteId", venta.ClienteId);
+                comando.Parameters.AddWithValue("@MetodoPagoId", venta.MetodoPagoId);
+                comando.Parameters.AddWithValue("@EnLocal", venta.EnLocal);
+                comando.Parameters.AddWithValue("@Total", venta.Total);
+                comando.Parameters.AddWithValue("@UsuarioEditaId", venta.UsuarioId);
 
                 // Crear DataTable para el parámetro tipo tabla
                 DataTable dtDetalles = new DataTable();
                 dtDetalles.Columns.Add("ProductoId", typeof(int));
-                dtDetalles.Columns.Add("Cantidad", typeof(decimal));
+                dtDetalles.Columns.Add("Cantidad", typeof(int));
                 dtDetalles.Columns.Add("SubTotal", typeof(decimal));
 
                 foreach (var d in detalles)
@@ -114,8 +119,18 @@ namespace CapaDatos
                 paramDetalles.SqlDbType = SqlDbType.Structured;
                 paramDetalles.TypeName = "DetalleVentaTipo";
 
-                conexion.Open();
-                comando.ExecuteNonQuery();
+                try
+                {
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    // Capturar errores específicos de RAISERROR
+                    if (ex.Class == 16)  // Errores de usuario
+                        throw new ApplicationException(ex.Message);
+                    throw;
+                }
             }
         }
 

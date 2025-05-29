@@ -10,7 +10,7 @@
             <table id="tablaVentas" class="display compact" style="width: 100%">
                 <thead class="rounded-lg bg-primary p-1 text-white">
                     <tr>
-                        <th>#</th>
+                        <th>№ venta</th>
                         <th>Fecha</th>
                         <th>Cliente</th>
                         <th>Total</th>
