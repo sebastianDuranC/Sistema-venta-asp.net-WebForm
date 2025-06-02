@@ -12,7 +12,7 @@ namespace CapaNegocio
         {
             try
             {
-                CD_Ventas datos = new CD_Ventas();
+                VentaDAL datos = new VentaDAL();
                 return datos.ObtenerVentas();
             }
             catch (Exception ex)
@@ -36,7 +36,7 @@ namespace CapaNegocio
                 dtDetalle.Rows.Add(detalle.ProductoId, detalle.Cantidad, detalle.SubTotal);
             }
 
-            CD_Ventas datos = new CD_Ventas();
+            VentaDAL datos = new VentaDAL();
             return datos.RegistrarVentas(enLocal, clienteId, usuarioId, metodoPagoId, dtDetalle);
         }
 
@@ -55,7 +55,7 @@ namespace CapaNegocio
 
         public DataTable ObtenerVentaPorId(int ventaId)
         {
-            CD_Ventas cD_Ventas = new CD_Ventas();
+            VentaDAL cD_Ventas = new VentaDAL();
             return cD_Ventas.ObtenerVentaId(ventaId);
         }
 
@@ -67,13 +67,13 @@ namespace CapaNegocio
 
         public void EditarVenta(Venta venta, List<DetalleVenta> detalles)
         {
-            CD_Ventas cD_Ventas = new CD_Ventas();
+            VentaDAL cD_Ventas = new VentaDAL();
             cD_Ventas.EditarVenta(venta, detalles);
         }
 
         public bool EliminarVenta(int ventaId)
         {
-            CD_Ventas cd_ventas = new CD_Ventas();
+            VentaDAL cd_ventas = new VentaDAL();
             try
             {
                 return cd_ventas.EliminarVenta(ventaId);

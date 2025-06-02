@@ -2,6 +2,7 @@
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web.UI;
@@ -64,7 +65,7 @@ namespace CapaPresentacion.Pages.Ventas
         /// </summary>
         private void CargarProductosDisponibles()
         {
-            CN_Productos objProductos = new CN_Productos();
+            ProductoBLL objProductos = new ProductoBLL();
             List<Producto> lista = objProductos.ObtenerProductos();
             rptProductos.DataSource = lista;
             rptProductos.DataBind();
@@ -139,8 +140,16 @@ namespace CapaPresentacion.Pages.Ventas
             {
                 // Si el producto no está en el carrito, lo busca en la base de datos
                 // y lo añade como un nuevo DetalleVenta.
-                CN_Productos objProductos = new CN_Productos();
-                Producto producto = objProductos.ObtenerProductoPorId(productoId);
+                ProductoBLL objProductos = new ProductoBLL();
+                DataTable objetoProducto = objProductos.ObtenerProductoPorId(productoId);
+                Producto producto = (from row in objetoProducto.AsEnumerable()
+                                     select new Producto()
+                                     {
+                                         Id = Convert.ToInt32(row["Id"]),
+                                         Nombre = row["Nombre"].ToString(),
+                                         Precio = Convert.ToDecimal(row["Precio"]),
+                                         Stock = row["Stock"] != DBNull.Value ? (int?)Convert.ToInt32(row["Stock"]) : null
+                                     }).FirstOrDefault();
                 if (producto != null)
                 {
                     carrito.Add(new DetalleVenta

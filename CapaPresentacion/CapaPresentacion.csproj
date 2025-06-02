@@ -107,6 +107,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
+    <Content Include="Pages\Productos\EditarProducto.aspx" />
+    <Content Include="Pages\Productos\Productos.aspx" />
+    <Content Include="Pages\Productos\RegistrarProductos.aspx" />
     <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
     <Content Include="Pages\Ventas\DetalleVentas.aspx" />
     <Content Include="Pages\Ventas\EditarVentas.aspx" />
@@ -133,6 +136,8 @@
     <Content Include="Scripts\DataTables\pdfmake.min.js" />
     <Content Include="Scripts\DataTables\vfs_fonts.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\Sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Scripts\Sweetalert2\sweetalert2.min.css" />
     <Content Include="tailwind.config.js" />
     <Content Include="wwwroot\css\tailwind.css" />
     <Content Include="wwwroot\images\ala-pollo.png" />
@@ -145,6 +150,7 @@
     <Content Include="wwwroot\images\cocacola-3l.jpg" />
     <Content Include="wwwroot\images\costilla.jpeg" />
     <Content Include="wwwroot\images\higado.jpeg" />
+    <Content Include="wwwroot\images\icon-accesodenegado.png" />
     <Content Include="wwwroot\images\icons8-basura-llena-100.png" />
     <Content Include="wwwroot\images\icons8-basura-llena-48.png" />
     <Content Include="wwwroot\images\icons8-buy-100.png" />
@@ -172,6 +178,7 @@
     <Content Include="Scripts\DataTables\es-ES.json" />
     <Content Include="Pages\Ventas\VentaDataHandler.ashx" />
     <Content Include="Pages\Ventas\EliminarVentaHandler.ashx" />
+    <Content Include="Pages\Productos\EliminarProducto.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -240,6 +247,30 @@
     <Compile Include="Pages\Permisos\Permisos.aspx.designer.cs">
       <DependentUpon>Permisos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Productos\EditarProducto.aspx.cs">
+      <DependentUpon>EditarProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Productos\EditarProducto.aspx.designer.cs">
+      <DependentUpon>EditarProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Productos\EliminarProducto.ashx.cs">
+      <DependentUpon>EliminarProducto.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Productos\Productos.aspx.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Productos\Productos.aspx.designer.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Productos\RegistrarProductos.aspx.cs">
+      <DependentUpon>RegistrarProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Productos\RegistrarProductos.aspx.designer.cs">
+      <DependentUpon>RegistrarProductos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RolPermisos\RolPermisos.aspx.cs">
       <DependentUpon>RolPermisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -306,6 +337,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="wwwroot\images\Productos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

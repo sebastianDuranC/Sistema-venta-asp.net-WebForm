@@ -6,10 +6,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %>El Fogón</title>
-    <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
+    <link href="/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Scripts/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <style>
         #sidebar.w-20 .menu-text,
         #sidebar.w-20 .submenu,
@@ -22,7 +23,7 @@
         }
     </style>
     <!-- jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/Scripts/Sweetalert2/sweetalert2.all.min.js"></script>
     <script src="/Scripts/jquery-3.7.1.min.js"></script>
 
     <!-- DataTables JS -->
@@ -56,11 +57,11 @@
                         <img src="/wwwroot/images/icons8-porcentaje-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Ventas</span>
                     </a>
-                    <a href="/Pages/Insumos/Insumos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                    <a href="/Pages/Productos/Productos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                         <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Productos</span>
                     </a>
-                    <a href="/Pages/Productos/Productos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                    <a href="/Pages/Insumos/Insumos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                         <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-[28px] w-[28px]" />
                         <span class="menu-text">Inventario</span>
                     </a>

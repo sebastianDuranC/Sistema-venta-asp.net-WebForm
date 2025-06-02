@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_Ventas
+    public class VentaDAL
     {
         private string ObtenerCadenaConexion()
         {

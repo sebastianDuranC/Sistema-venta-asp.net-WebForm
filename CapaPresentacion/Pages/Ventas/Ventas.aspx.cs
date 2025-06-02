@@ -32,7 +32,7 @@ namespace CapaPresentacion.Pages.Ventas
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object EliminarVenta(int ventaId) // El nombre del parámetro debe coincidir
+        public static object EliminarVenta(int ventaId)
         {
             try
             {

@@ -49,10 +49,11 @@
     <Compile Include="CD_Form.cs" />
     <Compile Include="CD_Login.cs" />
     <Compile Include="CD_MetodoPagos.cs" />
-    <Compile Include="CD_Productos.cs" />
+    <Compile Include="ProductoCategoriaDAL.cs" />
+    <Compile Include="ProductoDAL.cs" />
     <Compile Include="CD_Rol.cs" />
     <Compile Include="CD_RolPermisos.cs" />
-    <Compile Include="CD_Ventas.cs" />
+    <Compile Include="VentaDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
