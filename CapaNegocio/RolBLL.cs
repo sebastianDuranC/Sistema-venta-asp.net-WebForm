@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class CN_Rol
+    public class RolBLL
     {
         public List<Rol> ObtenerRoles()
         {
-            CD_Rol rol = new CD_Rol();
+            RolDAL rol = new RolDAL();
             return rol.obtenerRol();
         }
     }

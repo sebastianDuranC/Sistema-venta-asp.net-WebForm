@@ -36,7 +36,7 @@ namespace CapaPresentacion.Pages.Ventas
         {
             try
             {
-                CN_Venta oCN_Venta = new CN_Venta();
+                VentaBLL oCN_Venta = new VentaBLL();
                 bool resultado = oCN_Venta.EliminarVenta(ventaId);
                 System.Diagnostics.Debug.WriteLine($"Intentando eliminar venta ID: {ventaId}");
                 return new

@@ -12,7 +12,7 @@ namespace CapaPresentacion.Pages.Ventas
     public partial class EditarVentas : System.Web.UI.Page
     {
         // Instancia de la capa de negocio para manejar operaciones de Venta.
-        private CN_Venta _ventaBLL = new CN_Venta();
+        private VentaBLL _ventaBLL = new VentaBLL();
         // Campo privado para almacenar el ID de la venta que se está editando.
         // Se inicializa en Page_Load y se mantiene en postbacks.
         private int _ventaId;
@@ -62,7 +62,7 @@ namespace CapaPresentacion.Pages.Ventas
         private void CargarCombos()
         {
             // Carga de Clientes
-            CN_Cliente cN_Cliente = new CN_Cliente();
+            ClienteBLL cN_Cliente = new ClienteBLL();
             List<Cliente> listaClientes = cN_Cliente.ObtenerClientes();
             ddlClientes.DataSource = listaClientes;
             ddlClientes.DataTextField = "Nombre"; // Propiedad a mostrar en el DropDownList
@@ -70,7 +70,7 @@ namespace CapaPresentacion.Pages.Ventas
             ddlClientes.DataBind();
 
             // Carga de Métodos de Pago
-            CN_MetodoPagos objMetodoPago = new CN_MetodoPagos();
+            MetodoPagoBLL objMetodoPago = new MetodoPagoBLL();
             List<MetodoPago> listaMetodoPagos = objMetodoPago.ObtenerMetodoPagosParaVenta();
             ddlMetodoPago.DataSource = listaMetodoPagos;
             ddlMetodoPago.DataTextField = "Nombre";
@@ -227,7 +227,7 @@ namespace CapaPresentacion.Pages.Ventas
                     return;
                 }
                 string nombreUsuarioSesion = Session["usuario"].ToString();
-                CN_Venta cnVenta = new CN_Venta();
+                VentaBLL cnVenta = new VentaBLL();
                 idUsuarioParaVenta = cnVenta.ObtenerIdUsuario(nombreUsuarioSesion);
 
                 if (idUsuarioParaVenta <= 0)

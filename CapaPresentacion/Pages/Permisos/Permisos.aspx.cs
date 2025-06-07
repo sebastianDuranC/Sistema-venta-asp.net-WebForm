@@ -20,7 +20,7 @@ namespace CapaPresentacion.Form
             string nombreForm = txtFormNombre.Text.Trim();
             string formRuta = txtformRuta.Text.Trim();
 
-            CN_Form form = new CN_Form();
+            PermisoBLL form = new PermisoBLL();
             if (form.RegistrarForm(nombreForm, formRuta))
             {
                 lblMensaje.Text = "Formulario registrado correctamente.";

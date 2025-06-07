@@ -11,7 +11,7 @@
                             <h4 class="m-0 text-lg font-semibold"><%# Eval("Nombre") %></h4>
                         </div>
                         <div class="flex flex-col gap-2 px-6 py-4">
-                            <asp:Repeater runat="server" ID="rptForm" OnItemDataBound="rptForm_ItemDataBound">
+                            <asp:Repeater runat="server" ID="rptForm">
                                 <ItemTemplate>
                                     <div class="flex items-center rounded-md bg-gray-50 px-3 py-2">
                                         <asp:CheckBox runat="server" ID="checkFormPermisos" CssClass="mr-2 accent-blue-600" />
@@ -23,14 +23,14 @@
                             </asp:Repeater>
                         </div>
                         <div class="flex justify-end px-6 py-2">
-                            <asp:Label runat="server" ID="lblRolId" Visible="false" Text=' <%# Eval("Id") %> '> </asp:Label>
+                            <asp:Label runat="server" ID="lblRolId" Visible="true" Text=' <%# Eval("Id") %> '> </asp:Label>
                         </div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
         <div class="mt-6 flex items-center gap-4">
-            <asp:Button runat="server" CssClass="rounded-lg bg-primary px-8 py-3 font-semibold text-white shadow transition hover:bg-gray-700" ID="btnRolPermisos" Text="Guardar Permisos" OnClick="btnRolPermisos_Click" />
+            <asp:Button runat="server" CssClass="cursor-pointer rounded-lg bg-primary px-8 py-3 font-semibold text-white shadow transition hover:bg-gray-700" ID="btnRolPermisos" Text="Guardar Permisos" OnClick="btnRolPermisos_Click" />
             <asp:Label runat="server" CssClass="font-semibold text-green-600" ID="lblMensaje"></asp:Label>
         </div>
     </div>

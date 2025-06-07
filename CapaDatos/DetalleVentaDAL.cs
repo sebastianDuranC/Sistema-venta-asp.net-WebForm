@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_DetalleVentas
+    public class DetalleVentaDAL
     {
         public DataTable ObtenerDetalleVenta(int ventaId)
         {

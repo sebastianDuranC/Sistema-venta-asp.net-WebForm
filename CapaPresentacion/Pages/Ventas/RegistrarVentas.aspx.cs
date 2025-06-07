@@ -78,7 +78,7 @@ namespace CapaPresentacion.Pages.Ventas
         private void CargarClientesYMetodosPago()
         {
             // Cargar clientes
-            CN_Cliente cN_Cliente = new CN_Cliente();
+            ClienteBLL cN_Cliente = new ClienteBLL();
             List<Cliente> listaClientes = cN_Cliente.ObtenerClientes();
             ddlCliente.DataSource = listaClientes;
             ddlCliente.DataTextField = "Nombre"; // Mostrar el nombre del cliente
@@ -97,7 +97,7 @@ namespace CapaPresentacion.Pages.Ventas
             }
 
             // Cargar métodos de pago
-            CN_MetodoPagos objMetodoPago = new CN_MetodoPagos();
+            MetodoPagoBLL objMetodoPago = new MetodoPagoBLL();
             List<MetodoPago> listaMetodoPagos = objMetodoPago.ObtenerMetodoPagosParaVenta();
             ddlMetodoPago.DataSource = listaMetodoPagos;
             ddlMetodoPago.DataTextField = "Nombre"; // Mostrar el nombre del método de pago
@@ -185,7 +185,7 @@ namespace CapaPresentacion.Pages.Ventas
         {
             if (int.TryParse(ddlCliente.SelectedValue, out int clienteId) && clienteId > 0)
             {
-                CN_Cliente cN_Cliente = new CN_Cliente();
+                ClienteBLL cN_Cliente = new ClienteBLL();
                 // Busca el cliente seleccionado en la lista completa de clientes.
                 Cliente cliente = cN_Cliente.ObtenerClientes().FirstOrDefault(c => c.Id == clienteId);
 
@@ -302,7 +302,7 @@ namespace CapaPresentacion.Pages.Ventas
                     return;
                 }
                 string nombreUsuarioSesion = Session["usuario"].ToString();
-                CN_Venta cnVenta = new CN_Venta(); // Se usa una instancia de CN_Venta para obtener el ID de usuario
+                VentaBLL cnVenta = new VentaBLL(); // Se usa una instancia de CN_Venta para obtener el ID de usuario
                 idUsuarioParaVenta = cnVenta.ObtenerIdUsuario(nombreUsuarioSesion);
 
                 if (idUsuarioParaVenta == 0)

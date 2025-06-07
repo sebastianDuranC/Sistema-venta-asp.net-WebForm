@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class CN_Cliente
+    public class ClienteBLL
     {
-        private CD_Cliente cdCliente = new CD_Cliente();
+        private ClienteDAL cdCliente = new ClienteDAL();
 
         public List<Cliente> ObtenerClientes()
         {

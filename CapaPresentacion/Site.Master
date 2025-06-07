@@ -6,27 +6,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %>El Fogón</title>
+    
     <link href="/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Scripts/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
     <style>
+        /* Estilos para controlar el estado colapsado del sidebar */
         #sidebar.w-20 .menu-text,
         #sidebar.w-20 .submenu,
-        #sidebar.w-20 .submenu-arrow {
-            display: none !important;
+        #sidebar.w-20 .submenu-arrow-container {
+            display: none;
         }
 
-        #sidebar.w-20 .menu-text {
-            opacity: 0;
+        /* Transición suave para la altura del submenú */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        /* Transición para la flecha del submenú */
+        .submenu-arrow {
+            transition: transform 0.3s ease-in-out;
         }
     </style>
-    <!-- jQuery -->
-    <script src="/Scripts/Sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="/Scripts/jquery-3.7.1.min.js"></script>
 
-    <!-- DataTables JS -->
+    <script src="/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="/Scripts/Sweetalert2/sweetalert2.all.min.js"></script>
     <script src="/Scripts/DataTables/jquery.dataTables.min.js"></script>
     <script src="/Scripts/DataTables/dataTables.buttons.min.js"></script>
     <script src="/Scripts/DataTables/buttons.html5.min.js"></script>
@@ -35,74 +44,137 @@
     <script src="/Scripts/DataTables/vfs_fonts.js"></script>
 </head>
 <body class="h-full">
-    <form runat="server">
+    <form id="form1" runat="server">
         <asp:ScriptManager runat="server" />
 
-        <div class="flex min-h-screen bg-red-100 transition-all duration-300">
-            <!-- Sidebar -->
-           <aside id="sidebar" class="w-20 bg-secondary shadow-lg transition-all duration-300 flex flex-col justify-between">
-                <!-- Header: Logo + toggle -->
-                <div class="flex items-center gap-3 px-6 py-4 border-b">
-                    <img src="/wwwroot/images/icons8-menú-60.png" alt="Menú" class="h-6 w-6 cursor-pointer transition-transform duration-300" id="sidebar-toggle-icon" onclick="toggleSidebar()" />
+        <div class="flex h-screen bg-contentbg">
+            <aside id="sidebar" class="bg-secondary shadow-lg flex flex-col w-64 transition-all duration-300">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-white">
                     <span class="text-xl font-bold text-white select-none menu-text">El Fogón</span>
+                    <img src="/wwwroot/images/icons8-menú-60.png" alt="Menú" class="h-6 w-6 cursor-pointer transition-transform duration-300" id="sidebar-toggle-icon" onclick="toggleSidebar()" />
                 </div>
 
-                <!-- Navegación -->
-                <nav class="flex flex-col gap-1 px-2">
+                <nav class="flex-grow overflow-y-auto py-2">
+                    <%-- Dashboard --%>
                     <a href="/Default.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="h-[28px] w-[28px]" />
+                        <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="h-7 w-7 flex-shrink-0" />
                         <span class="menu-text">Dashboard</span>
                     </a>
+                    <%-- Cliente --%>
+                    <div>
+                        <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                            <span class="flex items-center gap-3">
+                                <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <span class="menu-text">Clientes</span>
+                            </span>
+                            <span class="submenu-arrow-container">
+                                <span class="submenu-arrow transform">&#9660;</span>
+                            </span>
+                        </a>
+                        <div class="submenu flex flex-col gap-1 pl-10">
+                            <a href="/Pages/Clientes/Clientes.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Gestionar Clientes</a>
+                            <a href="/Pages/Clientes/MetodoPago.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Método pago</a>
+                        </div>
+                    </div>
+                    <%-- Producto --%>
+                    <div>
+                        <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                            <span class="flex items-center gap-3">
+                                <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <span class="menu-text">Productos</span>
+                            </span>
+                             <span class="submenu-arrow-container">
+                                <span class="submenu-arrow transform">&#9660;</span>
+                            </span>
+                        </a>
+                        <div class="submenu flex flex-col gap-1 pl-10">
+                            <a href="/Pages/Productos/Productos.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Gestionar Productos</a>
+                            <a href="/Pages/Productos/Categorias.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Categoria</a>
+                        </div>
+                    </div>
+                    <%-- Venta --%>
                     <a href="/Pages/Ventas/Ventas.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-porcentaje-100.png" class="h-[28px] w-[28px]" />
+                        <img src="/wwwroot/images/icons8-porcentaje-100.png" class="h-7 w-7 flex-shrink-0" />
                         <span class="menu-text">Ventas</span>
                     </a>
-                    <a href="/Pages/Productos/Productos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-[28px] w-[28px]" />
-                        <span class="menu-text">Productos</span>
-                    </a>
-                    <a href="/Pages/Insumos/Insumos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-[28px] w-[28px]" />
-                        <span class="menu-text">Inventario</span>
-                    </a>
+                    <%-- Insumo --%>
+                    <div>
+                        <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                            <span class="flex items-center gap-3">
+                                <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <span class="menu-text">Insumos</span>
+                            </span>
+                             <span class="submenu-arrow-container">
+                                <span class="submenu-arrow transform">&#9660;</span>
+                            </span>
+                        </a>
+                        <div class="submenu flex flex-col gap-1 pl-10">
+                            <a href="/Pages/Insumos/Categorias.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Categoria</a>
+                            <a href="/Pages/Insumos/Proveedores.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Proveedor</a>
+                            <a href="/Pages/Insumos/Unidades.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Unidades</a>
+                            <a href="/Pages/Insumos/Insumos.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Gestionar Insumos</a>
+                        </div>
+                    </div>
+                    <%-- Compra --%>
                     <a href="/Pages/Compras/Compras.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-[28px] w-[28px]" />
+                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-7 w-7 flex-shrink-0" />
                         <span class="menu-text">Compras</span>
                     </a>
-                    <a href="/Pages/Usuarios/Usuarios.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="h-[28px] w-[28px]" />
-                        <span class="menu-text">Administracion</span>
+                    <%-- Movimiento inventario --%>
+                    <a href="/Pages/Compras/Compras.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-7 w-7 flex-shrink-0" />
+                        <span class="menu-text">Inventario</span>
                     </a>
-                    <a href="/Pages/Permisos/Permisos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-[28px] w-[28px]" />
-                        <span class="menu-text">Permisos</span>
-                    </a>
-                    <a href="/Pages/RolPermisos/RolPermisos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-[28px] w-[28px]" />
-                        <span class="menu-text">RolPermisos</span>
-                    </a>
+                    <%-- Administracion --%>
+                    <div>
+                        <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                            <span class="flex items-center gap-3">
+                                <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <span class="menu-text">Administración</span>
+                            </span>
+                            <span class="submenu-arrow-container">
+                                <span class="submenu-arrow transform">&#9660;</span>
+                            </span>
+                        </a>
+                        <div class="submenu flex flex-col gap-1 pl-10">
+                            <a href="/Pages/Usuarios/Usuarios.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Usuario</a>
+                            <a href="/Pages/Administracion/Roles.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Rol</a>
+                            <a href="/Pages/Permisos/Permisos.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Formulario</a>
+                            <a href="/Pages/RolPermisos/RolPermisos.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Permisos</a>
+                        </div>
+                    </div>
+                    <%-- Reportes --%>
+                    <div>
+                        <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                            <span class="flex items-center gap-3">
+                                <img src="/wwwroot/images/icons8-descargar-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <span class="menu-text">Reportes</span>
+                            </span>
+                            <span class="submenu-arrow-container">
+                                <span class="submenu-arrow transform">&#9660;</span>
+                            </span>
+                        </a>
+                        <div class="submenu flex flex-col gap-1 pl-10">
+                            <a href="/Pages/Reportes/ReporteVenta.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Reporte Venta</a>
+                            <a href="/Pages/Reportes/ReporteCompra.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Reporte Compra</a>
+                        </div>
+                    </div>
+                    <%-- Configuracion --%>
                     <a href="/Pages/Configuracion/Configuracion.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="h-[28px] w-[28px]" />
+                        <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="h-7 w-7 flex-shrink-0" />
                         <span class="menu-text">Configuración</span>
                     </a>
                 </nav>
 
-                <!-- Cerrar sesión -->
-                <div class="p-4 border-t">
-                    <button
-                        type="submit"
-                        runat="server"
-                        onserverclick="cerrarSesion_Click"
-                        class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium shadow transition duration-200 focus:outline-none"
-                        style="outline: none; border: none;">
+                <div class="p-4 border-t border-white">
+                    <button type="submit" runat="server" onserverclick="cerrarSesion_Click" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium shadow transition duration-200 focus:outline-none" style="outline: none; border: none;">
                         <img src="/wwwroot/images/icons8-salida-100.png" class="h-5 w-5" alt="Cerrar Sesión" />
                         <span class="menu-text">Cerrar Sesión</span>
                     </button>
                 </div>
             </aside>
 
-            <!-- Main Content -->
-            <main class="flex-1 flex flex-col justify-start p-8 bg-contentbg transition-all duration-300 text-primary">
+            <main class="flex-1 p-8 overflow-y-auto bg-contentbg text-primary">
                 <div class="w-full">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
@@ -110,15 +182,80 @@
             </main>
         </div>
 
-        <!-- Script para el sidebar -->
         <script>
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
                 const icon = document.getElementById('sidebar-toggle-icon');
+                const isCollapsed = sidebar.classList.contains('w-20');
+
                 sidebar.classList.toggle('w-64');
                 sidebar.classList.toggle('w-20');
-                icon.classList.toggle('rotate-180');
+                icon.classList.toggle('-rotate-180');
+
+                // Si el sidebar se está colapsando, cierra todos los submenús abiertos
+                if (!isCollapsed) {
+                    const allSubmenus = sidebar.querySelectorAll('.submenu');
+                    allSubmenus.forEach(submenu => {
+                        submenu.style.maxHeight = '0px';
+                        const arrow = submenu.previousElementSibling.querySelector('.submenu-arrow');
+                        if (arrow) {
+                            arrow.classList.remove('rotate-180');
+                        }
+                    });
+                }
             }
+
+            function toggleSubmenu(anchorElement) {
+                event.preventDefault(); // Prevenir navegación
+                const sidebar = document.getElementById('sidebar');
+
+                // No permitir abrir submenús si el sidebar está colapsado
+                if (sidebar.classList.contains('w-20')) {
+                    return;
+                }
+
+                const submenu = anchorElement.nextElementSibling;
+                const arrow = anchorElement.querySelector('.submenu-arrow');
+
+                // Cerrar otros submenús abiertos
+                const allSubmenus = sidebar.querySelectorAll('.submenu');
+                allSubmenus.forEach(otherSubmenu => {
+                    if (otherSubmenu !== submenu && otherSubmenu.style.maxHeight !== '0px') {
+                        otherSubmenu.style.maxHeight = '0px';
+                        const otherArrow = otherSubmenu.previousElementSibling.querySelector('.submenu-arrow');
+                        if (otherArrow) otherArrow.classList.remove('rotate-180');
+                    }
+                });
+
+                // Abrir o cerrar el submenú actual
+                if (submenu.style.maxHeight && submenu.style.maxHeight !== '0px') {
+                    submenu.style.maxHeight = '0px';
+                    if (arrow) arrow.classList.remove('rotate-180');
+                } else {
+                    submenu.style.maxHeight = submenu.scrollHeight + "px";
+                    if (arrow) arrow.classList.add('rotate-180');
+                }
+            }
+
+            // Inicializar rotación de las flechas
+            document.addEventListener('DOMContentLoaded', function () {
+                const allArrows = document.querySelectorAll('.submenu-arrow');
+                allArrows.forEach(arrow => {
+                    // Inicialmente apuntan hacia abajo, rotamos para que apunten a la derecha
+                    arrow.classList.add('-rotate-90');
+                });
+            });
+
+            // Reajustar submenús abiertos si la ventana cambia de tamaño
+            window.addEventListener('resize', () => {
+                const openSubmenus = document.querySelectorAll('.submenu');
+                openSubmenus.forEach(submenu => {
+                    if (submenu.style.maxHeight && submenu.style.maxHeight !== '0px') {
+                        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                    }
+                });
+            });
+
         </script>
     </form>
 </body>

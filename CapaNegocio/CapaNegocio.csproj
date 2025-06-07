@@ -41,15 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CN_Cliente.cs" />
-    <Compile Include="CN_DetalleVentas.cs" />
-    <Compile Include="CN_MetodoPagos.cs" />
-    <Compile Include="CN_Form.cs" />
-    <Compile Include="CN_Login.cs" />
+    <Compile Include="ClienteBLL.cs" />
+    <Compile Include="DetalleVentaBLL.cs" />
+    <Compile Include="MetodoPagoBLL.cs" />
+    <Compile Include="PermisoBLL.cs" />
+    <Compile Include="UsuarioBLL.cs" />
     <Compile Include="ProductoBLL.cs" />
-    <Compile Include="CN_Rol.cs" />
-    <Compile Include="CN_RolPermisos.cs" />
-    <Compile Include="CN_Venta.cs" />
+    <Compile Include="RolBLL.cs" />
+    <Compile Include="RolPermisoBLL.cs" />
+    <Compile Include="VentaBLL.cs" />
     <Compile Include="ProductoCategoriaBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

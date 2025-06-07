@@ -21,7 +21,7 @@ namespace CapaPresentacion.Pages.Ventas
             try
             {
                 int ventaId = int.Parse(context.Request["ventaId"]);
-                CN_Venta oCN_Venta = new CN_Venta();
+                VentaBLL oCN_Venta = new VentaBLL();
                 bool resultado = oCN_Venta.EliminarVenta(ventaId);
 
                 context.Response.Write(serializer.Serialize(new

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_RolPermisos
+    public class RolPermisoDAL
     {
         private CD_Conexion conexion = new CD_Conexion();
         SqlDataReader leer;
@@ -47,12 +47,8 @@ namespace CapaDatos
             return esPermitido;
         }
 
-        public bool UsuarioTienePermisoForm(string currentUsuario, string currentNombreForm)
+        public bool UsuarioTienePermisoForm(int rolId, int formularioId)
         {
-            CD_Login cD_Usuario = new CD_Login();
-            int rolId = cD_Usuario.ObtenerRolIdNombre(currentUsuario);
-            CD_Form cD_Form = new CD_Form();
-            int formularioId = cD_Form.ObtenerFormularioIdNombre(currentNombreForm);
             if (rolId != -1 && formularioId != -1)
             {
                 comandoQuery.Connection = conexion.AbrirBd();

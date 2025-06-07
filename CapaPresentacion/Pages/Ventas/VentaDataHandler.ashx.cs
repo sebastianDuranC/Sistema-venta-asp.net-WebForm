@@ -19,7 +19,7 @@ namespace CapaPresentacion.Pages.Ventas
             try
             {
                 // Obtener la lista de ventas desde la capa de negocio
-                CN_Venta cn_venta = new CN_Venta();
+                VentaBLL cn_venta = new VentaBLL();
                 DataTable ventas = cn_venta.ListarVentas();
 
                 // Convertir DataTable a lista de diccionarios

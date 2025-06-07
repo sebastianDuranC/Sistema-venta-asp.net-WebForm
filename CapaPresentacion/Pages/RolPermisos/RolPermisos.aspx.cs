@@ -12,10 +12,7 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
         {
             if (!IsPostBack)
             {
-                CN_Rol rolNegocio = new CN_Rol();
-                var roles = rolNegocio.ObtenerRoles();
-                rptRoles.DataSource = roles;
-                rptRoles.DataBind();
+                CargarDatos();
             }
         }
 
@@ -27,12 +24,13 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
                 int rolId = rol.Id;
 
                 Repeater rptForms = e.Item.FindControl("rptForm") as Repeater;
-                CN_Form formNegocio = new CN_Form();
-                var forms = formNegocio.obtenerForm();
+                PermisoBLL permisoForm  = new PermisoBLL();
+                var forms = permisoForm.obtenerForm();
                 rptForms.DataSource = forms;
                 rptForms.DataBind();
 
-                CN_RolPermisos permisosNegocio = new CN_RolPermisos();
+                //Aqui indicamos que si el roldId y el permisoId(form) tienen el estado=1 en la tabla RolPermiso, entonces el checkbox se marca como permitido
+                RolPermisoBLL permisosNegocio = new RolPermisoBLL();
 
                 foreach (RepeaterItem formItem in rptForms.Items)
                 {
@@ -43,6 +41,15 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
                     checkFormPermisos.Checked = isAllowed;
                 }
             }
+        }
+
+        public void CargarDatos()
+        {
+            // Cargar los roles desde la base de datos y enlazarlos al Repeater
+            RolBLL rolNegocio = new RolBLL();
+            var roles = rolNegocio.ObtenerRoles();
+            rptRoles.DataSource = roles;
+            rptRoles.DataBind();
         }
 
         protected void btnRolPermisos_Click(object sender, EventArgs e)
@@ -56,11 +63,11 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
                     Repeater rptForm = (Repeater)rolItem.FindControl("rptForm");
                     foreach (RepeaterItem formItem in rptForm.Items)
                     {
-                        int formId = Convert.ToInt32(((HiddenField)formItem.FindControl("hdnFormId")).Value);
-                        CheckBox checkBoxPermisos = (CheckBox)formItem.FindControl("checkFormPermisos");
+                        int formId = Convert.ToInt32(((HiddenField)formItem.FindControl("hdnFormId")).Value); //PermisoId
+                        CheckBox checkBoxPermisos = (CheckBox)formItem.FindControl("checkFormPermisos"); // Estado del checkbox
                         bool isChecked = checkBoxPermisos.Checked;
 
-                        CN_RolPermisos permisosNegocio = new CN_RolPermisos();
+                        RolPermisoBLL permisosNegocio = new RolPermisoBLL();
                         permisosNegocio.ActualizarRolPermisos(rolId, formId, isChecked);
                         totalUpdates++;
                     }
@@ -77,11 +84,6 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
                 lblMensaje.Text = "¡Error al guardar permisos!";
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
             }
-        }
-
-        protected void rptForm_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-
         }
     }
 }

@@ -21,7 +21,7 @@ namespace CapaPresentacion.Acceso
             string usuario = txtUsuario.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            CN_Login CN_negocio = new CN_Login();
+            UsuarioBLL CN_negocio = new UsuarioBLL();
             if (CN_negocio.ValidarCredencialesUsuario(usuario, password))
             {
                 FormsAuthentication.SetAuthCookie(usuario, false);

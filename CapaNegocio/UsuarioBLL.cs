@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class CN_Login
+    public class UsuarioBLL
     {
-        private CD_Login CD_Datos = new CD_Login();
+        private UsuarioDAL usuarioDal = new UsuarioDAL();
 
         public bool ValidarCredencialesUsuario(string usuario, string password)
         {
@@ -19,16 +19,17 @@ namespace CapaNegocio
                 {
                     return false;
                 }
-                return CD_Datos.ValidarCredencialesUsuario(usuario, password);
+                return usuarioDal.ValidarCredencialesUsuario(usuario, password);
             }
             catch (Exception ex)
             {
                 throw new Exception ("Error al intentar iniciar sesión: " + ex);
             }
         }
-        public bool UsuarioTienePermisoForm(string currentUsuario, string currentNombreForm)
+
+        public bool UsuarioTienePermisoForm(int currentUsuario, int currentNombreForm)
         {
-            CD_RolPermisos cD_RolPermisos = new CD_RolPermisos(); 
+            RolPermisoDAL cD_RolPermisos = new RolPermisoDAL(); 
             try
             {
                 return cD_RolPermisos.UsuarioTienePermisoForm(currentUsuario, currentNombreForm);
@@ -36,6 +37,18 @@ namespace CapaNegocio
             catch (Exception ex)
             {
                 throw new Exception("Error al intentar saber el permiso al form: " + ex);
+            }
+        }
+
+        public int ObtenerRolIdNombre(string currentUsuario)
+        {
+            try
+            {
+                return usuarioDal.ObtenerRolIdNombre(currentUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar obtener el rol del usuario: " + ex);
             }
         }
     }

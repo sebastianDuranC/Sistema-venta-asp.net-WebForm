@@ -43,16 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CD_Cliente.cs" />
+    <Compile Include="ClienteDAL.cs" />
     <Compile Include="CD_Conexion.cs" />
-    <Compile Include="CD_DetalleVentas.cs" />
-    <Compile Include="CD_Form.cs" />
-    <Compile Include="CD_Login.cs" />
-    <Compile Include="CD_MetodoPagos.cs" />
+    <Compile Include="DetalleVentaDAL.cs" />
+    <Compile Include="PermisoDAL.cs" />
+    <Compile Include="UsuarioDAL.cs" />
+    <Compile Include="MetodoPagoDAL.cs" />
     <Compile Include="ProductoCategoriaDAL.cs" />
     <Compile Include="ProductoDAL.cs" />
-    <Compile Include="CD_Rol.cs" />
-    <Compile Include="CD_RolPermisos.cs" />
+    <Compile Include="RolDAL.cs" />
+    <Compile Include="RolPermisoDAL.cs" />
     <Compile Include="VentaDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

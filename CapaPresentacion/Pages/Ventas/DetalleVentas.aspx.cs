@@ -36,7 +36,7 @@ namespace CapaPresentacion.Pages.Ventas
 
         private void CargarDetalleVenta(int ventaId)
         {
-            CN_DetalleVentas cnDetalleVentas = new CN_DetalleVentas();
+            DetalleVentaBLL cnDetalleVentas = new DetalleVentaBLL();
             var detalle = cnDetalleVentas.ObtenerDetalleVentas(ventaId);
 
             gvDetalle.DataSource = detalle;

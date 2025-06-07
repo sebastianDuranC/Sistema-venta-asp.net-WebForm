@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class CN_DetalleVentas
+    public class DetalleVentaBLL
     {
-         CD_DetalleVentas cd_detalleventas = new CD_DetalleVentas();
+         DetalleVentaDAL cd_detalleventas = new DetalleVentaDAL();
 
         public DataTable ObtenerDetalleVentas(int ventaId)
         {

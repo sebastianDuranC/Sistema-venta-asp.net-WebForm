@@ -9,12 +9,12 @@ using System.Xml;
 
 namespace CapaNegocio
 {
-    public class CN_RolPermisos
+    public class RolPermisoBLL
     {
-        CD_RolPermisos RolPermisos = new CD_RolPermisos();
+        RolPermisoDAL RolPermisos = new RolPermisoDAL();
         public void ActualizarRolPermisos(int rolId, int formId, bool check)
         {
-            CD_RolPermisos cD_RolPermisos = new CD_RolPermisos();
+            RolPermisoDAL cD_RolPermisos = new RolPermisoDAL();
             try
             {
                 if (rolId != 0 && formId != 0)
@@ -30,7 +30,7 @@ namespace CapaNegocio
 
         public bool ObtenerEsPermitidoForm(int rolId, int formId)
         {
-            CD_RolPermisos cD_RolPermisos = new CD_RolPermisos();
+            RolPermisoDAL cD_RolPermisos = new RolPermisoDAL();
             try
             {
                 if (rolId != 0 && formId != 0)

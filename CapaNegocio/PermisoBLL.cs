@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class CN_Form
+    public class PermisoBLL
     {
-        CD_Form form = new CD_Form();
+        PermisoDAL form = new PermisoDAL();
 
         public bool RegistrarForm(string nombreForm, string formRuta)
         {
@@ -37,6 +37,26 @@ namespace CapaNegocio
             try
             {
                 return form.ObtenerForm();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int ObtenerFormularioIdNombre(string currentNombreForm)
+        {
+            try
+            {
+                // Validar que el nombre del formulario no sea nulo o vacío
+                if (!string.IsNullOrEmpty(currentNombreForm))
+                {
+                    return form.ObtenerFormularioIdNombre(currentNombreForm);
+                }
+                else
+                {
+                    return -1; // O un valor que indique error
+                }
             }
             catch (Exception)
             {

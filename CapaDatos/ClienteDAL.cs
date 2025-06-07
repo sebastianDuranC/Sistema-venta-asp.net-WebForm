@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_Cliente
+    public class ClienteDAL
     {
         private string ObtenerCadenaConexion()
         {

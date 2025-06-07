@@ -9,7 +9,7 @@ using CapaEntidades;
 
 namespace CapaDatos
 {
-    public class CD_Rol
+    public class RolDAL
     {
         private CD_Conexion conexion = new CD_Conexion();
         SqlDataReader leer;

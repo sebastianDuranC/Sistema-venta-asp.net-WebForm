@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace CapaDatos
 {
-    public class CD_Login
+    public class UsuarioDAL
     {
         private CD_Conexion conexion = new CD_Conexion();
         SqlDataReader leer;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_MetodoPagos
+    public class MetodoPagoDAL
     {
         private CD_Conexion conexion = new CD_Conexion();
 

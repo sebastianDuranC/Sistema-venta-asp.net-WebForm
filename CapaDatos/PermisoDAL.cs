@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class CD_Form
+    public class PermisoDAL
     {
         private CD_Conexion conexion = new CD_Conexion();
         SqlCommand comandoQuery = new SqlCommand();

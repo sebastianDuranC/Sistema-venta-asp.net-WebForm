@@ -6,7 +6,7 @@ using CapaEntidades;
 
 namespace CapaNegocio
 {
-    public class CN_Venta
+    public class VentaBLL
     {
         public DataTable ListarVentas()
         {
@@ -44,7 +44,7 @@ namespace CapaNegocio
         {
             try
             {
-                CD_Login datos = new CD_Login();
+                UsuarioDAL datos = new UsuarioDAL();
                 return datos.ObtenerRolIdNombre(nombreUsuario);
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace CapaNegocio
 
         public DataTable ObtenerDetallesVentaPorVentaId(int ventaId)
         {
-            CD_DetalleVentas cD_Ventas = new CD_DetalleVentas();
+            DetalleVentaDAL cD_Ventas = new DetalleVentaDAL();
             return cD_Ventas.ObtenerDetalleVenta(ventaId);
         }
 

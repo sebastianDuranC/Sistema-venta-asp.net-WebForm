@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    public class CN_MetodoPagos
+    public class MetodoPagoBLL
     {
-        private CD_MetodoPagos metodoPagos = new CD_MetodoPagos();
+        private MetodoPagoDAL metodoPagos = new MetodoPagoDAL();
         public List<MetodoPago> ObtenerMetodoPagosParaVenta()
         {
             return metodoPagos.ObtenerMetodoVenta();

@@ -24,11 +24,14 @@ namespace CapaPresentacion
                 return;
             }
 
+            UsuarioBLL usuarioBLL = new UsuarioBLL();
             string currentUsuario = Session["usuario"].ToString();
+
+            PermisoBLL permisoBLL = new PermisoBLL();
             string currentNombreForm = "~" + Request.Url.AbsolutePath + ".aspx";
 
-            CN_Login CN_Login = new CN_Login();
-            if (!CN_Login.UsuarioTienePermisoForm(currentUsuario, currentNombreForm))
+            UsuarioBLL CN_Login = new UsuarioBLL();
+            if (!CN_Login.UsuarioTienePermisoForm(usuarioBLL.ObtenerRolIdNombre(currentUsuario), permisoBLL.ObtenerFormularioIdNombre(currentNombreForm)))
             {
                 Response.Redirect("~/Acceso/AccesoDenegado.aspx");
                 return;
