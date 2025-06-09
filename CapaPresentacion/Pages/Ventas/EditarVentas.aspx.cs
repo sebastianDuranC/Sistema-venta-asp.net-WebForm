@@ -248,6 +248,7 @@ namespace CapaPresentacion.Pages.Ventas
                     EnLocal = (rdbEnLocal.SelectedValue == "Local"),
                     Fecha = DateTime.Now,
                     Total = Convert.ToDecimal(lblTotal.Text.Replace("Bs.", "").Trim()),
+                    MontoRecibido = Convert.ToDecimal(txtMontoCliente.Text.Replace("Bs.", "").Trim()),
                     Estado = true
                 };
 

@@ -21,7 +21,7 @@ namespace CapaNegocio
             }
         }
 
-        public bool RegistrarVentas(int enLocal, int clienteId, int usuarioId, int metodoPagoId, List<DetalleVenta> listaDetalles)
+        public bool RegistrarVentas(Venta venta, List<DetalleVenta> listaDetalles)
         {
             if (listaDetalles == null || listaDetalles.Count == 0)
                 return false;
@@ -37,7 +37,7 @@ namespace CapaNegocio
             }
 
             VentaDAL datos = new VentaDAL();
-            return datos.RegistrarVentas(enLocal, clienteId, usuarioId, metodoPagoId, dtDetalle);
+            return datos.RegistrarVentas(venta, dtDetalle);
         }
 
         public int ObtenerIdUsuario(string nombreUsuario)

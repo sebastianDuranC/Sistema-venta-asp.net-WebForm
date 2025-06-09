@@ -134,7 +134,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <span>Cambio</span>
-                        <asp:Label ID="lblCambio" runat="server" Text="Bs. 0.00" CssClass="font-bold" />
+                        <asp:Label ID="lblCambio" runat="server" Text="Bs. 0.00" CssClass="font-bold"/>
                     </div>
                 </div>
                 <div class="flex flex-col space-y-2">

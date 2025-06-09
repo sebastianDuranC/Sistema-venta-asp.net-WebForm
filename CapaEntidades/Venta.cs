@@ -16,6 +16,8 @@ namespace CapaEntidades
         public int? ClienteId { get; set; }
         public int UsuarioId { get; set; }
         public int MetodoPagoId { get; set; }
+        public decimal MontoRecibido { get; set; }
+        public decimal CambioDevuelto { get; set; }
         public bool Estado { get; set; }
 
         public virtual Cliente Cliente { get; set; }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapaEntidades
 {
+
     public class Permisos
     {
         public int Id { get; set; }

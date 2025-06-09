@@ -41,7 +41,7 @@ namespace CapaDatos
             return dataTable;
         }
 
-        public bool RegistrarVentas(int enLocal, int cliente, int usuario, int metodoPago, DataTable detalles)
+        public bool RegistrarVentas(Venta venta, DataTable detalles)
         {
             using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
             {
@@ -50,10 +50,11 @@ namespace CapaDatos
                     comando.CommandType = CommandType.StoredProcedure;
 
                     // Parámetros escalares
-                    comando.Parameters.AddWithValue("@EnLocal", enLocal);
-                    comando.Parameters.AddWithValue("@ClienteId", cliente);
-                    comando.Parameters.AddWithValue("@UsuarioId", usuario);
-                    comando.Parameters.AddWithValue("@MetodoPagoId", metodoPago);
+                    comando.Parameters.AddWithValue("@EnLocal", venta.EnLocal);
+                    comando.Parameters.AddWithValue("@ClienteId", venta.ClienteId);
+                    comando.Parameters.AddWithValue("@UsuarioId", venta.UsuarioId);
+                    comando.Parameters.AddWithValue("@MetodoPagoId", venta.MetodoPagoId);
+                    comando.Parameters.AddWithValue("@MontoRecibido", venta.MontoRecibido);
 
                     // Parámetro tipo tabla
                     SqlParameter tvpDetalle = comando.Parameters.AddWithValue("@Detalles", detalles);
@@ -103,6 +104,7 @@ namespace CapaDatos
                 comando.Parameters.AddWithValue("@EnLocal", venta.EnLocal);
                 comando.Parameters.AddWithValue("@Total", venta.Total);
                 comando.Parameters.AddWithValue("@UsuarioEditaId", venta.UsuarioId);
+                comando.Parameters.AddWithValue("@MontoRecibido", venta.MontoRecibido);
 
                 // Crear DataTable para el parámetro tipo tabla
                 DataTable dtDetalles = new DataTable();
@@ -137,23 +139,25 @@ namespace CapaDatos
         public bool EliminarVenta(int ventaId)
         {
             using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
-            using (SqlCommand comando = new SqlCommand("sp_EliminarVenta", conexion))
             {
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.AddWithValue("@VentaId", ventaId);
-                conexion.Open();
-                try
+                using (SqlCommand comando = new SqlCommand("sp_EliminarVenta", conexion))
                 {
-                    int filasAfectadas = comando.ExecuteNonQuery();
-                    return filasAfectadas > 0;
-                }
-                catch (SqlException ex)
-                {
-                    // Capturar errores específicos de RAISERROR
-                    if (ex.Class == 16)  // Errores de usuario
-                        throw new ApplicationException(ex.Message);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@VentaId", ventaId);
+                    conexion.Open();
+                    try
+                    {
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        return filasAfectadas > 0;
+                    }
+                    catch (SqlException ex)
+                    {
+                        // Capturar errores específicos de RAISERROR
+                        if (ex.Class == 16)  // Errores de usuario
+                            throw new ApplicationException(ex.Message);
 
-                    throw;
+                        throw;
+                    }
                 }
             }
         }

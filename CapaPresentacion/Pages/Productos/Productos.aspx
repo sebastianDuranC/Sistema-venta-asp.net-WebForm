@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="flex w-full flex-col justify-between py-4">
         <div class="mb-4 flex items-center justify-between">
-            <h2 class="text-3xl font-bold text-primary">Lista de productos</h2>
-            <asp:Button CssClass="mt-2 inline-block rounded bg-primary px-4 py-2 font-semibold text-white shadow transition-colors hover:cursor-pointer hover:bg-primary-dark" Text="Crear Productos" runat="server" ID="btnRegistrarProducto" OnClick="btnRegistrarProducto_Click" />
+            <h2 class="text-3xl font-extrabold text-primary">Lista de productos</h2>
+            <asp:Button CssClass="mt-2 inline-block rounded bg-primary px-4 py-2 font-semibold text-white shadow transition-colors hover:cursor-pointer hover:bg-primary/85 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" Text="Crear Productos" runat="server" ID="btnRegistrarProducto" OnClick="btnRegistrarProducto_Click" />
         </div>
     </div>
     <div class="flex rounded-lg bg-white p-4">
@@ -28,13 +28,13 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td class="px-4 py-2 text-center font-semibold text-secondary"><%# Eval("Id") %></td>
-                        <td class="px-4 py-2 text-center"><%# Eval("Nombre") %></td>
-                        <td class="px-4 py-2 text-center"><%# Eval("Precio", "{0:C}") %></td>
-                        <td class="px-4 py-2 text-center"><%# string.IsNullOrEmpty(Eval("Stock")?.ToString()) ? "0" : Eval("Stock") %></td>
-                        <td class="px-4 py-2 text-center"><%# string.IsNullOrEmpty(Eval("StockMinimo")?.ToString()) ? "0" : Eval("StockMinimo") %></td>
-                        <td class="px-4 py-2 text-center"><%# Eval("ProductoCategoria.Nombre") %></td>
-                        <td class="px-4 py-2 text-center">
+                        <td class="px-4 py-2 font-semibold text-secondary"><%# Eval("Id") %></td>
+                        <td class="px-4 py-2"><%# Eval("Nombre") %></td>
+                        <td class="px-4 py-2"><%# Eval("Precio", "{0:C}") %></td>
+                        <td class="px-4 py-2"><%# string.IsNullOrEmpty(Eval("Stock")?.ToString()) ? "0" : Eval("Stock") %></td>
+                        <td class="px-4 py-2"><%# string.IsNullOrEmpty(Eval("StockMinimo")?.ToString()) ? "0" : Eval("StockMinimo") %></td>
+                        <td class="px-4 py-2"><%# Eval("ProductoCategoria.Nombre") %></td>
+                        <td class="px-4 py-2">
                             <div style="display: flex; justify-content: center;">
                                 <asp:Image ImageUrl='<%# Eval("FotoUrl") %>' runat="server" Width="80px" Height="80px" CssClass="rounded shadow" />
                             </div>
@@ -43,7 +43,7 @@
                             <div style="display: flex; justify-content: center; gap: 0.5rem;">
                                 <asp:Button runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="rounded bg-yellow-500 px-3 py-1 text-white transition-colors hover:bg-yellow-600 hover:cursor-pointer" />
                                 <button type="button" onclick='confirmarEliminacionProducto("<%# Eval("Id") %>")' 
-                                    class="rounded bg-secondary px-3 py-1 text-white transition-colors hover:bg-red-600 hover:cursor-pointer">
+                                    class="rounded bg-secondary px-3 py-1 text-white transition-colors hover:bg-secondary/85 hover:cursor-pointer">
                                     Eliminar
                                 </button>
                             </div>

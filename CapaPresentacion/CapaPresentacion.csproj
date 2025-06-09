@@ -106,7 +106,10 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Permisos\EditarPermiso.aspx" />
+    <Content Include="Pages\Permisos\EditarPermisos.aspx" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
+    <Content Include="Pages\Permisos\RegistrarPermisos.aspx" />
     <Content Include="Pages\Productos\EditarProducto.aspx" />
     <Content Include="Pages\Productos\Productos.aspx" />
     <Content Include="Pages\Productos\RegistrarProductos.aspx" />
@@ -250,12 +253,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Permisos\EditarPermiso.aspx.cs">
+      <DependentUpon>EditarPermiso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Permisos\EditarPermiso.aspx.designer.cs">
+      <DependentUpon>EditarPermiso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Permisos\EditarPermisos.aspx.cs">
+      <DependentUpon>EditarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Permisos\EditarPermisos.aspx.designer.cs">
+      <DependentUpon>EditarPermisos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Permisos\Permisos.aspx.cs">
       <DependentUpon>Permisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Permisos\Permisos.aspx.designer.cs">
       <DependentUpon>Permisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Permisos\RegistrarPermisos.aspx.cs">
+      <DependentUpon>RegistrarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Permisos\RegistrarPermisos.aspx.designer.cs">
+      <DependentUpon>RegistrarPermisos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Productos\EditarProducto.aspx.cs">
       <DependentUpon>EditarProducto.aspx</DependentUpon>

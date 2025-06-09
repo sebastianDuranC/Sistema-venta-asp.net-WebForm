@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mx-auto p-4 md:p-6 lg:p-8">
         <div class="mb-6 flex items-center justify-between py-4">
-            <h2 class="text-3xl font-extrabold text-gray-900">Editar producto</h2>
+            <h2 class="text-3xl font-extrabold text-primary">Editar producto</h2>
             <asp:Button CssClass="inline-flex items-center rounded-md bg-red-600 px-5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 Text="Cancelar" runat="server" ID="btnVolverProductos" OnClick="btnVolverProductos_Click" />
         </div>

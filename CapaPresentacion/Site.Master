@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %>El Fogón</title>
-    
+
     <link href="/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -83,7 +83,7 @@
                                 <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-7 w-7 flex-shrink-0" />
                                 <span class="menu-text">Productos</span>
                             </span>
-                             <span class="submenu-arrow-container">
+                            <span class="submenu-arrow-container">
                                 <span class="submenu-arrow transform">&#9660;</span>
                             </span>
                         </a>
@@ -104,7 +104,7 @@
                                 <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" />
                                 <span class="menu-text">Insumos</span>
                             </span>
-                             <span class="submenu-arrow-container">
+                            <span class="submenu-arrow-container">
                                 <span class="submenu-arrow transform">&#9660;</span>
                             </span>
                         </a>
@@ -174,7 +174,7 @@
                 </div>
             </aside>
 
-            <main class="flex-1 p-8 overflow-y-auto bg-contentbg text-primary">
+            <main class="flex-1 flex flex-col items-center justify-center p-8 bg-contentbg transition-all duration-300 text-primary">
                 <div class="w-full">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>

@@ -54,6 +54,11 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
 
         protected void btnRolPermisos_Click(object sender, EventArgs e)
         {
+            EditarPermisos();
+        }
+
+        private void EditarPermisos()
+        {
             int totalUpdates = 0;
             if (Session["usuario"] != null)
             {
@@ -64,7 +69,7 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
                     foreach (RepeaterItem formItem in rptForm.Items)
                     {
                         int formId = Convert.ToInt32(((HiddenField)formItem.FindControl("hdnFormId")).Value); //PermisoId
-                        CheckBox checkBoxPermisos = (CheckBox)formItem.FindControl("checkFormPermisos"); // Estado del checkbox
+                        CheckBox checkBoxPermisos = (CheckBox)formItem.FindControl("checkFormPermisos"); // Estado del checkbox/rolpermisos
                         bool isChecked = checkBoxPermisos.Checked;
 
                         RolPermisoBLL permisosNegocio = new RolPermisoBLL();

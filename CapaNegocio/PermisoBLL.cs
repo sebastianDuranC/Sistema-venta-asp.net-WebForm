@@ -18,8 +18,8 @@ namespace CapaNegocio
             {
                 // Validar que los parámetros no sean nulos o vacíos
                 if (!string.IsNullOrEmpty(nombreForm) && !string.IsNullOrEmpty(formRuta))
-                { 
-                    return form.RegistrarForm(nombreForm, formRuta); 
+                {
+                    return form.RegistrarForm(nombreForm, formRuta);
                 }
                 else
                 {
@@ -44,6 +44,26 @@ namespace CapaNegocio
             }
         }
 
+        public Permisos ObtenerFormPorId(int id)
+        {
+            try
+            {
+                // Validar que el ID sea mayor a 0
+                if (id > 0)
+                {
+                    return form.ObtenerFormPorId(id);
+                }
+                else
+                {
+                    return new Permisos(); // O un valor que indique error
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public int ObtenerFormularioIdNombre(string currentNombreForm)
         {
             try
@@ -56,6 +76,46 @@ namespace CapaNegocio
                 else
                 {
                     return -1; // O un valor que indique error
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool EditarForm(Permisos permisos)
+        {
+            try
+            {
+                // Validar que el ID sea mayor a 0
+                if (permisos.Id > 0)
+                {
+                    return form.EditarPermiso(permisos);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool EliminarPermiso(int id)
+        {
+            try
+            {
+                // Validar que el ID sea mayor a 0
+                if (id > 0)
+                {
+                    return form.EliminarPermiso(id);
+                }
+                else
+                {
+                    return false;
                 }
             }
             catch (Exception)

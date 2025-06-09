@@ -336,13 +336,17 @@ namespace CapaPresentacion.Pages.Ventas
 
                 // Determinar si la venta es para llevar (0) o local (1)
                 int enLocal = rbLocal.SelectedValue == "Local" ? 1 : 0;
-
+                decimal montoRecibido = Convert.ToDecimal(txtPagoCliente.Text);
                 // Registrar la venta
-                bool resultado = cnVenta.RegistrarVentas(
-                                            enLocal,
-                                            clienteId,
-                                            idUsuarioParaVenta,
-                                            metodoPagoId,
+                Venta venta = new Venta
+                {
+                    EnLocal = Convert.ToBoolean(enLocal),
+                    ClienteId = clienteId,
+                    UsuarioId = idUsuarioParaVenta,
+                    MetodoPagoId = metodoPagoId,
+                    MontoRecibido = montoRecibido
+                };
+                bool resultado = cnVenta.RegistrarVentas(venta,
                                             detallesVenta);
 
                 if (resultado)
