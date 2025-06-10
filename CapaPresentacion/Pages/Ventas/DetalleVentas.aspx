@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mx-auto px-4 py-8">
-        <!-- Encabezado mejorado -->
+        <!-- Encabezado -->
         <div class="mb-6 flex items-center justify-between">
             <h2 class="text-3xl font-bold text-primary">📋 Detalle de Venta<asp:Literal ID="litVentaId" runat="server" /></h2>
             <asp:Button ID="btnVolver" runat="server" Text="← Volver a Ventas"

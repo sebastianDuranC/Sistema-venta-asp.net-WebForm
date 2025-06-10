@@ -9,7 +9,7 @@
     </div>
     <div class="flex rounded-lg bg-white p-4">
         <div class="flex w-full flex-col justify-between">
-            <%-- Lista de permisos --%>
+            <%-- Lista --%>
             <asp:Repeater runat="server" ID="rptPermisos" OnItemCommand="rptPermisos_ItemCommand">
                 <%-- Cabezera del table --%>
                 <HeaderTemplate>

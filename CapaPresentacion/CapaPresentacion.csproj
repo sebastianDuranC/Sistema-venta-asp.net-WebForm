@@ -106,7 +106,6 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Pages\Permisos\EditarPermiso.aspx" />
     <Content Include="Pages\Permisos\EditarPermisos.aspx" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
     <Content Include="Pages\Permisos\RegistrarPermisos.aspx" />
@@ -116,6 +115,7 @@
     <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
     <Content Include="Pages\Ventas\DetalleVentas.aspx" />
     <Content Include="Pages\Ventas\EditarVentas.aspx" />
+    <Content Include="Pages\Ventas\EliminarVentas.aspx" />
     <Content Include="Pages\Ventas\RegistrarVentas.aspx" />
     <Content Include="Pages\Ventas\Ventas.aspx" />
     <Content Include="postcss.config.js" />
@@ -184,12 +184,10 @@
     <Content Include="wwwroot\images\pacumuto.png" />
     <Content Include="wwwroot\images\pepsi-3l.jpg" />
     <Content Include="wwwroot\images\pollerita.jpeg" />
-    <Content Include="wwwroot\images\sucursales\c74b5583-4e19-4ed7-9be4-d5fc8470cd37_292494896_451531606977362_3754286695921249784_n.png" />
     <Content Include="wwwroot\images\visualizacion.png" />
     <Content Include="wwwroot\site.css" />
     <Content Include="package.json" />
     <Content Include="Scripts\DataTables\es-ES.json" />
-    <Content Include="Pages\Ventas\VentaDataHandler.ashx" />
     <Content Include="Pages\Ventas\EliminarVentaHandler.ashx" />
     <Content Include="Pages\Productos\EliminarProducto.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
@@ -252,13 +250,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Permisos\EditarPermiso.aspx.cs">
-      <DependentUpon>EditarPermiso.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Permisos\EditarPermiso.aspx.designer.cs">
-      <DependentUpon>EditarPermiso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Permisos\EditarPermisos.aspx.cs">
       <DependentUpon>EditarPermisos.aspx</DependentUpon>
@@ -329,15 +320,19 @@
     <Compile Include="Pages\Ventas\EliminarVentaHandler.ashx.cs">
       <DependentUpon>EliminarVentaHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Ventas\EliminarVentas.aspx.cs">
+      <DependentUpon>EliminarVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Ventas\EliminarVentas.aspx.designer.cs">
+      <DependentUpon>EliminarVentas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Ventas\RegistrarVentas.aspx.cs">
       <DependentUpon>RegistrarVentas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Ventas\RegistrarVentas.aspx.designer.cs">
       <DependentUpon>RegistrarVentas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Ventas\VentaDataHandler.ashx.cs">
-      <DependentUpon>VentaDataHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Ventas\Ventas.aspx.cs">
       <DependentUpon>Ventas.aspx</DependentUpon>

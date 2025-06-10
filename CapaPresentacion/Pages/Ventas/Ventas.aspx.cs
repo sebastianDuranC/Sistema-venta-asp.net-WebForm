@@ -20,14 +20,17 @@ namespace CapaPresentacion.Pages.Ventas
         {
             if (!IsPostBack)
             {
-
+                cargarDatos();
             }
         }
 
-        protected void crearVentas_Click(object sender, EventArgs e)
+        private void cargarDatos()
         {
-            //Redirigirme a la página de crear ventas
-            Response.Redirect("~/Pages/Ventas/RegistrarVentas.aspx");
+            // Obtener la lista de ventas desde la capa de negocio
+            VentaBLL cn_venta = new VentaBLL();
+            DataTable ventas = cn_venta.ListarVentas();
+            rptVentas.DataSource = ventas;
+            rptVentas.DataBind();
         }
 
         [WebMethod]
@@ -53,6 +56,29 @@ namespace CapaPresentacion.Pages.Ventas
                     success = false,
                     message = "Error interno: " + ex.Message
                 };
+            }
+        }
+
+        protected void btnRegistrarVenta_Click(object sender, EventArgs e)
+        {
+            //Redirigirme a la página de crear ventas
+            Response.Redirect("~/Pages/Ventas/RegistrarVentas.aspx");
+        }
+
+        protected void rptVentas_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument);
+            switch (e.CommandName)
+            {
+                case "Editar":
+                    Response.Redirect($"~/Pages/Ventas/EditarVentas.aspx?VentaId={id}");
+                    break;
+                case "Ver":
+                    Response.Redirect($"~/Pages/Ventas/DetalleVentas.aspx?VentaId={id}");
+                    break;
+                case "Eliminar":
+                    Response.Redirect($"~/Pages/Ventas/EliminarVentas.aspx?VentaId={id}");
+                    break;
             }
         }
     }

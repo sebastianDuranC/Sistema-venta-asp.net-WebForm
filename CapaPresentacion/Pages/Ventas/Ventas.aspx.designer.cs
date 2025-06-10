@@ -15,12 +15,21 @@ namespace CapaPresentacion.Pages.Ventas
     {
 
         /// <summary>
-        /// Control crearVentas.
+        /// Control btnRegistrarVenta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button crearVentas;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarVenta;
+
+        /// <summary>
+        /// Control rptVentas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptVentas;
     }
 }

@@ -1,6 +1,8 @@
-﻿using CapaNegocio;
+﻿using CapaEntidades;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -15,36 +17,57 @@ namespace CapaPresentacion.Pages.Ventas
 
         public void ProcessRequest(HttpContext context)
         {
+            // Configurar la respuesta como JSON
             context.Response.ContentType = "application/json";
-            var serializer = new JavaScriptSerializer();
 
             try
             {
-                int ventaId = int.Parse(context.Request["ventaId"]);
-                VentaBLL oCN_Venta = new VentaBLL();
-                bool resultado = oCN_Venta.EliminarVenta(ventaId);
+                // Verificar si el formulario tiene el parámetro Id
+                if (context.Request.Form["VentaId"] == null)
+                {
+                    throw new Exception("No se proporcionó el ID de la venta");
+                }
 
-                context.Response.Write(serializer.Serialize(new
+                // Obtener el ID del producto desde la solicitud
+                int VentaId;
+                if (!int.TryParse(context.Request.Form["VentaId"], out VentaId))
                 {
-                    success = resultado,
-                    message = resultado ? "Venta anulada correctamente" : "No se realizaron cambios"
-                }));
-            }
-            catch (ApplicationException ex)
-            {
-                context.Response.Write(serializer.Serialize(new
+                    throw new Exception("El ID no es válido");
+                }
+
+                // Crear instancia de la capa de negocio
+                VentaBLL venta = new VentaBLL();
+
+                // Intentar eliminar el producto
+                bool resultado = venta.EliminarVenta(VentaId);
+
+                // Crear objeto de respuesta
+                var respuesta = new
                 {
-                    success = false,
-                    message = ex.Message
-                }));
+                    exito = resultado,
+                    mensaje = resultado ? "Venta eliminado correctamente" : "Error al eliminar la Venta"
+                };
+
+                // Serializar y enviar la respuesta
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                context.Response.Write(serializer.Serialize(respuesta));
             }
             catch (Exception ex)
             {
-                context.Response.Write(serializer.Serialize(new
+                // Registrar el error en el log de eventos
+                EventLog.WriteEntry("Application",
+                    $"Error en EliminarProductoHandler: {ex.Message}\nStackTrace: {ex.StackTrace}",
+                    EventLogEntryType.Error);
+
+                // En caso de error, enviar respuesta de error
+                var respuestaError = new
                 {
-                    success = false,
-                    message = "Error crítico: " + ex.Message
-                }));
+                    exito = false,
+                    mensaje = "Error: " + ex.Message
+                };
+
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                context.Response.Write(serializer.Serialize(respuestaError));
             }
         }
 

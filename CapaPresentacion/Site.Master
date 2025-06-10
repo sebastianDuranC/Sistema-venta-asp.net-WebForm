@@ -5,7 +5,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %>El Fogón</title>
+    <title><%: Page.Title %> - El Fogón</title> <%-- Corregido para agregar un separador --%>
 
     <link href="/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -21,6 +21,13 @@
             display: none;
         }
 
+        /* CAMBIO: Nueva regla para centrar íconos cuando el menú está colapsado */
+        #sidebar.w-20 nav a {
+            justify-content: center;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        
         /* Transición suave para la altura del submenú */
         .submenu {
             max-height: 0;
@@ -48,23 +55,23 @@
         <asp:ScriptManager runat="server" />
 
         <div class="flex h-screen bg-contentbg">
-            <aside id="sidebar" class="bg-secondary shadow-lg flex flex-col w-64 transition-all duration-300">
+            <aside id="sidebar" class="bg-secondary shadow-lg flex flex-col w-20 transition-all duration-300">
                 <div class="flex items-center justify-between px-6 py-4 border-b border-white">
                     <span class="text-xl font-bold text-white select-none menu-text">El Fogón</span>
-                    <img src="/wwwroot/images/icons8-menú-60.png" alt="Menú" class="h-6 w-6 cursor-pointer transition-transform duration-300" id="sidebar-toggle-icon" onclick="toggleSidebar()" />
+                    <img src="/wwwroot/images/icons8-menú-60.png" alt="Menú" class="h-6 w-6 cursor-pointer transition-transform duration-300 -rotate-180" id="sidebar-toggle-icon" onclick="toggleSidebar()" />
                 </div>
 
                 <nav class="flex-grow overflow-y-auto py-2">
                     <%-- Dashboard --%>
                     <a href="/Default.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="h-7 w-7 flex-shrink-0" />
+                        <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="h-7 w-7 flex-shrink-0" alt="Dashboard"/>
                         <span class="menu-text">Dashboard</span>
                     </a>
                     <%-- Cliente --%>
                     <div>
                         <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                             <span class="flex items-center gap-3">
-                                <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="h-7 w-7 flex-shrink-0" alt="Clientes" />
                                 <span class="menu-text">Clientes</span>
                             </span>
                             <span class="submenu-arrow-container">
@@ -80,7 +87,7 @@
                     <div>
                         <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                             <span class="flex items-center gap-3">
-                                <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <img src="/wwwroot/images/icons8-cheeseburger-100.png" class="h-7 w-7 flex-shrink-0" alt="Productos" />
                                 <span class="menu-text">Productos</span>
                             </span>
                             <span class="submenu-arrow-container">
@@ -94,14 +101,14 @@
                     </div>
                     <%-- Venta --%>
                     <a href="/Pages/Ventas/Ventas.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-porcentaje-100.png" class="h-7 w-7 flex-shrink-0" />
+                        <img src="/wwwroot/images/icons8-porcentaje-100.png" class="h-7 w-7 flex-shrink-0" alt="Ventas"/>
                         <span class="menu-text">Ventas</span>
                     </a>
                     <%-- Insumo --%>
                     <div>
                         <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                             <span class="flex items-center gap-3">
-                                <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" alt="Insumos"/>
                                 <span class="menu-text">Insumos</span>
                             </span>
                             <span class="submenu-arrow-container">
@@ -117,19 +124,19 @@
                     </div>
                     <%-- Compra --%>
                     <a href="/Pages/Compras/Compras.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-7 w-7 flex-shrink-0" />
+                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-7 w-7 flex-shrink-0" alt="Compras" />
                         <span class="menu-text">Compras</span>
                     </a>
                     <%-- Movimiento inventario --%>
-                    <a href="/Pages/Compras/Compras.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-compra-100.png" class="h-7 w-7 flex-shrink-0" />
+                    <a href="/Pages/Movimientos/Movimientos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white"> <%-- Ruta corregida a modo de ejemplo --%>
+                        <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" alt="Inventario"/> <%-- Ícono cambiado a modo de ejemplo --%>
                         <span class="menu-text">Inventario</span>
                     </a>
                     <%-- Administracion --%>
                     <div>
                         <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                             <span class="flex items-center gap-3">
-                                <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <img src="/wwwroot/images/icons8-aprobación-100.png" class="h-7 w-7 flex-shrink-0" alt="Administración"/>
                                 <span class="menu-text">Administración</span>
                             </span>
                             <span class="submenu-arrow-container">
@@ -147,7 +154,7 @@
                     <div>
                         <a href="#" onclick="toggleSubmenu(this)" class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                             <span class="flex items-center gap-3">
-                                <img src="/wwwroot/images/icons8-descargar-100.png" class="h-7 w-7 flex-shrink-0" />
+                                <img src="/wwwroot/images/icons8-descargar-100.png" class="h-7 w-7 flex-shrink-0" alt="Reportes"/>
                                 <span class="menu-text">Reportes</span>
                             </span>
                             <span class="submenu-arrow-container">
@@ -161,7 +168,7 @@
                     </div>
                     <%-- Configuracion --%>
                     <a href="/Pages/Configuracion/Configuracion.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
-                        <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="h-7 w-7 flex-shrink-0" />
+                        <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="h-7 w-7 flex-shrink-0" alt="Configuración" />
                         <span class="menu-text">Configuración</span>
                     </a>
                 </nav>
@@ -192,8 +199,11 @@
                 sidebar.classList.toggle('w-20');
                 icon.classList.toggle('-rotate-180');
 
-                // Si el sidebar se está colapsando, cierra todos los submenús abiertos
-                if (!isCollapsed) {
+                // Si el sidebar se está colapsando (pasando de abierto a cerrado), cierra todos los submenús
+                if (isCollapsed) { // Ahora la condición es si ESTABA colapsado (isCollapsed = true) y se va a abrir
+                    // No es necesario hacer nada especial al abrir
+                } else {
+                    // Si NO ESTABA colapsado (isCollapsed = false) y se va a cerrar, los cerramos.
                     const allSubmenus = sidebar.querySelectorAll('.submenu');
                     allSubmenus.forEach(submenu => {
                         submenu.style.maxHeight = '0px';
@@ -237,21 +247,15 @@
                 }
             }
 
-            // Inicializar rotación de las flechas
-            document.addEventListener('DOMContentLoaded', function () {
-                const allArrows = document.querySelectorAll('.submenu-arrow');
-                allArrows.forEach(arrow => {
-                    // Inicialmente apuntan hacia abajo, rotamos para que apunten a la derecha
-                    arrow.classList.add('-rotate-90');
-                });
-            });
-
             // Reajustar submenús abiertos si la ventana cambia de tamaño
             window.addEventListener('resize', () => {
                 const openSubmenus = document.querySelectorAll('.submenu');
                 openSubmenus.forEach(submenu => {
                     if (submenu.style.maxHeight && submenu.style.maxHeight !== '0px') {
-                        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                        // Solo reajusta si el menú está expandido
+                        if (document.getElementById('sidebar').classList.contains('w-64')) {
+                            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                        }
                     }
                 });
             });
