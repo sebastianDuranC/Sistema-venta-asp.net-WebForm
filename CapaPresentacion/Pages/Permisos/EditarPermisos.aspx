@@ -5,7 +5,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
             <div class="mb-6 flex items-center justify-between">
                 <h3 class="text-2xl font-bold text-gray-800">Editar permiso</h3>
-                <asp:Button ID="btnVolver" OnClick="btnVolver_Click" Text="Volver" runat="server" CssClass="rounded bg-primary px-4 py-2 font-semibold text-white transition-colors duration-200 hover:cursor-pointer hover:bg-primary/65" />
+                <asp:Button ID="btnVolver" OnClick="btnVolver_Click" Text="Volver" runat="server" CssClass="bg-primary rounded px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-primary/65 hover:cursor-pointer" />
             </div>
             <div class="space-y-4">
                 <div>
@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <asp:Button ID="btnEditar" runat="server" Text="Editar permiso" OnClick="btnEditar_Click"
-                        CssClass="w-full rounded bg-secondary px-4 py-2 font-semibold text-white transition-colors duration-200 hover:cursor-pointer hover:bg-secondary/70" />
+                        CssClass="bg-secondary w-full rounded px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-secondary/70 hover:cursor-pointer" />
                 </div>
                 <div>
                     <asp:Label ID="lblMensaje" runat="server" CssClass="block text-center font-medium text-red-600" />

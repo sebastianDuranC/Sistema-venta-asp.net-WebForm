@@ -2,12 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="mx-auto max-w-5xl py-8">
-        <h2 class="mb-6 text-3xl font-bold text-primary">Gestión de Permisos por Rol</h2>
-        <div class="max-h-[500px] space-y-6 overflow-y-auto rounded-xl bg-gray-100 p-4 shadow">
+        <h2 class="text-primary mb-6 text-3xl font-bold">Gestión de Permisos por Rol</h2>
+        <div class="max-h-[400px] overflow-y-auto rounded-xl bg-gray-100 p-4 shadow">
             <asp:Repeater runat="server" ID="rptRoles" OnItemDataBound="rptRoles_ItemDataBound">
                 <ItemTemplate>
-                    <div class="flex flex-col rounded-lg bg-white shadow">
-                        <div class="rounded-t-lg bg-secondary px-6 py-3 text-white">
+                    <div class="mb-4 flex flex-col rounded-lg bg-white shadow">
+                        <div class="bg-secondary rounded-t-lg px-6 py-3 text-white">
                             <h4 class="m-0 text-lg font-semibold"><%# Eval("Nombre") %></h4>
                         </div>
                         <div class="flex flex-col gap-2 px-6 py-4">
@@ -30,7 +30,7 @@
             </asp:Repeater>
         </div>
         <div class="mt-6 flex items-center gap-4">
-            <asp:Button runat="server" CssClass="cursor-pointer rounded-lg bg-primary px-8 py-3 font-semibold text-white shadow transition hover:bg-gray-700" ID="btnRolPermisos" Text="Guardar Permisos" OnClick="btnRolPermisos_Click" />
+            <asp:Button runat="server" CssClass="bg-primary cursor-pointer rounded-lg px-8 py-3 font-semibold text-white shadow transition hover:bg-gray-700" ID="btnRolPermisos" Text="Guardar Permisos" OnClick="btnRolPermisos_Click" />
             <asp:Label runat="server" CssClass="font-semibold text-green-600" ID="lblMensaje"></asp:Label>
         </div>
     </div>

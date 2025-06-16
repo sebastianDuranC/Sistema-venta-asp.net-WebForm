@@ -33,31 +33,6 @@ namespace CapaPresentacion.Pages.Ventas
             rptVentas.DataBind();
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object EliminarVenta(int ventaId)
-        {
-            try
-            {
-                VentaBLL oCN_Venta = new VentaBLL();
-                bool resultado = oCN_Venta.EliminarVenta(ventaId);
-                System.Diagnostics.Debug.WriteLine($"Intentando eliminar venta ID: {ventaId}");
-                return new
-                {
-                    success = resultado,
-                    message = resultado ? "Venta eliminada correctamente." : "No se pudo eliminar la venta."
-                };
-            }
-            catch (Exception ex)
-            {
-                HttpContext.Current.Response.StatusCode = 500;
-                return new
-                {
-                    success = false,
-                    message = "Error interno: " + ex.Message
-                };
-            }
-        }
 
         protected void btnRegistrarVenta_Click(object sender, EventArgs e)
         {

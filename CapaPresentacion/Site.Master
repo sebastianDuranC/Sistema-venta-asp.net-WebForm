@@ -1,13 +1,13 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CapaPresentacion.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CapaPresentacion.SiteMaster"%>
 
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-gray-100">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - El Fogón</title> <%-- Corregido para agregar un separador --%>
+    <title><%: Page.Title %> El Fogón</title>
 
-    <link href="/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
+    <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +21,7 @@
             display: none;
         }
 
-        /* CAMBIO: Nueva regla para centrar íconos cuando el menú está colapsado */
+        /* Regla para centrar íconos cuando el menú está colapsado */
         #sidebar.w-20 nav a {
             justify-content: center;
             padding-left: 0;
@@ -51,17 +51,17 @@
     <script src="/Scripts/DataTables/vfs_fonts.js"></script>
 </head>
 <body class="h-full">
-    <form id="form1" runat="server">
-        <asp:ScriptManager runat="server" />
+    <form runat="server">
+        <asp:ScriptManager runat="server"/>
 
-        <div class="flex h-screen bg-contentbg">
+        <div class="flex min-h-screen bg-contentbg">
             <aside id="sidebar" class="bg-secondary shadow-lg flex flex-col w-20 transition-all duration-300">
                 <div class="flex items-center justify-between px-6 py-4 border-b border-white">
                     <span class="text-xl font-bold text-white select-none menu-text">El Fogón</span>
                     <img src="/wwwroot/images/icons8-menú-60.png" alt="Menú" class="h-6 w-6 cursor-pointer transition-transform duration-300 -rotate-180" id="sidebar-toggle-icon" onclick="toggleSidebar()" />
                 </div>
 
-                <nav class="flex-grow overflow-y-auto py-2">
+                <nav class="flex-grow overflow-y-auto py-2 justify-center items-center">
                     <%-- Dashboard --%>
                     <a href="/Default.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
                         <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="h-7 w-7 flex-shrink-0" alt="Dashboard"/>
@@ -128,8 +128,8 @@
                         <span class="menu-text">Compras</span>
                     </a>
                     <%-- Movimiento inventario --%>
-                    <a href="/Pages/Movimientos/Movimientos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white"> <%-- Ruta corregida a modo de ejemplo --%>
-                        <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" alt="Inventario"/> <%-- Ícono cambiado a modo de ejemplo --%>
+                    <a href="/Pages/Movimientos/Movimientos.aspx" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/15 transition text-white">
+                        <img src="/wwwroot/images/icons8-inventarios-100.png" class="h-7 w-7 flex-shrink-0" alt="Inventario"/>
                         <span class="menu-text">Inventario</span>
                     </a>
                     <%-- Administracion --%>
@@ -181,8 +181,8 @@
                 </div>
             </aside>
 
-            <main class="flex-1 flex flex-col items-center justify-center p-8 bg-contentbg transition-all duration-300 text-primary">
-                <div class="w-full">
+            <main class="flex-1 flex flex-col items-center justify-start p-8 bg-contentbg transition-all duration-300 text-primary">
+                 <div class="w-full max-w-7xl">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -200,10 +200,7 @@
                 icon.classList.toggle('-rotate-180');
 
                 // Si el sidebar se está colapsando (pasando de abierto a cerrado), cierra todos los submenús
-                if (isCollapsed) { // Ahora la condición es si ESTABA colapsado (isCollapsed = true) y se va a abrir
-                    // No es necesario hacer nada especial al abrir
-                } else {
-                    // Si NO ESTABA colapsado (isCollapsed = false) y se va a cerrar, los cerramos.
+                if (!isCollapsed) {
                     const allSubmenus = sidebar.querySelectorAll('.submenu');
                     allSubmenus.forEach(submenu => {
                         submenu.style.maxHeight = '0px';

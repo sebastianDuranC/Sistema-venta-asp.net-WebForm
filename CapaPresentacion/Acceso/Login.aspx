@@ -20,7 +20,7 @@
                 <div>
                     <label class="mb-3 block text-gray-700">Usuario</label>
                     <asp:TextBox ID="txtUsuario" runat="server" 
-                        CssClass="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-gray-500"
+                        CssClass="w-full rounded-lg border border-gray-300 p-3 focus:border-gray-500 focus:outline-none"
                         placeholder="Ingrese su usuario">
                     </asp:TextBox>
                 </div>
@@ -28,7 +28,7 @@
                 <div>
                     <label class="mb-3 block text-gray-700">Contraseña</label>
                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"
-                        CssClass="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:border-gray-500"
+                        CssClass="w-full rounded-lg border border-gray-300 p-3 focus:border-gray-500 focus:outline-none"
                         placeholder="Ingrese su contraseña">
                     </asp:TextBox>
                 </div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarVentas.aspx.cs" Inherits="CapaPresentacion.Pages.Ventas.EliminarVentas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarVentas.aspx.cs" Inherits="CapaPresentacion.Pages.Ventas.EliminarVentas" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="flex w-full flex-col items-center justify-center py-8">
@@ -40,7 +40,7 @@
                     <%-- Botones de acción --%>
                     <div class="flex justify-center space-x-5">
                         <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click"
-                            CssClass="cursor-pointer rounded-md bg-secondary px-6 py-2 text-white shadow-sm transition-colors hover:bg-secondary/75 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2" />
+                            CssClass="bg-secondary cursor-pointer rounded-md px-6 py-2 text-white shadow-sm transition-colors hover:bg-secondary/75 focus:ring-secondary focus:outline-none focus:ring-2 focus:ring-offset-2" />
                         <button type="button" onclick='confirmarEliminacion("<%# Eval("VentaId") %>")'
                             class="rounded-md bg-primary px-6 py-2 text-white shadow-sm transition-colors hover:bg-primary/85 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                             Eliminar</button>

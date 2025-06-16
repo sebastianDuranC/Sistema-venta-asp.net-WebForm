@@ -7,5 +7,8 @@
   "scripts": {
     "build": "tailwindcss -i ./wwwroot/site.css -o ./wwwroot/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./wwwroot/site.css -o ./wwwroot/css/tailwind.css --watch=always"
+  },
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001723"
   }
 }

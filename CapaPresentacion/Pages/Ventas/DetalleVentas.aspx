@@ -5,9 +5,9 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Encabezado -->
         <div class="mb-6 flex items-center justify-between">
-            <h2 class="text-3xl font-bold text-primary">📋 Detalle de Venta<asp:Literal ID="litVentaId" runat="server" /></h2>
+            <h2 class="text-primary text-3xl font-bold">📋 Detalle de Venta<asp:Literal ID="litVentaId" runat="server" /></h2>
             <asp:Button ID="btnVolver" runat="server" Text="← Volver a Ventas"
-                CssClass="rounded-lg bg-primary px-6 py-3 font-medium text-white shadow-md transition-colors duration-200 hover:bg-gray-800"
+                CssClass="bg-primary rounded-lg px-6 py-3 font-medium text-white shadow-md transition-colors duration-200 hover:bg-gray-800"
                 OnClick="btnVolver_Click" />
         </div>
 

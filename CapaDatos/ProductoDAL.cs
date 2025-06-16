@@ -78,20 +78,29 @@ namespace CapaDatos
             return lista;
         }
 
-        public bool RegistrarProducto(Producto producto)
+        public bool RegistrarProducto(Producto producto, DataTable productoInsumo)
         {
             using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
             {
                 conexion.Open();
-                using (SqlCommand comando = new SqlCommand("sp_RegistrarProductos", conexion))
+                using (SqlCommand comando = new SqlCommand("sp_RegistrarProducto", conexion))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
+                    // --- Parámetros para el Producto ---
                     comando.Parameters.AddWithValue("@Nombre", producto.Nombre);
                     comando.Parameters.AddWithValue("@Precio", producto.Precio);
                     comando.Parameters.AddWithValue("@Stock", (object)producto.Stock ?? DBNull.Value);
                     comando.Parameters.AddWithValue("@StockMinimo", (object)producto.StockMinimo ?? DBNull.Value);
                     comando.Parameters.AddWithValue("@ProductoCategoriaId", producto.ProductoCategoriaId);
                     comando.Parameters.AddWithValue("@FotoUrl", (object)producto.FotoUrl ?? DBNull.Value);
+
+
+                    // --- Parámetro para la lista de Insumos (Table-Valued Parameter) ---
+                    SqlParameter parametroInsumos = new SqlParameter("@Insumos", SqlDbType.Structured);
+                    parametroInsumos.Value = productoInsumo;
+                    parametroInsumos.TypeName = "dbo.ProductoInsumoType"; // El nombre del tipo
+                    comando.Parameters.Add(parametroInsumos);
+
                     return comando.ExecuteNonQuery() > 0;
                 }
             }

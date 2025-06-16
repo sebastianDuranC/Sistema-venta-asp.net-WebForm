@@ -50,6 +50,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -113,6 +116,10 @@
     <Content Include="Pages\Productos\Productos.aspx" />
     <Content Include="Pages\Productos\RegistrarProductos.aspx" />
     <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
+    <Content Include="Pages\Usuarios\EditarUsuario.aspx" />
+    <Content Include="Pages\Usuarios\EliminarUsuario.aspx" />
+    <Content Include="Pages\Usuarios\RegistrarUsuarios.aspx" />
+    <Content Include="Pages\Usuarios\Usuarios.aspx" />
     <Content Include="Pages\Ventas\DetalleVentas.aspx" />
     <Content Include="Pages\Ventas\EditarVentas.aspx" />
     <Content Include="Pages\Ventas\EliminarVentas.aspx" />
@@ -165,8 +172,10 @@
     <Content Include="wwwroot\images\icons8-comprar-50.png" />
     <Content Include="wwwroot\images\icons8-configuración-de-datos-100.png" />
     <Content Include="wwwroot\images\icons8-configuración-del-administrador-100.png" />
+    <Content Include="wwwroot\images\icons8-contraseña-48.png" />
     <Content Include="wwwroot\images\icons8-dashboard-layout-48.png" />
     <Content Include="wwwroot\images\icons8-descargar-100.png" />
+    <Content Include="wwwroot\images\icons8-escudo-50.png" />
     <Content Include="wwwroot\images\icons8-flecha-abajo-24.png" />
     <Content Include="wwwroot\images\icons8-gráfico-de-barras-100.png" />
     <Content Include="wwwroot\images\icons8-informe-gráfico-100.png" />
@@ -177,6 +186,7 @@
     <Content Include="wwwroot\images\icons8-salida-100.png" />
     <Content Include="wwwroot\images\icons8-salida-48.png" />
     <Content Include="wwwroot\images\icons8-settings-100.png" />
+    <Content Include="wwwroot\images\icons8-usuario-48.png" />
     <Content Include="wwwroot\images\icons8-usuario-60.png" />
     <Content Include="wwwroot\images\limonada-personal-vaso-de-limonada-11563388586krpkgozy61-removebg-preview.png" />
     <Content Include="wwwroot\images\limonada-personal-vaso-de-limonada-11563388586krpkgozy61.png" />
@@ -184,12 +194,15 @@
     <Content Include="wwwroot\images\pacumuto.png" />
     <Content Include="wwwroot\images\pepsi-3l.jpg" />
     <Content Include="wwwroot\images\pollerita.jpeg" />
+    <Content Include="wwwroot\images\subir-datos.png" />
+    <Content Include="wwwroot\images\usuario.png" />
     <Content Include="wwwroot\images\visualizacion.png" />
     <Content Include="wwwroot\site.css" />
     <Content Include="package.json" />
     <Content Include="Scripts\DataTables\es-ES.json" />
     <Content Include="Pages\Ventas\EliminarVentaHandler.ashx" />
     <Content Include="Pages\Productos\EliminarProducto.ashx" />
+    <Content Include="Pages\Usuarios\EliminarUsuarioHandler.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -222,7 +235,6 @@
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
-    <Content Include="wwwroot\images\pechua-pollo.webp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso\AccesoDenegado.aspx.cs">
@@ -302,6 +314,37 @@
     </Compile>
     <Compile Include="Pages\RolPermisos\RolPermisos.aspx.designer.cs">
       <DependentUpon>RolPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Usuarios\EditarUsuario.aspx.cs">
+      <DependentUpon>EditarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Usuarios\EditarUsuario.aspx.designer.cs">
+      <DependentUpon>EditarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Usuarios\EliminarUsuario.aspx.cs">
+      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Usuarios\EliminarUsuario.aspx.designer.cs">
+      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Usuarios\EliminarUsuarioHandler.ashx.cs">
+      <DependentUpon>EliminarUsuarioHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Usuarios\RegistrarUsuarios.aspx.cs">
+      <DependentUpon>RegistrarUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Usuarios\RegistrarUsuarios.aspx.designer.cs">
+      <DependentUpon>RegistrarUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Usuarios\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Usuarios\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Ventas\DetalleVentas.aspx.cs">
       <DependentUpon>DetalleVentas.aspx</DependentUpon>

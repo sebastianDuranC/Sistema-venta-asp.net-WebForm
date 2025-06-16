@@ -20,7 +20,7 @@
     <div>
         <div class="flex items-center justify-between py-2">
             <h1 class="text-2xl font-bold">Nueva Venta</h1>
-            <asp:Button Text="Cancelar" runat="server" ID="cancelarVenta" class="cursor-pointer rounded-lg bg-primary p-2 text-white hover:bg-gray-700" OnClick="cancelarVenta_Click" />
+            <asp:Button Text="Cancelar" runat="server" ID="cancelarVenta" class="bg-primary cursor-pointer rounded-lg p-2 text-white hover:bg-gray-700" OnClick="cancelarVenta_Click" />
         </div>
         <div class="flex flex-col gap-4 lg:flex-row">
             <div class="w-full rounded bg-white p-4 shadow lg:w-2/3">
@@ -29,7 +29,7 @@
                     <input type="text" id="buscarProductos" placeholder="Buscar productos..." class="w-full rounded-md border px-3 py-2" onkeyup="filtrarProductos()">
                 </div>
                 <div class="mb-4 flex space-x-2">
-                    <button class="rounded-md bg-secondary px-4 py-2 text-white">Todos</button>
+                    <button class="bg-secondary rounded-md px-4 py-2 text-white">Todos</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Platos</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Bebidas</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Complementos</button>
@@ -69,7 +69,7 @@
                     <div class="flex flex-col md:flex-row md:gap-4">
                         <div class="mb-3 flex-1 md:mb-0">
                             <label class="mb-1 block text-sm font-medium text-gray-700">Nombre Cliente:</label>
-                            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select w-full rounded-md border px-3 py-2 text-sm text-primary focus:ring-primary" OnSelectedIndexChanged="ddlCliente_SelectedIndexChanged" AutoPostBack="true">
+                            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select text-primary w-full rounded-md border px-3 py-2 text-sm focus:ring-primary" OnSelectedIndexChanged="ddlCliente_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                         </div>
                         <div class="flex items-end gap-3">
@@ -86,7 +86,7 @@
                 </asp:Panel>
                 <div class="mb-4">
                     <label for="<%= ddlMetodoPago.ClientID %>" class="block text-lg font-medium text-gray-700">Método de pago</label>
-                    <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="form-select w-full rounded-md border px-3 py-2 text-sm text-primary focus:ring-primary">
+                    <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="form-select text-primary w-full rounded-md border px-3 py-2 text-sm focus:ring-primary">
                     </asp:DropDownList>
                 </div>
                 <div class="mb-4 space-y-4">
@@ -134,15 +134,15 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <span>Cambio</span>
-                        <asp:Label ID="lblCambio" runat="server" Text="Bs. 0.00" CssClass="font-bold"/>
+                        <asp:Label ID="lblCambio" runat="server" Text="Bs. 0.00" CssClass="font-bold" />
                     </div>
                 </div>
                 <div class="flex flex-col space-y-2">
                     <asp:Button ID="btnCompletarVenta" runat="server" Text="Completar Venta"
-                        CssClass="rounded-md bg-primary py-2 text-white"
+                        CssClass="bg-primary rounded-md py-2 text-white"
                         OnClick="btnCompletarVenta_Click" />
                     <asp:Button ID="btnImprimirComanda" runat="server" Text="Imprimir Comanda"
-                        CssClass="rounded-md bg-contentbg py-2 text-gray-800" />
+                        CssClass="bg-contentbg rounded-md py-2 text-gray-800" />
                 </div>
             </div>
         </div>

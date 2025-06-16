@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarProducto.aspx.cs" Inherits="CapaPresentacion.Pages.Productos.EditarProducto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container mx-auto p-4 md:p-6 lg:p-8">
-        <div class="mb-6 flex items-center justify-between py-4">
-            <h2 class="text-3xl font-extrabold text-primary">Editar producto</h2>
+    <div class="mx-auto p-4 md:p-6 lg:p-8">
+        <div class="mb-1 flex items-center justify-between py-1">
+            <h2 class="text-primary text-3xl font-extrabold">Editar producto</h2>
             <asp:Button CssClass="inline-flex items-center rounded-md bg-red-600 px-5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 Text="Cancelar" runat="server" ID="btnVolverProductos" OnClick="btnVolverProductos_Click" />
         </div>
 
-        <div class="mx-auto rounded-xl bg-white p-6 shadow-xl md:p-8 lg:p-10">
+        <div class="mx-auto rounded-xl bg-white p-4 shadow-xl md:p-8 lg:p-10">
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <!-- Columna izquierda: Imagen actual y FileUpload -->
                 <div class="flex flex-col items-center space-y-6">
@@ -55,7 +55,7 @@
             </div>
             <div class="mt-8 flex justify-end">
                 <asp:Button ID="btnEditar" runat="server" Text="Editar Producto"
-                    CssClass="inline-flex items-center rounded-md bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-primary/85 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    CssClass="bg-primary inline-flex items-center rounded-md px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-primary/85 hover:cursor-pointer focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2"
                     OnClick="btnEditar_Click" />
             </div>
         </div>

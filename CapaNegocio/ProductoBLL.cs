@@ -34,7 +34,7 @@ namespace CapaNegocio
             return cdProducto.ObtenerProductos();
         }
 
-        public bool RegistrarProducto(Producto producto)
+        public bool RegistrarProducto(Producto producto, DataTable productoInsumo)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace CapaNegocio
                 }
                 else
                 {
-                    cdProducto.RegistrarProducto(producto);
+                    cdProducto.RegistrarProducto(producto, productoInsumo);
                     return true;
                 }
             }

@@ -11,9 +11,9 @@ namespace CapaEntidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Contra { get; set; }
-        public bool Estado { get; set; }
         public int NegocioId { get; set; }
         public int RolId { get; set; }
+        public bool Estado { get; set; }
 
         public virtual Negocio Negocio { get; set; }
         public virtual Rol Rol { get; set; }
