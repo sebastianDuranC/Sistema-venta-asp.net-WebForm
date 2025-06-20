@@ -144,7 +144,7 @@ namespace CapaDatos
             }
         }
         /// <summary>
-        /// Elimina un permiso por su Id utilizando una consulta SQL directa (no SP).
+        /// Elimina un permiso por su Id
         /// </summary>
         public bool EliminarPermiso(int id)
         {

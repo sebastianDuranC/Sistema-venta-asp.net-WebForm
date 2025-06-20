@@ -50,6 +50,7 @@
     <Compile Include="CD_Conexion.cs" />
     <Compile Include="DetalleVentaDAL.cs" />
     <Compile Include="InsumoDAL.cs" />
+    <Compile Include="NegocioDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
     <Compile Include="MetodoPagoDAL.cs" />

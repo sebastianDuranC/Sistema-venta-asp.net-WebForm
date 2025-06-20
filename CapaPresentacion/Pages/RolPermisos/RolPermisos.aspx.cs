@@ -20,7 +20,7 @@ namespace CapaPresentacion.Pages.rolpermisosmapping
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                Rol rol = (Rol)e.Item.DataItem;
+                CapaEntidades.Rol rol = (CapaEntidades.Rol)e.Item.DataItem;
                 int rolId = rol.Id;
 
                 Repeater rptForms = e.Item.FindControl("rptForm") as Repeater;

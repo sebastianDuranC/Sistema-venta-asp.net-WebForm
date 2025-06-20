@@ -144,8 +144,9 @@
                             </span>
                         </a>
                         <div class="submenu flex flex-col gap-1 pl-10">
+                            <a href="/Pages/Negocio/Negocio.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Negocio</a>
                             <a href="/Pages/Usuarios/Usuarios.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Usuario</a>
-                            <a href="/Pages/Administracion/Roles.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Rol</a>
+                            <a href="/Pages/Rol/Rol.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Rol</a>
                             <a href="/Pages/Permisos/Permisos.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Formulario</a>
                             <a href="/Pages/RolPermisos/RolPermisos.aspx" class="block px-4 py-1 rounded-md hover:bg-primary/20 text-white text-sm menu-text">Permisos</a>
                         </div>

@@ -109,6 +109,8 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Negocio\EditarNegocio.aspx" />
+    <Content Include="Pages\Negocio\Negocio.aspx" />
     <Content Include="Pages\Permisos\EditarPermisos.aspx" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
     <Content Include="Pages\Permisos\RegistrarPermisos.aspx" />
@@ -116,6 +118,10 @@
     <Content Include="Pages\Productos\Productos.aspx" />
     <Content Include="Pages\Productos\RegistrarProductos.aspx" />
     <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
+    <Content Include="Pages\Rol\EditarRol.aspx" />
+    <Content Include="Pages\Rol\EliminarRol.aspx" />
+    <Content Include="Pages\Rol\RegistrarRol.aspx" />
+    <Content Include="Pages\Rol\Rol.aspx" />
     <Content Include="Pages\Usuarios\EditarUsuario.aspx" />
     <Content Include="Pages\Usuarios\EliminarUsuario.aspx" />
     <Content Include="Pages\Usuarios\RegistrarUsuarios.aspx" />
@@ -203,6 +209,7 @@
     <Content Include="Pages\Ventas\EliminarVentaHandler.ashx" />
     <Content Include="Pages\Productos\EliminarProducto.ashx" />
     <Content Include="Pages\Usuarios\EliminarUsuarioHandler.ashx" />
+    <Content Include="Pages\Rol\EliminarRolHandler.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -263,6 +270,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Negocio\EditarNegocio.aspx.cs">
+      <DependentUpon>EditarNegocio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Negocio\EditarNegocio.aspx.designer.cs">
+      <DependentUpon>EditarNegocio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Negocio\Negocio.aspx.cs">
+      <DependentUpon>Negocio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Negocio\Negocio.aspx.designer.cs">
+      <DependentUpon>Negocio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Permisos\EditarPermisos.aspx.cs">
       <DependentUpon>EditarPermisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -314,6 +335,37 @@
     </Compile>
     <Compile Include="Pages\RolPermisos\RolPermisos.aspx.designer.cs">
       <DependentUpon>RolPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rol\EditarRol.aspx.cs">
+      <DependentUpon>EditarRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Rol\EditarRol.aspx.designer.cs">
+      <DependentUpon>EditarRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rol\EliminarRol.aspx.cs">
+      <DependentUpon>EliminarRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Rol\EliminarRol.aspx.designer.cs">
+      <DependentUpon>EliminarRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rol\EliminarRolHandler.ashx.cs">
+      <DependentUpon>EliminarRolHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rol\RegistrarRol.aspx.cs">
+      <DependentUpon>RegistrarRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Rol\RegistrarRol.aspx.designer.cs">
+      <DependentUpon>RegistrarRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rol\Rol.aspx.cs">
+      <DependentUpon>Rol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Rol\Rol.aspx.designer.cs">
+      <DependentUpon>Rol.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Usuarios\EditarUsuario.aspx.cs">
       <DependentUpon>EditarUsuario.aspx</DependentUpon>
