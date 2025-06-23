@@ -19,7 +19,7 @@ namespace CapaNegocio
             {
                 if (rolId != 0 && formId != 0)
                 {
-                    cD_RolPermisos.actualizarRolPermisos(rolId, formId, check);
+                    cD_RolPermisos.ActualizarRolPermisos(rolId, formId, check);
                 }
             }
             catch (Exception)
@@ -41,6 +41,19 @@ namespace CapaNegocio
                 {
                     return false;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<string> ObtenerRutasPermitidasPorRol(int rolId)
+        {
+            RolPermisoDAL cD_RolPermisos = new RolPermisoDAL();
+            try
+            {
+                return cD_RolPermisos.ObtenerRutasPermitidasPorRol(rolId);
             }
             catch (Exception)
             {

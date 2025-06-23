@@ -1,5 +1,6 @@
 ﻿using CapaNegocio;
 using System;
+using System.Collections.Generic;
 using System.Web.Security;
 using System.Web.UI;
 
@@ -25,7 +26,16 @@ namespace CapaPresentacion.Acceso
             if (CN_negocio.ValidarCredencialesUsuario(usuario, password))
             {
                 FormsAuthentication.SetAuthCookie(usuario, false);
+                UsuarioBLL usuarioBLL = new UsuarioBLL();
+                int rolIdDelUsuario = usuarioBLL.ObtenerRolIdNombre(usuario);
                 Session["usuario"] = usuario;
+
+                // Obtener y guardar la lista de rutas permitidas
+                RolPermisoBLL permisoBLL = new RolPermisoBLL();
+                List<string> permisos = permisoBLL.ObtenerRutasPermitidasPorRol(rolIdDelUsuario);
+                Session["permisos"] = permisos;
+
+                // Redirigir al Default
                 Response.Redirect("~/Default.aspx");
             }
             else
