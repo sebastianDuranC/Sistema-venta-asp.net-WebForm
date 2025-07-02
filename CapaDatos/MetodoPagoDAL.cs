@@ -1,6 +1,7 @@
 ﻿using CapaEntidades;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace CapaDatos
     public class MetodoPagoDAL
     {
         private CD_Conexion conexion = new CD_Conexion();
+        /// <summary>
+        /// Obtiene la cadena de conexión desde el archivo de configuración (Web.config).
+        /// </summary>
+        private string ObtenerCadenaConexion()
+        {
+            return ConfigurationManager.ConnectionStrings["conexionSql"].ConnectionString;
+        }
 
         public List<MetodoPago> ObtenerMetodoVenta()
         {
@@ -34,6 +42,35 @@ namespace CapaDatos
             }
             conexion.CerrarBd();
             return lista;
+        }
+
+        /// <summary>
+        /// Inserta un nuevo registro de la entidad en la base de datos.
+        /// </summary>
+        public bool RegistrarMetodoPago(MetodoPago metodoPago)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                try
+                {
+                    conexion.Open();
+                    using (SqlCommand comando = new SqlCommand("sp_RegistrarMetodoPago", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@Nombre", metodoPago.Nombre);
+
+                        return comando.ExecuteNonQuery() > 0; // Ejecuta el comando y devuelve numero de filas afectadas
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception($"Error SQL al insertar {typeof(MetodoPago).Name}.", sqlEx);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error inesperado al insertar {typeof(MetodoPago).Name}.", ex);
+                }
+            }
         }
     }
 }

@@ -109,11 +109,19 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Clientes\Clientes.aspx" />
+    <Content Include="Pages\Clientes\EditarCliente.aspx" />
+    <Content Include="Pages\Clientes\EliminarCliente.aspx" />
+    <Content Include="Pages\Clientes\RegistrarCliente.aspx" />
+    <Content Include="Pages\MetodosPago\MetodosPago.aspx" />
+    <Content Include="Pages\MetodosPago\RegistrarMetodoPago.aspx" />
     <Content Include="Pages\Negocio\EditarNegocio.aspx" />
     <Content Include="Pages\Negocio\Negocio.aspx" />
     <Content Include="Pages\Permisos\EditarPermisos.aspx" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
     <Content Include="Pages\Permisos\RegistrarPermisos.aspx" />
+    <Content Include="Pages\ProductoCategoria\ProductoCategorias.aspx" />
+    <Content Include="Pages\ProductoCategoria\RegistrarProductoCategoria.aspx" />
     <Content Include="Pages\Productos\EditarProducto.aspx" />
     <Content Include="Pages\Productos\Productos.aspx" />
     <Content Include="Pages\Productos\RegistrarProductos.aspx" />
@@ -210,6 +218,7 @@
     <Content Include="Pages\Productos\EliminarProducto.ashx" />
     <Content Include="Pages\Usuarios\EliminarUsuarioHandler.ashx" />
     <Content Include="Pages\Rol\EliminarRolHandler.ashx" />
+    <Content Include="Pages\Clientes\EliminarClienteHandler.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -270,6 +279,51 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Clientes\Clientes.aspx.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Clientes\Clientes.aspx.designer.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Clientes\EditarCliente.aspx.cs">
+      <DependentUpon>EditarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Clientes\EditarCliente.aspx.designer.cs">
+      <DependentUpon>EditarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Clientes\EliminarCliente.aspx.cs">
+      <DependentUpon>EliminarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Clientes\EliminarCliente.aspx.designer.cs">
+      <DependentUpon>EliminarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Clientes\EliminarClienteHandler.ashx.cs">
+      <DependentUpon>EliminarClienteHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Clientes\RegistrarCliente.aspx.cs">
+      <DependentUpon>RegistrarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Clientes\RegistrarCliente.aspx.designer.cs">
+      <DependentUpon>RegistrarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\MetodosPago.aspx.cs">
+      <DependentUpon>MetodosPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\MetodosPago.aspx.designer.cs">
+      <DependentUpon>MetodosPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\RegistrarMetodoPago.aspx.cs">
+      <DependentUpon>RegistrarMetodoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\RegistrarMetodoPago.aspx.designer.cs">
+      <DependentUpon>RegistrarMetodoPago.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Negocio\EditarNegocio.aspx.cs">
       <DependentUpon>EditarNegocio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -304,6 +358,20 @@
     </Compile>
     <Compile Include="Pages\Permisos\RegistrarPermisos.aspx.designer.cs">
       <DependentUpon>RegistrarPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\ProductoCategorias.aspx.cs">
+      <DependentUpon>ProductoCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\ProductoCategorias.aspx.designer.cs">
+      <DependentUpon>ProductoCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\RegistrarProductoCategoria.aspx.cs">
+      <DependentUpon>RegistrarProductoCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\RegistrarProductoCategoria.aspx.designer.cs">
+      <DependentUpon>RegistrarProductoCategoria.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Productos\EditarProducto.aspx.cs">
       <DependentUpon>EditarProducto.aspx</DependentUpon>

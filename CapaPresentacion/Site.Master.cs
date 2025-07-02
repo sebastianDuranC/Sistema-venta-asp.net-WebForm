@@ -36,7 +36,7 @@ namespace CapaPresentacion
             if (!IsPostBack)
             {
                 // 3. Poblar la información del usuario en el sidebar
-                lblUsuarioNombre.Text = usuario;
+                //lblUsuarioNombre.Text = usuario;
                 //lblUsuarioRol.Text = usuario.NombreRol; // Asumo que tienes NombreRol en tu objeto Usuario
 
                 // 4. Construir el menú dinámicamente basado en permisos
@@ -73,7 +73,7 @@ namespace CapaPresentacion
             // Dashboard
             pnlMenuDashboard.Visible = verificiarVisibilidad("~/Default.aspx", permisos);
 
-            // Administración
+            // Acceso y Administración
             pnlSubMenuItemUsuarios.Visible = verificiarVisibilidad("~/Pages/Usuarios/Usuarios.aspx", permisos);
             pnlSubMenuItemRoles.Visible = verificiarVisibilidad("~/Pages/Rol/Rol.aspx", permisos);
             pnlSubMenuItemFormularios.Visible = verificiarVisibilidad("~/Pages/Permisos/Permisos.aspx", permisos);
@@ -89,7 +89,8 @@ namespace CapaPresentacion
             pnlSubMenuItemGestionarVentas.Visible = verificiarVisibilidad("~/Pages/Ventas/Ventas.aspx", permisos);
             pnlSubMenuItemClientes.Visible = verificiarVisibilidad("~/Pages/Clientes/Clientes.aspx", permisos);
             pnlSubMenuItemProductos.Visible = verificiarVisibilidad("~/Pages/Productos/Productos.aspx", permisos);
-            pnlSubMenuItemCategorias.Visible = verificiarVisibilidad("~/Pages/Productos/Categorias.aspx", permisos);
+            pnlSubMenuItemCategorias.Visible = verificiarVisibilidad("~/Pages/ProductoCategoria/ProductoCategorias.aspx", permisos);
+            pnlSubMenuItemMetodoPago.Visible = verificiarVisibilidad("~/Pages/MetodosPago/MetodosPago.aspx", permisos);
 
             pnlModuleVentas.Visible =
                 pnlSubMenuItemGestionarVentas.Visible ||

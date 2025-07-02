@@ -15,5 +15,14 @@ namespace CapaNegocio
         {
             return cdProductoCategoria.obtenerCategoriasProducto();
         }
+
+        public bool RegistrarProductoCategoria(ProductoCategoria categoria)
+        {
+            if (string.IsNullOrEmpty(categoria.Nombre))
+            {
+                throw new ArgumentException("El nombre de la categoría no puede estar vacío.");
+            }
+            return cdProductoCategoria.RegistrarProductoCategoria(categoria);
+        }
     }
 }

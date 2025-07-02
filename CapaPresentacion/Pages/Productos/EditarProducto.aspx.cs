@@ -101,7 +101,7 @@ namespace CapaPresentacion.Pages.Productos
         public void cargarCategorias()
         {
             ProductoCategoriaBLL productoBLL = new ProductoCategoriaBLL();
-            List<ProductoCategoria> categorias = productoBLL.ObtenerCategoriasProducto();
+            List<CapaEntidades.ProductoCategoria> categorias = productoBLL.ObtenerCategoriasProducto();
             ddlCategoria.DataSource = categorias;
             ddlCategoria.DataTextField = "Nombre";
             ddlCategoria.DataValueField = "Id";

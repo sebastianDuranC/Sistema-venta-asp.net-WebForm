@@ -15,5 +15,14 @@ namespace CapaNegocio
         {
             return metodoPagos.ObtenerMetodoVenta();
         }
+
+        public bool RegistrarMetodoPago(MetodoPago metodoPago)
+        {
+            if (string.IsNullOrWhiteSpace(metodoPago.Nombre))
+            {
+                throw new ArgumentException("El nombre del método de pago no puede estar vacío.");
+            }
+            return metodoPagos.RegistrarMetodoPago(metodoPago);
+        }
     }
 }

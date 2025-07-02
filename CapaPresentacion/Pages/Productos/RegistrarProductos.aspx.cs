@@ -246,7 +246,7 @@ namespace CapaPresentacion.Pages.Productos
         {
             // Cargar categorías de productos en el DropDownList
             ProductoCategoriaBLL productoBLL = new ProductoCategoriaBLL();
-            List<ProductoCategoria> categorias = productoBLL.ObtenerCategoriasProducto();
+            List<CapaEntidades.ProductoCategoria> categorias = productoBLL.ObtenerCategoriasProducto();
             ddlCategoria.DataSource = categorias;
             ddlCategoria.DataTextField = "Nombre";
             ddlCategoria.DataValueField = "Id";

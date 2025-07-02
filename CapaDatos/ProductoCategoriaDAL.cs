@@ -19,7 +19,7 @@ namespace CapaDatos
         {
             return System.Configuration.ConfigurationManager.ConnectionStrings["conexionSql"].ConnectionString;
         }
-        
+
         public List<ProductoCategoria> obtenerCategoriasProducto()
         {
             List<ProductoCategoria> lista = new List<ProductoCategoria>();
@@ -44,6 +44,22 @@ namespace CapaDatos
                 }
             }
             return lista;
+        }
+
+        public bool RegistrarProductoCategoria(ProductoCategoria categoria)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand("sp_RegistrarProductoCategoria", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@Nombre", categoria.Nombre);
+
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
         }
     }
 }
