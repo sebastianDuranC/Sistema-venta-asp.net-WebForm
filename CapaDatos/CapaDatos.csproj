@@ -48,10 +48,12 @@
   <ItemGroup>
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="CD_Conexion.cs" />
+    <Compile Include="DashboardDAL.cs" />
     <Compile Include="DetalleVentaDAL.cs" />
     <Compile Include="InsumoDAL.cs" />
     <Compile Include="NegocioDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
+    <Compile Include="UnidadMedidaDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
     <Compile Include="MetodoPagoDAL.cs" />
     <Compile Include="ProductoCategoriaDAL.cs" />

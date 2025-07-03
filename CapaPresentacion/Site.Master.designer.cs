@@ -168,6 +168,15 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemProveedores;
 
         /// <summary>
+        /// Control pnlSubMenuItemUnidadMedida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemUnidadMedida;
+
+        /// <summary>
         /// Control pnlModuleConfiguracion.
         /// </summary>
         /// <remarks>

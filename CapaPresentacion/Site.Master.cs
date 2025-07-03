@@ -102,11 +102,13 @@ namespace CapaPresentacion
             pnlSubMenuItemGestionarCompras.Visible = verificiarVisibilidad("~/Pages/Compras/Compras.aspx", permisos);
             pnlSubMenuItemInsumos.Visible = verificiarVisibilidad("~/Pages/Insumos/Insumos.aspx", permisos);
             pnlSubMenuItemProveedores.Visible = verificiarVisibilidad("~/Pages/Proveedores/Proveedores.aspx", permisos);
+            pnlSubMenuItemUnidadMedida.Visible = verificiarVisibilidad("~/Pages/UnidadesMedida/UnidadesMedida.aspx", permisos);
 
             pnlModuleCompras.Visible =
                 pnlSubMenuItemGestionarCompras.Visible ||
                 pnlSubMenuItemInsumos.Visible ||
-                pnlSubMenuItemProveedores.Visible;
+                pnlSubMenuItemProveedores.Visible ||
+                pnlSubMenuItemUnidadMedida.Visible;
 
             // Configuración
             pnlSubMenuItemNegocio.Visible = verificiarVisibilidad("~/Pages/Negocio/Negocio.aspx", permisos);

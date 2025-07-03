@@ -7,38 +7,29 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace CapaPresentacion
+namespace CapaPresentacion.Pages.Insumos
 {
 
 
-    public partial class _Default
+    public partial class Insumos
     {
 
         /// <summary>
-        /// Control lblVentasMes.
+        /// Control btnCrearNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVentasMes;
+        protected global::System.Web.UI.WebControls.Button btnCrearNuevo;
 
         /// <summary>
-        /// Control lblProductosVendidos.
+        /// Control rptInsumo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProductosVendidos;
-
-        /// <summary>
-        /// Control lblItemsInventario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItemsInventario;
+        protected global::System.Web.UI.WebControls.Repeater rptInsumo;
     }
 }

@@ -21,6 +21,7 @@
     <script src="/Scripts/DataTables/jszip.min.js"></script>
     <script src="/Scripts/DataTables/pdfmake.min.js"></script>
     <script src="/Scripts/DataTables/vfs_fonts.js"></script>
+    <script src="/Scripts/chart.js"></script>
 </head>
 <body class="bg-gray-50">
     <form id="form1" runat="server">
@@ -50,7 +51,7 @@
                                         <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-administracion">
                                             <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Admin Icon"/>
                                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Administración</span>
-                                            <img src="/ruta/a/tu/viñeta-abajo.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
+                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
                                         </button>
                                         <ul id="dropdown-administracion" class="hidden py-2 space-y-2">
                                             <li><asp:Panel ID="pnlSubMenuItemUsuarios" runat="server" Visible="false"><a href="/Pages/Usuarios/Usuarios.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Usuarios</a></asp:Panel></li>
@@ -66,7 +67,7 @@
                                         <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-ventas">
                                             <img src="/wwwroot/images/icons8-porcentaje-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Ventas Icon" />
                                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Ventas</span>
-                                            <img src="/ruta/a/tu/viñeta-abajo.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
+                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
                                         </button>
                                         <ul id="dropdown-ventas" class="hidden py-2 space-y-2">
                                             <li><asp:Panel ID="pnlSubMenuItemGestionarVentas" runat="server" Visible="false"><a href="/Pages/Ventas/Ventas.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Ventas</a></asp:Panel></li>
@@ -81,14 +82,15 @@
                                 <asp:Panel ID="pnlModuleCompras" runat="server" Visible="true">
                                      <li>
                                         <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-compras">
-                                            <img src="/ruta/a/tu/icono-compras.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Compras Icon" />
+                                            <img src="/wwwroot/images/icons8-compra-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Compras Icon" />
                                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Compras</span>
-                                            <img src="/ruta/a/tu/viñeta-abajo.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
+                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
                                         </button>
                                         <ul id="dropdown-compras" class="hidden py-2 space-y-2">
                                             <li><asp:Panel ID="pnlSubMenuItemGestionarCompras" runat="server" Visible="false"><a href="/Pages/Compras/Compras.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Compras</a></asp:Panel></li>
                                             <li><asp:Panel ID="pnlSubMenuItemInsumos" runat="server" Visible="false"><a href="/Pages/Insumos/Insumos.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Insumos</a></asp:Panel></li>
                                             <li><asp:Panel ID="pnlSubMenuItemProveedores" runat="server" Visible="false"><a href="/Pages/Proveedores/Proveedores.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Proveedores</a></asp:Panel></li>
+                                            <li><asp:Panel ID="pnlSubMenuItemUnidadMedida" runat="server" Visible="false"><a href="/Pages/UnidadesMedida/UnidadesMedida.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Unidad de Medida</a></asp:Panel></li>
                                         </ul>
                                      </li>
                                 </asp:Panel>
@@ -96,9 +98,9 @@
                                  <asp:Panel ID="pnlModuleConfiguracion" runat="server" Visible="true">
                                      <li>
                                         <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-configuracion">
-                                            <img src="/ruta/a/tu/icono-config.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Config Icon" />
+                                            <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Config Icon" />
                                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Configuración</span>
-                                            <img src="/ruta/a/tu/viñeta-abajo.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
+                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
                                         </button>
                                         <ul id="dropdown-configuracion" class="hidden py-2 space-y-2">
                                             <li><asp:Panel ID="pnlSubMenuItemNegocio" runat="server" Visible="false"><a href="/Pages/Negocio/Negocio.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Datos del Negocio</a></asp:Panel></li>
@@ -124,7 +126,7 @@
                 </button>
             </div>
 
-            <main id="main-content" class="flex-1 justify-center items-center p-4 transition-all duration-300">
+            <main id="main-content" class="flex-1 p-4 transition-all duration-300">
                 <div class="mt-4">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                 </div>
@@ -151,7 +153,7 @@
                 const expandSidebar = () => {
                     sidebarContainer.style.width = '16rem'; // w-64
                     menuTexts.forEach(text => text.classList.remove('hidden'));
-                    toggleIcon.classList.remove('rotate-180');
+                    toggleIcon.classList.remove('rotate-40');
                     localStorage.setItem('sidebar-collapsed', 'false');
                 };
 

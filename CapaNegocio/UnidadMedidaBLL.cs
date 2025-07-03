@@ -1,0 +1,20 @@
+﻿using CapaDatos;
+using CapaEntidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CapaNegocio
+{
+    public class UnidadMedidaBLL
+    {
+        UnidadMedidaDAL unidadMedidaDAL = new UnidadMedidaDAL();
+
+        public List<UnidadesMedida> ObtenerUnidadesMedida()
+        {
+            return unidadMedidaDAL.ObtenerUnidadesMedida();
+        }
+    }
+}

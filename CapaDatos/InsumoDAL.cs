@@ -79,5 +79,10 @@ namespace CapaDatos
             }
             return lista;
         }
+
+        //public bool RegistrarInsumo(Insumo insumo)
+        //{
+
+        //}
     }
 }
