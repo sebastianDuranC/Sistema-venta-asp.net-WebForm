@@ -53,6 +53,8 @@
     <Compile Include="InsumoDAL.cs" />
     <Compile Include="NegocioDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
+    <Compile Include="ProductoInsumoDAL.cs" />
+    <Compile Include="ProveedorDAL.cs" />
     <Compile Include="UnidadMedidaDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
     <Compile Include="MetodoPagoDAL.cs" />

@@ -61,5 +61,63 @@ namespace CapaDatos
                 }
             }
         }
+
+        public ProductoCategoria ObtenerProductoCategoriaPorId(int id)
+        {
+            ProductoCategoria categoria = null;
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand("sp_ObtenerProductoCategoriasPorId", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader leer = comando.ExecuteReader())
+                    {
+                        if (leer.Read())
+                        {
+                            categoria = new ProductoCategoria
+                            {
+                                Id = Convert.ToInt32(leer["Id"]),
+                                Nombre = leer["Nombre"].ToString(),
+                                Estado = Convert.ToBoolean(leer["Estado"])
+                            };
+                        }
+                    }
+                }
+            }
+            return categoria;
+        }
+
+        public bool EditarProductoCategoria(ProductoCategoria categoria)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand("sp_EditarProductoCategoria", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@Id", categoria.Id);
+                    comando.Parameters.AddWithValue("@Nombre", categoria.Nombre);
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+        }
+
+        public bool EliminarProductoCategoria(int id)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand("sp_EliminarProductoCategoria", conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@Id", id);
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+        }
     }
 }

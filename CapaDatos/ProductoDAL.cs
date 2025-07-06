@@ -106,7 +106,7 @@ namespace CapaDatos
             }
         }
 
-        public bool EditarProducto(Producto producto)
+        public bool EditarProducto(Producto producto, DataTable productoInsumo)
         {
             using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
             {
@@ -121,6 +121,13 @@ namespace CapaDatos
                     comando.Parameters.AddWithValue("@StockMinimo", (object)producto.StockMinimo ?? DBNull.Value);
                     comando.Parameters.AddWithValue("@ProductoCategoriaId", producto.ProductoCategoriaId);
                     comando.Parameters.AddWithValue("@FotoUrl", (object)producto.FotoUrl ?? DBNull.Value);
+
+                    // Parámetro para la lista de insumos (Table-Valued Parameter)
+                    SqlParameter parametroInsumos = new SqlParameter("@Insumos", SqlDbType.Structured);
+                    parametroInsumos.Value = productoInsumo;
+                    parametroInsumos.TypeName = "dbo.ProductoInsumoType";
+                    comando.Parameters.Add(parametroInsumos);
+
                     return comando.ExecuteNonQuery() > 0;
                 }
             }

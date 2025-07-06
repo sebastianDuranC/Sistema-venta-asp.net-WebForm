@@ -27,6 +27,7 @@ namespace CapaPresentacion.Pages.Clientes
             txtNombre.Text = cliente.Nombre;
             txtNumeroLocal.Text = cliente.NumeroLocal;
             txtPasillo.Text = cliente.Pasillo;
+            chkEsComerciante.SelectedValue = cliente.EsComerciante ? "1" : "0";
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)

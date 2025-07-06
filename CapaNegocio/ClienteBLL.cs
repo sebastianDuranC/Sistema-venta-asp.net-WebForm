@@ -54,15 +54,25 @@ namespace CapaNegocio
 
             return clientes;
         }
-
         public bool RegistrarCliente(Cliente cliente)
         {
             if (string.IsNullOrWhiteSpace(cliente.Nombre))
                 throw new ArgumentException("El nombre del cliente no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(cliente.NumeroLocal))
-                throw new ArgumentException("El número de local del cliente no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(cliente.Pasillo))
-                throw new ArgumentException("El dato del pasillo del cliente no puede estar vacío.");
+
+            // Si es comerciante, validar los campos adicionales
+            if (cliente.EsComerciante)
+            {
+                if (string.IsNullOrWhiteSpace(cliente.NumeroLocal))
+                    throw new ArgumentException("El número de local del cliente comerciante no puede estar vacío.");
+
+                if (string.IsNullOrWhiteSpace(cliente.Pasillo))
+                    throw new ArgumentException("El dato del pasillo del cliente comerciante no puede estar vacío.");
+            }
+            else // Si es cliente normal, asegurarse que los campos de comerciante estén vacíos o nulos
+            {
+                cliente.NumeroLocal = ""; // O null, dependiendo de tu base de datos
+                cliente.Pasillo = "";     // O null
+            }
             return cdCliente.RegistrarCliente(cliente);
         }
 

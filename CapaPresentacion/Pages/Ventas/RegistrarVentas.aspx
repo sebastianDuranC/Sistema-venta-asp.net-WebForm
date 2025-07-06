@@ -20,7 +20,7 @@
     <div>
         <div class="flex items-center justify-between py-2">
             <h1 class="text-2xl font-bold">Nueva Venta</h1>
-            <asp:Button Text="Cancelar" runat="server" ID="cancelarVenta" class="bg-primary cursor-pointer rounded-lg p-2 text-white hover:bg-gray-700" OnClick="cancelarVenta_Click" />
+            <asp:Button Text="Volver" runat="server" ID="cancelarVenta" class="cursor-pointer rounded-lg bg-primary p-2 text-white hover:bg-gray-700" OnClick="cancelarVenta_Click" />
         </div>
         <div class="flex flex-col gap-4 lg:flex-row">
             <div class="w-full rounded bg-white p-4 shadow lg:w-2/3">
@@ -28,16 +28,17 @@
                 <div class="mb-4">
                     <input type="text" id="buscarProductos" placeholder="Buscar productos..." class="w-full rounded-md border px-3 py-2" onkeyup="filtrarProductos()">
                 </div>
-                <div class="mb-4 flex space-x-2">
-                    <button class="bg-secondary rounded-md px-4 py-2 text-white">Todos</button>
+                <%--<div class="mb-4 flex space-x-2">
+                    <button class="rounded-md bg-secondary px-4 py-2 text-white">Todos</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Platos</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Bebidas</button>
                     <button class="rounded-md bg-gray-200 px-4 py-2">Complementos</button>
-                </div>
+                </div>--%>
                 <div class="max-h-[calc(100vh-350px)] grid grid-cols-2 gap-4 overflow-y-auto md:grid-cols-3 lg:grid-cols-4" id="listaProductos">
                     <asp:Repeater ID="rptProductos" runat="server">
                         <ItemTemplate>
                             <div class="producto rounded-lg border p-4 text-center">
+                                <asp:HiddenField ID="idProducto" runat="server" Value='<%# Eval("Id") %>' />
                                 <img src='<%# Eval("FotoUrl") %>' alt='<%# Eval("Nombre") %>' class="mx-auto h-32 rounded-lg bg-contentbg" />
                                 <h3 class="font-semibold"><%# Eval("Nombre") %></h3>
                                 <p class="text-gray-600">Bs. <%# Eval("Precio", "{0:N2}") %></p>
@@ -65,11 +66,11 @@
                         </asp:RadioButtonList>
                     </div>
                 </div>
-                <asp:Panel ID="pnlClienteComercial" runat="server" Visible="false" CssClass="mb-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                <asp:Panel ID="pnlClienteComercial" runat="server" Visible="true" CssClass="mb-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
                     <div class="flex flex-col md:flex-row md:gap-4">
                         <div class="mb-3 flex-1 md:mb-0">
                             <label class="mb-1 block text-sm font-medium text-gray-700">Nombre Cliente:</label>
-                            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select text-primary w-full rounded-md border px-3 py-2 text-sm focus:ring-primary" OnSelectedIndexChanged="ddlCliente_SelectedIndexChanged" AutoPostBack="true">
+                            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select w-full rounded-md border px-3 py-2 text-sm text-primary focus:ring-primary" OnSelectedIndexChanged="ddlCliente_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                         </div>
                         <div class="flex items-end gap-3">
@@ -86,7 +87,7 @@
                 </asp:Panel>
                 <div class="mb-4">
                     <label for="<%= ddlMetodoPago.ClientID %>" class="block text-lg font-medium text-gray-700">Método de pago</label>
-                    <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="form-select text-primary w-full rounded-md border px-3 py-2 text-sm focus:ring-primary">
+                    <asp:DropDownList ID="ddlMetodoPago" runat="server" CssClass="form-select w-full rounded-md border px-3 py-2 text-sm text-primary focus:ring-primary">
                     </asp:DropDownList>
                 </div>
                 <div class="mb-4 space-y-4">
@@ -139,10 +140,10 @@
                 </div>
                 <div class="flex flex-col space-y-2">
                     <asp:Button ID="btnCompletarVenta" runat="server" Text="Completar Venta"
-                        CssClass="bg-primary rounded-md py-2 text-white"
+                        CssClass="rounded-md bg-primary py-2 text-white"
                         OnClick="btnCompletarVenta_Click" />
                     <asp:Button ID="btnImprimirComanda" runat="server" Text="Imprimir Comanda"
-                        CssClass="bg-contentbg rounded-md py-2 text-gray-800" />
+                        CssClass="rounded-md bg-contentbg py-2 text-gray-800" />
                 </div>
             </div>
         </div>

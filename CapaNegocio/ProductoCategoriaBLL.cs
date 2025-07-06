@@ -24,5 +24,36 @@ namespace CapaNegocio
             }
             return cdProductoCategoria.RegistrarProductoCategoria(categoria);
         }
+
+        public ProductoCategoria ObtenerCategoriaPorId(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("El ID de la categoría debe ser mayor que cero.");
+            }
+            return cdProductoCategoria.ObtenerProductoCategoriaPorId(id);
+        }
+
+        public bool ActualizarProductoCategoria(ProductoCategoria categoria)
+        {
+            if (categoria.Id <= 0)
+            {
+                throw new ArgumentException("El ID de la categoría debe ser mayor que cero.");
+            }
+            if (string.IsNullOrEmpty(categoria.Nombre))
+            {
+                throw new ArgumentException("El nombre de la categoría no puede estar vacío.");
+            }
+            return cdProductoCategoria.EditarProductoCategoria(categoria);
+        }
+
+        public bool EliminarProductoCategoria(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("El ID de la categoría debe ser mayor que cero.");
+            }
+            return cdProductoCategoria.EliminarProductoCategoria(id);
+        }
     }
 }

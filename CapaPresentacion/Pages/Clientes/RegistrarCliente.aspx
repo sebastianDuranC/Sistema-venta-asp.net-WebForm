@@ -11,7 +11,13 @@
                         <label for="<%= txtNombre.ClientID %>" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
                         <asp:TextBox ID="txtNombre" runat="server" CssClass="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej. Pepito"></asp:TextBox>
                     </div>
-
+                    <div class="mb-4">
+                        <label for="<%= chkEsComerciante.ClientID %>" class="block text-gray-700 text-sm font-bold mb-2">Tipo de cliente:</label>
+                        <asp:DropDownList runat="server" ID="chkEsComerciante">
+                            <asp:ListItem Value="0">Cliente normal</asp:ListItem>
+                            <asp:ListItem Value="1">Cliente comerciante</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
                     <div class="mb-4">
                         <label for="<%= txtNumeroLocal.ClientID %>" class="block text-gray-700 text-sm font-bold mb-2">Numero local:</label>
                         <asp:TextBox ID="txtNumeroLocal" runat="server" CssClass="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej. 1-20"></asp:TextBox>

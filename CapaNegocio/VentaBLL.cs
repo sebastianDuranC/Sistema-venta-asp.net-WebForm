@@ -23,9 +23,28 @@ namespace CapaNegocio
 
         public bool RegistrarVentas(Venta venta, List<DetalleVenta> listaDetalles)
         {
-            if (listaDetalles == null || listaDetalles.Count == 0)
-                return false;
+            //VALIDAR VENTA
+            if (listaDetalles == null || listaDetalles.Count == 0) { 
+                throw new ArgumentException("Debe ingresar al menos un producto en la venta");
+            }
+            if (venta.UsuarioId == 0)
+            {
+                throw new ArgumentException("Debe tener un usuario activo par la venta");
+            }
+            if (venta.ClienteId == 0)
+            {
+                throw new ArgumentException("Debe seleccionar un cliente par la venta");
+            }
+            if (venta.MetodoPagoId == 0)
+            {
+                throw new ArgumentException("Debe seleccionar un metodo de pago par la venta");
+            }
+            if (venta.MontoRecibido <= 0)
+            {
+                throw new ArgumentException("Debe seleccionar un monto mayor a la venta");
+            }
 
+            //DETALLEVENTA
             DataTable dtDetalle = new DataTable();
             dtDetalle.Columns.Add("ProductoId", typeof(int));
             dtDetalle.Columns.Add("Cantidad", typeof(decimal));

@@ -27,7 +27,8 @@ namespace CapaPresentacion.Pages.Clientes
             {
                 Nombre = txtNombre.Text.Trim(),
                 NumeroLocal = txtNumeroLocal.Text.Trim(),
-                Pasillo = txtPasillo.Text.Trim()
+                Pasillo = txtPasillo.Text.Trim(),
+                EsComerciante = chkEsComerciante.SelectedValue == "1",
             };
 
             try

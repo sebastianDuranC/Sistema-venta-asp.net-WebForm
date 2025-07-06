@@ -30,10 +30,7 @@ namespace CapaPresentacion.Pages.Ventas
             }
         }
 
-        /// <summary>
-        /// Evento que se dispara al cargar la página.
-        /// Se encarga de inicializar los datos necesarios solo en la primera carga (no postback).
-        /// </summary>
+        VentaBLL cnVenta = new VentaBLL();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -55,7 +52,7 @@ namespace CapaPresentacion.Pages.Ventas
         {
             // Cargar productos disponibles para la venta
             CargarProductosDisponibles();
-            // Cargar la lista de clientes (comerciantes)
+            // Cargar la lista de clientes
             CargarClientesYMetodosPago();
         }
 
@@ -80,7 +77,20 @@ namespace CapaPresentacion.Pages.Ventas
             // Cargar clientes
             ClienteBLL cN_Cliente = new ClienteBLL();
             List<Cliente> listaClientes = cN_Cliente.ObtenerClientes();
-            ddlCliente.DataSource = listaClientes;
+
+            // Filtrar usando LINQ
+            List<Cliente> clientesFiltrados = new List<Cliente>();
+
+            if (rblCliente.SelectedValue == "Comerciante")
+            {
+                clientesFiltrados = listaClientes.Where(c => c.EsComerciante).ToList();
+            }
+            else if (rblCliente.SelectedValue == "Normal")
+            {
+                clientesFiltrados = listaClientes.Where(c => !c.EsComerciante).ToList();
+            }
+
+            ddlCliente.DataSource = clientesFiltrados;
             ddlCliente.DataTextField = "Nombre"; // Mostrar el nombre del cliente
             ddlCliente.DataValueField = "Id";    // Usar el ID del cliente como valor
             ddlCliente.DataBind();
@@ -172,15 +182,42 @@ namespace CapaPresentacion.Pages.Ventas
         /// </summary>
         protected void rblCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Hace visible el panel de cliente comercial si se selecciona "Comerciante",
-            // de lo contrario, lo oculta.
-            pnlClienteComercial.Visible = rblCliente.SelectedValue == "Comerciante";
+            filtrarClientes();
         }
 
-        /// <summary>
-        /// Evento que se dispara al seleccionar un cliente en el DropDownList de clientes comerciales.
-        /// Muestra el número de local y pasillo del cliente seleccionado.
-        /// </summary>
+        private void filtrarClientes()
+        {
+            ClienteBLL cN_Cliente = new ClienteBLL();
+            List<Cliente> listaClientes = cN_Cliente.ObtenerClientes();
+
+            // Filtrar usando LINQ
+            List<Cliente> clientesFiltrados = new List<Cliente>();
+
+            if (rblCliente.SelectedValue == "Comerciante")
+            {
+                clientesFiltrados = listaClientes.Where(c => c.EsComerciante).ToList();
+            }
+            else if (rblCliente.SelectedValue == "Normal")
+            {
+                clientesFiltrados = listaClientes.Where(c => !c.EsComerciante).ToList();
+            }
+
+            ddlCliente.DataSource = clientesFiltrados;
+            ddlCliente.DataTextField = "Nombre";
+            ddlCliente.DataValueField = "Id";
+            ddlCliente.DataBind();
+
+            if (ddlCliente.Items.Count > 0)
+            {
+                ddlCliente.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+                ddlCliente.SelectedValue = "0"; // Asegura que el valor por defecto sea el seleccionado
+            }
+            else if (ddlCliente.Items.Count == 0)
+            {
+                ddlCliente.Items.Add(new ListItem("-- No hay Clientes --", "0"));
+            }
+        }
+
         protected void ddlCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (int.TryParse(ddlCliente.SelectedValue, out int clienteId) && clienteId > 0)
@@ -286,87 +323,67 @@ namespace CapaPresentacion.Pages.Ventas
         {
             try
             {
-                // Validar que haya productos seleccionados
-                List<DetalleVenta> detallesVenta = listaProductosSeleccionados;
-                if (detallesVenta == null || detallesVenta.Count == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Debe seleccionar al menos un producto para completar la venta.');", true);
-                    return;
-                }
-
-                // Validar y obtener el ID del usuario actual
-                int idUsuarioParaVenta;
-                if (Session["usuario"] == null)
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Error: Sesión de usuario no válida. Por favor, inicie sesión nuevamente.');", true);
-                    return;
-                }
                 string nombreUsuarioSesion = Session["usuario"].ToString();
-                VentaBLL cnVenta = new VentaBLL(); // Se usa una instancia de CN_Venta para obtener el ID de usuario
-                idUsuarioParaVenta = cnVenta.ObtenerIdUsuario(nombreUsuarioSesion);
 
-                if (idUsuarioParaVenta == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Error: No se pudo obtener la identificación del usuario actual.');", true);
-                    return;
-                }
-
-                // Validar y obtener el ID del método de pago
-                if (!int.TryParse(ddlMetodoPago.SelectedValue, out int metodoPagoId) || metodoPagoId == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Debe seleccionar un método de pago válido.');", true);
-                    return;
-                }
-
-                // Validar y obtener el ID del cliente
-                int clienteId = 0; // Default para cliente normal o si no se seleccionó comerciante
-                if (rblCliente.SelectedValue == "Comerciante")
-                {
-                    if (!int.TryParse(ddlCliente.SelectedValue, out clienteId) || clienteId == 0)
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Debe seleccionar un cliente comerciante válido.');", true);
-                        return;
-                    }
-                }
-                else
-                {
-                    // Si es cliente normal
-                    clienteId = 1; // No se requiere ID de cliente para ventas normales
-                }
-
-                // Determinar si la venta es para llevar (0) o local (1)
-                int enLocal = rbLocal.SelectedValue == "Local" ? 1 : 0;
-                decimal montoRecibido = Convert.ToDecimal(txtPagoCliente.Text);
                 // Registrar la venta
                 Venta venta = new Venta
                 {
-                    EnLocal = Convert.ToBoolean(enLocal),
-                    ClienteId = clienteId,
-                    UsuarioId = idUsuarioParaVenta,
-                    MetodoPagoId = metodoPagoId,
-                    MontoRecibido = montoRecibido
+                    EnLocal = rbLocal.SelectedValue == "Local",
+                    ClienteId = int.TryParse(ddlCliente.SelectedValue, out int clienteId) ? clienteId : (int?)null,
+                    UsuarioId = cnVenta.ObtenerIdUsuario(nombreUsuarioSesion),
+                    MetodoPagoId = int.TryParse(ddlMetodoPago.SelectedValue, out int metodoPagoId) ? metodoPagoId : 0,
+                    MontoRecibido = decimal.TryParse(txtPagoCliente.Text.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal montoRecibido) ? montoRecibido : 0
                 };
-                bool resultado = cnVenta.RegistrarVentas(venta,
-                                            detallesVenta);
 
+                List<DetalleVenta> detallesVenta = listaProductosSeleccionados;
+                bool resultado = cnVenta.RegistrarVentas(venta,detallesVenta);
                 if (resultado)
                 {
                     // Limpiar la sesión y redirigir si la venta fue exitosa.
+                    ShowToast("Venta exitosa","success");
                     Session.Remove("ProductosSeleccionados");
-                    Response.Redirect("/Pages/Ventas/Ventas.aspx", false); // false para evitar ThreadAbortException
+                    LimpiarInputs();
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Error al registrar la venta. Por favor, intente de nuevo.');", true);
+                    ShowToast("Error al registrar la venta","error");
                 }
             }
             catch (Exception ex)
             {
-                // Registra el error en el log del sistema para depuración.
-                System.Diagnostics.Trace.WriteLine($"Error en btnCompletarVenta_Click: {ex}");
-                string mensajeError = "Ocurrió un error inesperado al completar la venta. Por favor, contacte a soporte.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", $"alert('{mensajeError.Replace("'", "\\'")}');", true);
+                ShowToast(ex.Message, "error");
             }
+        }
+
+        private void LimpiarInputs()
+        {
+            //limpiar tiodos los campos de entrada y controles de la página
+            txtPagoCliente.Text = string.Empty;
+            txtNumeroLocalCliente.Text = string.Empty;
+            txtPasilloCliente.Text = string.Empty;
+            ddlCliente.SelectedIndex = 0; // Selecciona el primer item por defecto
+            ddlMetodoPago.SelectedIndex = 0; // Selecciona el primer item por defecto
+            rblCliente.SelectedIndex = 0; // Selecciona el primer item por defecto
+            rbLocal.SelectedIndex = 0; // Selecciona el primer item por defecto
+            listaProductosSeleccionados = new List<DetalleVenta>(); // Reinicia la lista de productos seleccionados
+            rptProductosSeleccionados.DataSource = null; // Limpia el Repeater de productos seleccionados
+            rptProductosSeleccionados.DataBind(); // Vuelve a enlazar el Repeater para que esté vacío
+            lblSubtotal.Text = "Bs. 0.00"; // Reinicia el subtotal
+            lblTotal.Text = "Bs. 0.00"; // Reinicia el total
+        }
+
+        private void ShowToast(string titulo, string icono)
+        {
+            // Escapamos las comillas simples para evitar errores de JavaScript
+            string safeTitle = titulo.Replace("'", "\\'");
+            string script = $"Swal.fire({{ " +
+                $"position: 'top-end'," +
+                $" icon: '{icono}'," +
+                $" title: '{safeTitle}'," +
+                $" showConfirmButton: false," +
+                $" timer: 2500," +
+                $" toast: true}});";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowToastScript", script, true);
         }
 
         /// <summary>

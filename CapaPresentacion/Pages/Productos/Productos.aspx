@@ -4,13 +4,13 @@
     <%-- Encabezado de la página: Título y Botón de Crear --%>
     <div class="flex w-full flex-col justify-between py-4">
         <div class="mb-4 flex items-center justify-between">
-            <h2 class="text-primary text-3xl font-extrabold">Gestion de Productos</h2>
+            <h2 class="text-3xl font-extrabold text-primary">Gestion de Productos</h2>
             <asp:Button
                 ID="btnRegistrarProducto"
                 runat="server"
                 Text="Crear Producto"
                 OnClick="btnRegistrarProducto_Click"
-                CssClass="bg-primary mt-2 inline-block rounded px-4 py-2 font-semibold text-white shadow transition-colors hover:bg-primary/85 hover:cursor-pointer focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2" />
+                CssClass="mt-2 inline-block rounded bg-primary px-4 py-2 font-semibold text-white shadow transition-colors hover:cursor-pointer hover:bg-primary/85 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" />
         </div>
     </div>
 
@@ -85,7 +85,6 @@
             </asp:Repeater>
 
         </div>
-    </div>
     </div>
     <script type="text/javascript">
         // Función para inicializar DataTables en nuestra tabla

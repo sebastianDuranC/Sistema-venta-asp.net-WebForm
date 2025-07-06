@@ -5,7 +5,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - El Fogón</title>
+    <title><%: Page.Title %>El Fogón</title>
 
     <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />

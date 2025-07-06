@@ -43,7 +43,7 @@ namespace CapaPresentacion.Pages.ProductoCategoria
             }
             if (e.CommandName == "Eliminar")
             {
-                Response.Redirect($"~/Pages/ProductoCategoria/EliminarProductoCategorias.aspx?Id={idCategoria}");
+                Response.Redirect($"~/Pages/ProductoCategoria/EliminarProductoCategoria.aspx?Id={idCategoria}");
             }
         }
     }

@@ -114,6 +114,8 @@
     <Content Include="Pages\Clientes\EliminarCliente.aspx" />
     <Content Include="Pages\Clientes\RegistrarCliente.aspx" />
     <Content Include="Pages\Insumos\Insumos.aspx" />
+    <Content Include="Pages\MetodosPago\EditarMetodoPago.aspx" />
+    <Content Include="Pages\MetodosPago\EliminarMetodoPago.aspx" />
     <Content Include="Pages\MetodosPago\MetodosPago.aspx" />
     <Content Include="Pages\MetodosPago\RegistrarMetodoPago.aspx" />
     <Content Include="Pages\Negocio\EditarNegocio.aspx" />
@@ -121,16 +123,25 @@
     <Content Include="Pages\Permisos\EditarPermisos.aspx" />
     <Content Include="Pages\Permisos\Permisos.aspx" />
     <Content Include="Pages\Permisos\RegistrarPermisos.aspx" />
+    <Content Include="Pages\ProductoCategoria\EditarProductoCategorias.aspx" />
+    <Content Include="Pages\ProductoCategoria\EliminarProductoCategoria.aspx" />
     <Content Include="Pages\ProductoCategoria\ProductoCategorias.aspx" />
     <Content Include="Pages\ProductoCategoria\RegistrarProductoCategoria.aspx" />
     <Content Include="Pages\Productos\EditarProducto.aspx" />
     <Content Include="Pages\Productos\Productos.aspx" />
     <Content Include="Pages\Productos\RegistrarProductos.aspx" />
+    <Content Include="Pages\Proveedores\EditarProveedor.aspx" />
+    <Content Include="Pages\Proveedores\EliminarProveedor.aspx" />
+    <Content Include="Pages\Proveedores\Proveedores.aspx" />
+    <Content Include="Pages\Proveedores\RegistrarProveedor.aspx" />
     <Content Include="Pages\RolPermisos\RolPermisos.aspx" />
     <Content Include="Pages\Rol\EditarRol.aspx" />
     <Content Include="Pages\Rol\EliminarRol.aspx" />
     <Content Include="Pages\Rol\RegistrarRol.aspx" />
     <Content Include="Pages\Rol\Rol.aspx" />
+    <Content Include="Pages\UnidadesMedida\EditarUnidadMedida.aspx" />
+    <Content Include="Pages\UnidadesMedida\EliminarUnidadMedida.aspx" />
+    <Content Include="Pages\UnidadesMedida\RegistrarUnidadMedida.aspx" />
     <Content Include="Pages\UnidadesMedida\UnidadesMedida.aspx" />
     <Content Include="Pages\Usuarios\EditarUsuario.aspx" />
     <Content Include="Pages\Usuarios\EliminarUsuario.aspx" />
@@ -224,6 +235,8 @@
     <Content Include="Pages\Rol\EliminarRolHandler.ashx" />
     <Content Include="Pages\Clientes\EliminarClienteHandler.ashx" />
     <Content Include="DashboardHandler.ashx" />
+    <Content Include="Pages\MetodosPago\EliminarMetodoPagoHandler.ashx" />
+    <Content Include="Pages\ProductoCategoria\EliminarProductoCategoriasHandler.ashx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -325,6 +338,23 @@
     <Compile Include="Pages\Insumos\Insumos.aspx.designer.cs">
       <DependentUpon>Insumos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MetodosPago\EditarMetodoPago.aspx.cs">
+      <DependentUpon>EditarMetodoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\EditarMetodoPago.aspx.designer.cs">
+      <DependentUpon>EditarMetodoPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\EliminarMetodoPago.aspx.cs">
+      <DependentUpon>EliminarMetodoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\EliminarMetodoPago.aspx.designer.cs">
+      <DependentUpon>EliminarMetodoPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MetodosPago\EliminarMetodoPagoHandler.ashx.cs">
+      <DependentUpon>EliminarMetodoPagoHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MetodosPago\MetodosPago.aspx.cs">
       <DependentUpon>MetodosPago.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -374,6 +404,23 @@
     <Compile Include="Pages\Permisos\RegistrarPermisos.aspx.designer.cs">
       <DependentUpon>RegistrarPermisos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ProductoCategoria\EditarProductoCategorias.aspx.cs">
+      <DependentUpon>EditarProductoCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\EditarProductoCategorias.aspx.designer.cs">
+      <DependentUpon>EditarProductoCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\EliminarProductoCategoria.aspx.cs">
+      <DependentUpon>EliminarProductoCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\EliminarProductoCategoria.aspx.designer.cs">
+      <DependentUpon>EliminarProductoCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductoCategoria\EliminarProductoCategoriasHandler.ashx.cs">
+      <DependentUpon>EliminarProductoCategoriasHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProductoCategoria\ProductoCategorias.aspx.cs">
       <DependentUpon>ProductoCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -412,6 +459,34 @@
     <Compile Include="Pages\Productos\RegistrarProductos.aspx.designer.cs">
       <DependentUpon>RegistrarProductos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Proveedores\EditarProveedor.aspx.cs">
+      <DependentUpon>EditarProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Proveedores\EditarProveedor.aspx.designer.cs">
+      <DependentUpon>EditarProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Proveedores\EliminarProveedor.aspx.cs">
+      <DependentUpon>EliminarProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Proveedores\EliminarProveedor.aspx.designer.cs">
+      <DependentUpon>EliminarProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Proveedores\Proveedores.aspx.cs">
+      <DependentUpon>Proveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Proveedores\Proveedores.aspx.designer.cs">
+      <DependentUpon>Proveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Proveedores\RegistrarProveedor.aspx.cs">
+      <DependentUpon>RegistrarProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Proveedores\RegistrarProveedor.aspx.designer.cs">
+      <DependentUpon>RegistrarProveedor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RolPermisos\RolPermisos.aspx.cs">
       <DependentUpon>RolPermisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -449,6 +524,27 @@
     </Compile>
     <Compile Include="Pages\Rol\Rol.aspx.designer.cs">
       <DependentUpon>Rol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UnidadesMedida\EditarUnidadMedida.aspx.cs">
+      <DependentUpon>EditarUnidadMedida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UnidadesMedida\EditarUnidadMedida.aspx.designer.cs">
+      <DependentUpon>EditarUnidadMedida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UnidadesMedida\EliminarUnidadMedida.aspx.cs">
+      <DependentUpon>EliminarUnidadMedida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UnidadesMedida\EliminarUnidadMedida.aspx.designer.cs">
+      <DependentUpon>EliminarUnidadMedida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UnidadesMedida\RegistrarUnidadMedida.aspx.cs">
+      <DependentUpon>RegistrarUnidadMedida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UnidadesMedida\RegistrarUnidadMedida.aspx.designer.cs">
+      <DependentUpon>RegistrarUnidadMedida.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UnidadesMedida\UnidadesMedida.aspx.cs">
       <DependentUpon>UnidadesMedida.aspx</DependentUpon>

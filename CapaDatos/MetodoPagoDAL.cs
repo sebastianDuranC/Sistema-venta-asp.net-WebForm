@@ -72,5 +72,81 @@ namespace CapaDatos
                 }
             }
         }
+
+        public MetodoPago ObtenerMetodoPagoPorId(int id)
+        {
+            MetodoPago metodoPago = null;
+            SqlConnection con = conexion.AbrirBd();
+            using (SqlCommand cmd = new SqlCommand("sp_ObtenerMetodoPagoPorId", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        metodoPago = new MetodoPago
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Nombre = dr["Nombre"].ToString(),
+                            Estado = Convert.ToBoolean(dr["Estado"])
+                        };
+                    }
+                }
+            }
+            conexion.CerrarBd();
+            return metodoPago;
+        }
+
+        public bool ActualizarMetodoPago(MetodoPago metodoPago)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                try
+                {
+                    conexion.Open();
+                    using (SqlCommand comando = new SqlCommand("sp_EditarMetodoPago", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@Id", metodoPago.Id);
+                        comando.Parameters.AddWithValue("@Nombre", metodoPago.Nombre);
+                        return comando.ExecuteNonQuery() > 0; // Ejecuta el comando y devuelve numero de filas afectadas
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception($"Error SQL al actualizar {typeof(MetodoPago).Name}.", sqlEx);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error inesperado al actualizar {typeof(MetodoPago).Name}.", ex);
+                }
+            }
+        }
+
+        public bool EliminarMetodoPago(int id)
+        {
+            using (SqlConnection conexion = new SqlConnection(ObtenerCadenaConexion()))
+            {
+                try
+                {
+                    conexion.Open();
+                    using (SqlCommand comando = new SqlCommand("sp_EliminarMetodoPago", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@Id", id);
+                        return comando.ExecuteNonQuery() > 0; // Ejecuta el comando y devuelve numero de filas afectadas
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception($"Error SQL al actualizar {typeof(MetodoPago).Name}.", sqlEx);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error inesperado al actualizar {typeof(MetodoPago).Name}.", ex);
+                }
+            }
+        }
     }
 }

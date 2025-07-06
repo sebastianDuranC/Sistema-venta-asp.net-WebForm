@@ -64,6 +64,8 @@
     <Compile Include="MetodoPagoBLL.cs" />
     <Compile Include="NegocioBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
+    <Compile Include="ProductoInsumoBLL.cs" />
+    <Compile Include="ProveedorBLL.cs" />
     <Compile Include="UnidadMedidaBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
     <Compile Include="ProductoBLL.cs" />

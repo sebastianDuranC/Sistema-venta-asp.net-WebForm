@@ -54,24 +54,9 @@ namespace CapaNegocio
             }
         }
 
-        public bool EditarProducto(Producto producto)
+        public bool EditarProducto(Producto producto, DataTable detalleProducto)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(producto.Nombre) || producto.Precio <= 0 || producto.ProductoCategoriaId <= 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    cdProducto.EditarProducto(producto);
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return cdProducto.EditarProducto(producto, detalleProducto);
         }
 
         public bool EliminarProducto(int productoId)

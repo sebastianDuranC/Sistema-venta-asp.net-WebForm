@@ -59,6 +59,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@Nombre", cliente.Nombre);
                     cmd.Parameters.AddWithValue("@NumeroLocal", cliente.NumeroLocal);
                     cmd.Parameters.AddWithValue("@Pasillo", cliente.Pasillo);
+                    cmd.Parameters.AddWithValue("@EsComerciante", cliente.EsComerciante);
                     con.Open();
                     int filasAfectadas = cmd.ExecuteNonQuery();
                     return filasAfectadas > 0;
@@ -85,7 +86,8 @@ namespace CapaDatos
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Nombre = reader["Nombre"].ToString(),
                                 NumeroLocal = reader["NumeroLocal"].ToString(),
-                                Pasillo = reader["Pasillo"].ToString()
+                                Pasillo = reader["Pasillo"].ToString(),
+                                EsComerciante = Convert.ToBoolean(reader["EsComerciante"]),
                             };
                         }
                     }

@@ -35,15 +35,15 @@ namespace CapaPresentacion.Pages.MetodosPago
             int idMetodoPago = Convert.ToInt32(e.CommandArgument);
             if (e.CommandName == "Ver")
             {
-                Response.Redirect("~/Pages/MetodosPago/VerMetodoPago.asox");
+                Response.Redirect($"~/Pages/MetodosPago/VerMetodoPago.aspx?=Id={idMetodoPago}");
             }
             if (e.CommandName == "Editar")
             {
-                Response.Redirect("~/Pages/MetodosPago/EditarMetodoPago.asox");
+                Response.Redirect($"~/Pages/MetodosPago/EditarMetodoPago.aspx?Id={idMetodoPago}");
             }
             if (e.CommandName == "Eliminar")
             {
-                Response.Redirect("~/Pages/MetodosPago/EliminarMetodoPago.asox");
+                Response.Redirect($"~/Pages/MetodosPago/EliminarMetodoPago.aspx?Id={idMetodoPago}");
             }
         }
     }

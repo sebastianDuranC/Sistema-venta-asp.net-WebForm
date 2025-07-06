@@ -17,7 +17,6 @@ namespace CapaPresentacion
         {
             if (!IsPostBack)
             {
-                // El Page_Load ahora solo se ocupa de los KPIs, como debe ser.
                 DashboardBLL cnDashboard = new DashboardBLL();
                 lblVentasMes.Text = string.Format(new CultureInfo("es-BO"), "Bs {0:N2}", cnDashboard.ObtenerVentasTotalesMes());
                 lblProductosVendidos.Text = cnDashboard.ObtenerProductosVendidosMes().ToString();
