@@ -60,15 +60,14 @@ namespace CapaDatos
                                 Id = Convert.ToInt32(leer["Id"]),
                                 Nombre = leer["Nombre"].ToString(),
                                 Precio = Convert.ToDecimal(leer["Precio"]),
-                                Stock = leer["Stock"] != DBNull.Value ? (int?)Convert.ToInt32(leer["Stock"]) : null,
-                                StockMinimo = leer["StockMinimo"] != DBNull.Value ? (int?)Convert.ToInt32(leer["StockMinimo"]) : null,
                                 ProductoCategoriaId = Convert.ToInt32(leer["ProductoCategoriaId"]),
                                 ProductoCategoria = new ProductoCategoria
                                 {
                                     Id = Convert.ToInt32(leer["ProductoCategoriaId"]),
                                     Nombre = leer["NombreCategoria"].ToString()
                                 },
-                                FotoUrl = leer["FotoUrl"] != DBNull.Value ? leer["FotoUrl"].ToString() : null
+                                FotoUrl = leer["FotoUrl"] != DBNull.Value ? leer["FotoUrl"].ToString() : null,
+                                Stock = Convert.ToInt32(leer["Stock"]),
                             });
 
                         }
@@ -89,8 +88,6 @@ namespace CapaDatos
                     // --- Parámetros para el Producto ---
                     comando.Parameters.AddWithValue("@Nombre", producto.Nombre);
                     comando.Parameters.AddWithValue("@Precio", producto.Precio);
-                    comando.Parameters.AddWithValue("@Stock", (object)producto.Stock ?? DBNull.Value);
-                    comando.Parameters.AddWithValue("@StockMinimo", (object)producto.StockMinimo ?? DBNull.Value);
                     comando.Parameters.AddWithValue("@ProductoCategoriaId", producto.ProductoCategoriaId);
                     comando.Parameters.AddWithValue("@FotoUrl", (object)producto.FotoUrl ?? DBNull.Value);
 
@@ -117,8 +114,6 @@ namespace CapaDatos
                     comando.Parameters.AddWithValue("@Id", producto.Id);
                     comando.Parameters.AddWithValue("@Nombre", producto.Nombre);
                     comando.Parameters.AddWithValue("@Precio", producto.Precio);
-                    comando.Parameters.AddWithValue("@Stock", (object)producto.Stock ?? DBNull.Value);
-                    comando.Parameters.AddWithValue("@StockMinimo", (object)producto.StockMinimo ?? DBNull.Value);
                     comando.Parameters.AddWithValue("@ProductoCategoriaId", producto.ProductoCategoriaId);
                     comando.Parameters.AddWithValue("@FotoUrl", (object)producto.FotoUrl ?? DBNull.Value);
 

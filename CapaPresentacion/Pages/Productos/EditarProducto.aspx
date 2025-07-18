@@ -42,14 +42,6 @@
                                     <label for="<%= ddlCategoria.ClientID %>" class="block text-sm font-medium text-gray-600 mb-1">Categoría</label>
                                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="w-full rounded-lg border bg-white p-3" />
                                 </div>
-                                <div>
-                                    <label for="<%= txtStock.ClientID %>" class="block text-sm font-medium text-gray-600 mb-1">Stock</label>
-                                    <asp:TextBox ID="txtStock" runat="server" TextMode="Number" CssClass="w-full rounded-lg border p-3" />
-                                </div>
-                                <div>
-                                    <label for="<%= txtStockMinimo.ClientID %>" class="block text-sm font-medium text-gray-600 mb-1">Stock Mínimo</label>
-                                    <asp:TextBox ID="txtStockMinimo" runat="server" TextMode="Number" CssClass="w-full rounded-lg border p-3" />
-                                </div>
                             </div>
                         </div>
 

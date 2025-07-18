@@ -23,8 +23,8 @@ namespace CapaPresentacion.Pages.UnidadesMedida
         private void cargarDato(int id)
         {
             CapaEntidades.UnidadesMedida unidadesMedida = UnidadMedidaBLL.ObtenerUnidadMedidaPorId(id);
-            rptUnidadMedidad.DataSource = new List<CapaEntidades.UnidadesMedida> { unidadesMedida };
-            rptUnidadMedidad.DataBind();
+            rptUnidadMedida.DataSource = new List<CapaEntidades.UnidadesMedida> { unidadesMedida };
+            rptUnidadMedida.DataBind();
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

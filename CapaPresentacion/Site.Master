@@ -5,10 +5,10 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %>El Fogón</title>
+    <title><%: Page.Title %> El Fogón</title>
 
     <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/wwwroot/images/LOGO-EL-FOGÓN-2025.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Scripts/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
@@ -22,167 +22,222 @@
     <script src="/Scripts/DataTables/pdfmake.min.js"></script>
     <script src="/Scripts/DataTables/vfs_fonts.js"></script>
     <script src="/Scripts/chart.js"></script>
+
+    <style>
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .rotate-180 {
+            transform: rotate(90deg);
+        }
+
+        .dropdown-chevron {
+            transition: transform 0.2s ease-in-out;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-contentbg">
     <form id="form1" runat="server">
         <asp:ScriptManager runat="server" />
 
-        <div class="relative min-h-screen flex">
-            <div id="sidebar-container" class="relative transition-all duration-300">
-                <aside id="sidebar" class="h-full bg-secondary">
-                    <div class="h-full px-3 py-4 overflow-y-auto flex flex-col">
-                        <a href="/Default.aspx" class="flex items-center ps-2.5 mb-5">
-                            <span class="text-white self-center text-xl font-semibold whitespace-nowrap menu-text">El Fogón</span>
-                        </a>
-                        
-                        <div class="flex-grow">
-                             <ul class="space-y-2 font-medium">
-                                <li>
-                                    <asp:Panel ID="pnlMenuDashboard" runat="server" Visible="false">
-                                        <a href="/Default.aspx" class="flex items-center p-2 text-white rounded-lg hover:bg-red-700 group">
-                                            <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Dashboard Icon"/>
-                                            <span class="ms-3 menu-text">Dashboard</span>
-                                        </a>
-                                    </asp:Panel>
-                                </li>
-                                 <%-- Modulo de acceso y administracion --%>
-                                <asp:Panel ID="pnlModuleAcceso" runat="server" Visible="true">
-                                     <li>
-                                        <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-administracion">
-                                            <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Admin Icon"/>
-                                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Administración</span>
-                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
-                                        </button>
-                                        <ul id="dropdown-administracion" class="hidden py-2 space-y-2">
-                                            <li><asp:Panel ID="pnlSubMenuItemUsuarios" runat="server" Visible="false"><a href="/Pages/Usuarios/Usuarios.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Usuarios</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemRoles" runat="server" Visible="false"><a href="/Pages/Rol/Rol.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Roles</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemFormularios" runat="server" Visible="false"><a href="/Pages/Permisos/Permisos.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Formularios</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemRolPermisos" runat="server" Visible="false"><a href="/Pages/RolPermisos/RolPermisos.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Permisos</a></asp:Panel></li>
-                                        </ul>
-                                     </li>
-                                </asp:Panel>
-                                 <%-- Modulo de ventas --%>
-                                <asp:Panel ID="pnlModuleVentas" runat="server" Visible="true">
-                                     <li>
-                                        <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-ventas">
-                                            <img src="/wwwroot/images/icons8-porcentaje-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Ventas Icon" />
-                                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Ventas</span>
-                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
-                                        </button>
-                                        <ul id="dropdown-ventas" class="hidden py-2 space-y-2">
-                                            <li><asp:Panel ID="pnlSubMenuItemGestionarVentas" runat="server" Visible="false"><a href="/Pages/Ventas/Ventas.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Ventas</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemClientes" runat="server" Visible="false"><a href="/Pages/Clientes/Clientes.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Clientes</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemProductos" runat="server" Visible="false"><a href="/Pages/Productos/Productos.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Productos</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemCategorias" runat="server" Visible="false"><a href="/Pages/ProductoCategoria/ProductoCategorias.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Categorias</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemMetodoPago" runat="server" Visible="false"><a href="/Pages/MetodosPago/MetodosPago.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Metodo de pago</a></asp:Panel></li>
-                                        </ul>
-                                     </li>
-                                </asp:Panel>
-                                 <%-- Modulo de compras --%>
-                                <asp:Panel ID="pnlModuleCompras" runat="server" Visible="true">
-                                     <li>
-                                        <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-compras">
-                                            <img src="/wwwroot/images/icons8-compra-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Compras Icon" />
-                                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Compras</span>
-                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
-                                        </button>
-                                        <ul id="dropdown-compras" class="hidden py-2 space-y-2">
-                                            <li><asp:Panel ID="pnlSubMenuItemGestionarCompras" runat="server" Visible="false"><a href="/Pages/Compras/Compras.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Compras</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemInsumos" runat="server" Visible="false"><a href="/Pages/Insumos/Insumos.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Insumos</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemProveedores" runat="server" Visible="false"><a href="/Pages/Proveedores/Proveedores.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Proveedores</a></asp:Panel></li>
-                                            <li><asp:Panel ID="pnlSubMenuItemUnidadMedida" runat="server" Visible="false"><a href="/Pages/UnidadesMedida/UnidadesMedida.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Unidad de Medida</a></asp:Panel></li>
-                                        </ul>
-                                     </li>
-                                </asp:Panel>
-                                 <%-- Modulo de configiracion --%>
-                                 <asp:Panel ID="pnlModuleConfiguracion" runat="server" Visible="true">
-                                     <li>
-                                        <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-red-700" data-dropdown-toggle="dropdown-configuracion">
-                                            <img src="/wwwroot/images/icons8-configuración-de-datos-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Config Icon" />
-                                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap menu-text">Configuración</span>
-                                            <img src="/wwwroot/images/flecha.png" class="w-3 h-3 transition-transform duration-300 menu-text dropdown-chevron" alt="dropdown arrow"/>
-                                        </button>
-                                        <ul id="dropdown-configuracion" class="hidden py-2 space-y-2">
-                                            <li><asp:Panel ID="pnlSubMenuItemNegocio" runat="server" Visible="false"><a href="/Pages/Negocio/Negocio.aspx" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-red-700">Datos del Negocio</a></asp:Panel></li>
-                                        </ul>
-                                     </li>
-                                </asp:Panel>
-                             </ul>
-                        </div>
+        <div class="flex h-screen bg-gray-100">
+            <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-64 bg-secondary text-white flex-col lg:static lg:flex">
 
-                        <div class="pt-4 mt-auto border-t border-gray-700">
-                             <asp:LinkButton ID="btnCerrarSesion" OnClick="cerrarSesion_Click" runat="server" CssClass="flex items-center p-2 text-white rounded-lg hover:bg-red-700 group w-full">
-                                <img src="/wwwroot/images/icons8-salida-100.png" class="w-5 h-5 transition duration-75 flex-shrink-0" alt="Logout Icon"/>
-                                <span class="ms-3 menu-text">Cerrar Sesión</span>
-                             </asp:LinkButton>
+                <div class="flex justify-center h-16 shrink-0e">
+                    <a href="/Default.aspx" class="flex items-center">
+                        <%--<img src="/wwwroot/images/LOGO-EL-FOGÓN-2025.ico" class="h-8 w-8 mr-2" alt="Logo El Fogón" />--%>
+                        <span class="text-white text-lg font-bold">El Fogón</span>
+                    </a>
+                </div>
+
+                <nav class="flex-1 px-2 py-4 space-y-2 overflow-y-auto">
+                    <%-- DASHBOARD --%>
+                    <asp:Panel ID="pnlMenuDashboard" runat="server" Visible="true">
+                        <a href="/Default.aspx" class="flex items-center px-2 py-2 text-sm font-bold rounded-md hover:bg-red-700">
+                            <img src="/wwwroot/images/icons8-gráfico-de-barras-100.png" class="w-6 h-6 mr-3" alt="Dashboard Icon" />
+                            <span>Dashboard</span>
+                        </a>
+                    </asp:Panel>
+                    <%-- MODULO DE ACCESO Y ADMINISTRACION --%>
+                    <asp:Panel ID="pnlModuleAcceso" runat="server" Visible="true">
+                        <div>
+                            <button type="button" class="dropdown-toggle flex items-center justify-between w-full px-2 py-2 text-sm font-medium text-left rounded-md hover:bg-red-700">
+                                <span class="flex items-center font-bold">
+                                    <img src="/wwwroot/images/icons8-configuración-del-administrador-100.png" class="w-6 h-6 mr-3" alt="Admin Icon" />
+                                    <span>Administración</span>
+                                </span>
+                                <img src="/wwwroot/images/flecha.png" alt="icon flecha" class="w-4 h-4 dropdown-chevron" />
+                            </button>
+                            <ul class="submenu hidden mt-2 space-y-2 pl-8">
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemUsuarios" runat="server" Visible="true"><a href="/Pages/Usuarios/Usuarios.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Usuarios</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemRoles" runat="server" Visible="true"><a href="/Pages/Rol/Rol.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Roles</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemFormularios" runat="server" Visible="true"><a href="/Pages/Permisos/Permisos.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Permisos</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemNegocio" runat="server" Visible="true"><a href="/Pages/Negocio/Negocio.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Datos del Negocio</a></asp:Panel>
+                                </li>
+                            </ul>
+                        </div>
+                    </asp:Panel>
+                    <%-- MODULO DE VENTAS --%>
+                    <asp:Panel ID="pnlModuleVentas" runat="server" Visible="true">
+                        <div>
+                            <button type="button" class="dropdown-toggle flex items-center justify-between w-full px-2 py-2 text-sm font-bold text-left rounded-md hover:bg-red-700">
+                                <span class="flex items-center ">
+                                    <img src="/wwwroot/images/icons8-porcentaje-100.png" class="w-6 h-6 mr-3" alt="Ventas Icon" />
+                                    <span>Ventas</span>
+                                </span>
+                                <img src="/wwwroot/images/flecha.png" alt="icon flecha" class="w-4 h-4 dropdown-chevron" />
+                            </button>
+                            <ul class="submenu hidden mt-2 space-y-2 pl-8">
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemGestionarVentas" runat="server" Visible="true"><a href="/Pages/Ventas/Ventas.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Ventas</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemClientes" runat="server" Visible="true"><a href="/Pages/Clientes/Clientes.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Clientes</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemProductos" runat="server" Visible="true"><a href="/Pages/Productos/Productos.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Productos</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemCategorias" runat="server" Visible="true"><a href="/Pages/ProductoCategoria/ProductoCategorias.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Categorias</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemMetodoPago" runat="server" Visible="true"><a href="/Pages/MetodosPago/MetodosPago.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Metodo de pago</a></asp:Panel>
+                                </li>
+                            </ul>
+                        </div>
+                    </asp:Panel>
+                    <%-- MODULO DE COMPRAS --%>
+                    <asp:Panel ID="pnlModuleCompras" runat="server" Visible="true">
+                        <div>
+                            <button type="button" class="dropdown-toggle flex items-center justify-between w-full px-2 py-2 text-sm font-bold text-left rounded-md hover:bg-red-700">
+                                <span class="flex items-center ">
+                                    <img src="/wwwroot/images/icons8-inventarios-100.png" class="w-6 h-6 mr-3" alt="Compras Icon" />
+                                    <span>Compras</span>
+                                </span>
+                                <img src="/wwwroot/images/flecha.png" alt="icon flecha" class="w-4 h-4 dropdown-chevron" />
+                            </button>
+                            <ul class="submenu hidden mt-2 space-y-2 pl-8">
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemGestionarCompras" runat="server" Visible="true"><a href="/Pages/Compras/Compras.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Compras</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemInsumos" runat="server" Visible="true"><a href="/Pages/Insumos/Insumos.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Insumos</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemProveedores" runat="server" Visible="true"><a href="/Pages/Proveedores/Proveedores.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Proveedores</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemUnidadMedida" runat="server" Visible="true"><a href="/Pages/UnidadesMedida/UnidadesMedida.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Unidades de Medida</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemInsumoCategoria" runat="server" Visible="true"><a href="/Pages/InsumoCategoria/InsumoCategorias" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Categoria</a></asp:Panel>
+                                </li>
+                                <li>
+                                    <asp:Panel ID="pnlSubMenuItemMovimientoInventario" runat="server" Visible="true"><a href="/Pages/MovimientoInventario/MovimientosInventario.aspx" class="block px-2 py-1 text-sm rounded-md hover:bg-red-700">Movimientos</a></asp:Panel>
+                                </li>
+                            </ul>
+                        </div>
+                    </asp:Panel>
+                </nav>
+
+                <div class="px-2 py-4 shrink-0">
+                    <asp:LinkButton ID="btnCerrarSesion" OnClick="cerrarSesion_Click" runat="server" CssClass="flex items-center px-2 py-2 font-bold rounded-md hover:bg-red-700 group w-full">
+                        <img src="/wwwroot/images/icons8-salida-100.png" class="w-6 h-6 mr-3" alt="Logout Icon"/>
+                        <span>Cerrar Sesión</span>
+                    </asp:LinkButton>
+                </div>
+            </aside>
+            <div class="flex-1 flex flex-col">
+                <%-- NAVBAR DE USUARIO LOGEADO Y NOTIFICACIONES --%>
+                <header class="flex items-center justify-between h-16 bg-white border-b border-gray-200 px-6 shrink-0">
+                    <div>
+                        <%-- icono hamburguesa --%>
+                        <button id="sidebar-toggle" type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none">
+                            <img src="/wwwroot/images/icons8-menu-50.png" alt="icon hamburguesa" class="w-4 h-4" />
+                        </button>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <asp:UpdatePanel ID="updAlertas" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="relative">
+                                    <div class="relative">
+                                        <%-- Icono de alert --%>
+                                        <asp:ImageButton ID="imgAlertbtn" runat="server"
+                                            ImageUrl="~/wwwroot/images/alert.png"
+                                            CssClass="w-6 h-6"
+                                            OnClick="imgAlertbtn_Click" />
+
+                                        <asp:Panel ID="pnlRedDot" runat="server" Visible="false"
+                                            CssClass="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white">
+                                        </asp:Panel>
+                                    </div>
+
+                                    <asp:Panel ID="pnlAlerts" runat="server" Visible="false"
+                                        CssClass="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 z-20">
+
+                                        <div class="p-4 border-b">
+                                            <h3 class="text-lg font-bold text-primary">Notificaciones</h3>
+                                        </div>
+                                        <div class="divide-y divide-gray-200 max-h-80 overflow-y-auto p-4">
+                                            <asp:Label ID="lblContenidoAlertas" runat="server" Text="No hay alertas nuevas" CssClass="text-gray-800 mt-2"></asp:Label>
+                                        </div>
+                                    </asp:Panel>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <div class="text-right">
+                            <asp:Label ID="lblNombreUsuario" runat="server" CssClass="text-sm font-semibold text-gray-800" Text="Nombre Usuario"></asp:Label>
+                            <asp:Label ID="lblRol" runat="server" CssClass="text-xs text-gray-500 block" Text="Rol Usuario"></asp:Label>
                         </div>
                     </div>
-                </aside>
+                </header>
 
-                <button id="sidebar-toggle-button" type="button" class="absolute top-1/2 -right-3 z-50 w-6 h-10 bg-secondary hover:bg-red-700 rounded-r-md flex items-center justify-center">
-                    <svg id="toggle-icon" class="w-4 h-4 text-white transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-            </div>
-
-            <main id="main-content" class="flex-1 p-4 transition-all duration-300">
-                <div class="mt-4">
+                <main class="flex-1 p-6 overflow-y-auto">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                const sidebarContainer = document.getElementById('sidebar-container');
-                const mainContent = document.getElementById('main-content');
-                const toggleButton = document.getElementById('sidebar-toggle-button');
-                const toggleIcon = document.getElementById('toggle-icon');
-                const menuTexts = document.querySelectorAll('.menu-text');
-                const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+                // Lógica para mostrar/ocultar el panel lateral (Sidebar)
+                const sidebar = document.getElementById('sidebar');
+                const sidebarToggle = document.getElementById('sidebar-toggle');
 
-                const collapseSidebar = () => {
-                    sidebarContainer.style.width = '5rem'; // w-20
-                    menuTexts.forEach(text => text.classList.add('hidden'));
-                    toggleIcon.classList.add('rotate-180');
-                    document.querySelectorAll('[data-dropdown-toggle] + ul').forEach(ul => ul.classList.add('hidden'));
-                    localStorage.setItem('sidebar-collapsed', 'true');
-                };
-
-                const expandSidebar = () => {
-                    sidebarContainer.style.width = '16rem'; // w-64
-                    menuTexts.forEach(text => text.classList.remove('hidden'));
-                    toggleIcon.classList.remove('rotate-40');
-                    localStorage.setItem('sidebar-collapsed', 'false');
-                };
-
-                toggleButton.addEventListener('click', () => {
-                    if (localStorage.getItem('sidebar-collapsed') === 'true') {
-                        expandSidebar();
-                    } else {
-                        collapseSidebar();
-                    }
+                sidebarToggle.addEventListener('click', function () {
+                    sidebar.classList.toggle('hidden');
+                    sidebar.classList.toggle('lg:flex'); // En pantallas grandes, usamos flex
+                    // En pantallas pequeñas (menores a lg), 'hidden' controla la visibilidad
                 });
 
-                dropdownToggles.forEach(toggle => {
-                    toggle.addEventListener('click', () => {
-                        if (localStorage.getItem('sidebar-collapsed') !== 'true') {
-                            const dropdownId = toggle.getAttribute('data-dropdown-toggle');
-                            const dropdownMenu = document.getElementById(dropdownId);
-                            const chevron = toggle.querySelector('.dropdown-chevron');
-                            if (dropdownMenu) dropdownMenu.classList.toggle('hidden');
-                            if (chevron) chevron.classList.toggle('rotate-180');
+                // Lógica para los menús desplegables (Dropdowns)
+                const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+                dropdownToggles.forEach(function (toggle) {
+                    toggle.addEventListener('click', function () {
+                        // Encuentra el submenú (el siguiente elemento ul)
+                        const submenu = this.nextElementSibling;
+                        // Encuentra la flecha dentro del botón
+                        const chevron = this.querySelector('.dropdown-chevron');
+
+                        // Muestra u oculta el submenú
+                        submenu.classList.toggle('hidden');
+
+                        // Rota la flecha
+                        if (chevron) {
+                            chevron.classList.toggle('rotate-180');
                         }
                     });
                 });
-
-                // Panel cerrado por defecto, a menos que se haya guardado como abierto
-                if (localStorage.getItem('sidebar-collapsed') === 'false') {
-                    expandSidebar();
-                } else {
-                    collapseSidebar();
-                }
             });
         </script>
     </form>

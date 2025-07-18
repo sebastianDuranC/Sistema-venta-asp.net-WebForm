@@ -27,30 +27,38 @@ namespace CapaPresentacion
             }
 
             // Si hay sesión, obtenemos los datos
-            var usuario = (string)Session["usuario"];
             var permisos = (List<string>)Session["permisos"];
 
-            // 2. Validar que el usuario tenga permiso para ver la página ACTUAL
+            //Validar que el usuario tenga permiso para ver la página ACTUAL
             ValidarAccesoPagina(permisos);
 
             if (!IsPostBack)
             {
-                // 3. Poblar la información del usuario en el sidebar
-                //lblUsuarioNombre.Text = usuario;
-                //lblUsuarioRol.Text = usuario.NombreRol; // Asumo que tienes NombreRol en tu objeto Usuario
+                cargarUsarioRol();
 
-                // 4. Construir el menú dinámicamente basado en permisos
+                //Construir el menú dinámicamente basado en permisos
                 ConfigurarVisibilidadMenu(permisos);
+                VerificarAlertasDeStock();
             }
+        }
+
+        private void cargarUsarioRol()
+        {
+            Usuario usuario = (Usuario)Session["usuario"];
+            lblNombreUsuario.Text = usuario.Nombre;
+
+            UsuarioBLL usuarioBLL = new UsuarioBLL();
+            int rolId = usuarioBLL.ObtenerRolIdNombre(usuario.Nombre);
+            RolBLL rol = new RolBLL();
+            Rol rolLogeado = rol.ObtenerRolPorId(rolId);
+            lblRol.Text = rolLogeado.Nombre;
         }
 
         private void ValidarAccesoPagina(List<string> permisos)
         {
-            // OBTENCIÓN DE RUTA SIMPLIFICADA Y DIRECTA
             // Request.AppRelativeCurrentExecutionFilePath devuelve la ruta exacta en formato "~/Folder/Page.aspx"
             string paginaActual = Request.AppRelativeCurrentExecutionFilePath + ".aspx";
 
-            // COMPARACIÓN DIRECTA Y CLARA
             // Compara la ruta actual con la lista de permisos, ignorando mayúsculas/minúsculas.
             bool tienePermiso = permisos.Any(p => p.Equals(paginaActual, StringComparison.InvariantCultureIgnoreCase));
 
@@ -77,13 +85,14 @@ namespace CapaPresentacion
             pnlSubMenuItemUsuarios.Visible = verificiarVisibilidad("~/Pages/Usuarios/Usuarios.aspx", permisos);
             pnlSubMenuItemRoles.Visible = verificiarVisibilidad("~/Pages/Rol/Rol.aspx", permisos);
             pnlSubMenuItemFormularios.Visible = verificiarVisibilidad("~/Pages/Permisos/Permisos.aspx", permisos);
-            pnlSubMenuItemRolPermisos.Visible = verificiarVisibilidad("~/Pages/RolPermisos/RolPermisos.aspx", permisos);
+            //pnlSubMenuItemRolPermisos.Visible = verificiarVisibilidad("~/Pages/RolPermisos/RolPermisos.aspx", permisos);
+            pnlSubMenuItemNegocio.Visible = verificiarVisibilidad("~/Pages/Negocio/Negocio.aspx", permisos);
 
             pnlModuleAcceso.Visible =
                 pnlSubMenuItemUsuarios.Visible ||
                 pnlSubMenuItemRoles.Visible ||
                 pnlSubMenuItemFormularios.Visible ||
-                pnlSubMenuItemRolPermisos.Visible;
+                pnlSubMenuItemNegocio.Visible;
 
             // Ventas
             pnlSubMenuItemGestionarVentas.Visible = verificiarVisibilidad("~/Pages/Ventas/Ventas.aspx", permisos);
@@ -103,16 +112,21 @@ namespace CapaPresentacion
             pnlSubMenuItemInsumos.Visible = verificiarVisibilidad("~/Pages/Insumos/Insumos.aspx", permisos);
             pnlSubMenuItemProveedores.Visible = verificiarVisibilidad("~/Pages/Proveedores/Proveedores.aspx", permisos);
             pnlSubMenuItemUnidadMedida.Visible = verificiarVisibilidad("~/Pages/UnidadesMedida/UnidadesMedida.aspx", permisos);
+            pnlSubMenuItemInsumoCategoria.Visible = verificiarVisibilidad("~/Pages/InsumoCategoria/InsumoCategorias.aspx", permisos);
+            pnlSubMenuItemMovimientoInventario.Visible = verificiarVisibilidad("~/Pages/MovimientoInventario/MovimientosInventario.aspx", permisos);
 
             pnlModuleCompras.Visible =
                 pnlSubMenuItemGestionarCompras.Visible ||
                 pnlSubMenuItemInsumos.Visible ||
                 pnlSubMenuItemProveedores.Visible ||
-                pnlSubMenuItemUnidadMedida.Visible;
+                pnlSubMenuItemUnidadMedida.Visible ||
+                pnlSubMenuItemInsumoCategoria.Visible ||
+                pnlSubMenuItemMovimientoInventario.Visible;
 
-            // Configuración
-            pnlSubMenuItemNegocio.Visible = verificiarVisibilidad("~/Pages/Negocio/Negocio.aspx", permisos);
-            pnlModuleConfiguracion.Visible = pnlSubMenuItemNegocio.Visible;
+            //// Configuración
+            //pnlSubMenuItemBaseDatos.Visible = verificiarVisibilidad("~/Pages/BD/Respaldo.aspx", permisos);
+
+            //pnlModuleConfiguracion.Visible = pnlSubMenuItemBaseDatos.Visible;
         }
 
         private bool verificiarVisibilidad(string ruta, List<string> permisos)
@@ -128,6 +142,57 @@ namespace CapaPresentacion
                 Session.Clear();
                 Session.Abandon();
                 Response.Redirect("~/Acceso/Login.aspx");
+            }
+        }
+
+        protected void imgAlertbtn_Click(object sender, ImageClickEventArgs e)
+        {
+            // Alterna la visibilidad del panel de alertas
+            pnlAlerts.Visible = !pnlAlerts.Visible;
+
+            // Si el panel se hace visible, carga el contenido
+            if (pnlAlerts.Visible)
+            {
+                CargarContenidoAlertas();
+            }
+        }
+
+        private void VerificarAlertasDeStock()
+        {
+            // --- AQUÍ VA LA LÓGICA DEL SP ---
+            // Llama a tu método de negocio que ejecuta el Stored Procedure
+            // Por ejemplo, asumamos que tienes un método que devuelve una lista o un DataTable
+            // CN_Producto cnProducto = new CN_Producto();
+            // DataTable dtAlertas = cnProducto.ObtenerAlertasStock();
+
+            // Simulación: vamos a asumir que tienes 2 alertas
+            int numeroDeAlertas = 2; // Reemplaza esto con la cuenta real: dtAlertas.Rows.Count;
+
+            if (numeroDeAlertas > 0)
+            {
+                // Si hay alertas, muestra el punto rojo
+                pnlRedDot.Visible = true;
+            }
+            else
+            {
+                pnlRedDot.Visible = false;
+            }
+        }
+
+        private void CargarContenidoAlertas()
+        {
+            int numeroDeAlertas = 2; // Reemplaza esto con la cuenta real: dtAlertas.Rows.Count;
+
+            if (numeroDeAlertas > 0)
+            {
+                // Si hay alertas, muestra el punto rojo
+                pnlRedDot.Visible = true;
+                lblContenidoAlertas.Text = "Coca Cola 2l quedan solo 2 unidades<br/>";
+                lblContenidoAlertas.Text += "Gabriel se llevo 2 platos";
+            }
+            else
+            {
+                pnlRedDot.Visible = false;
             }
         }
     }

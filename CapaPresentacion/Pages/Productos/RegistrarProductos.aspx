@@ -5,7 +5,7 @@
         <!-- Header sticky -->
         <div class="sticky top-0 z-10 mb-6 flex items-center justify-between py-4">
             <h2 class="text-3xl font-extrabold text-gray-900">Crear Nuevo Producto</h2>
-            <asp:Button CssClass="bg-primary inline-flex items-center rounded-md px-5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-primary/75 hover:cursor-pointer focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2"
+            <asp:Button CssClass="inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-base font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-primary/75 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 Text="Volver" runat="server" ID="btnVolverProductos" OnClick="btnVolverProductos_Click" />
         </div>
 
@@ -46,14 +46,6 @@
                                     <label for="<%= ddlCategoria.ClientID %>" class="block text-sm font-medium text-gray-600 mb-1">Categoría</label>
                                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="w-full rounded-lg border border-gray-300 bg-white p-3 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
                                     </asp:DropDownList>
-                                </div>
-                                <div>
-                                    <label for="<%= txtStock.ClientID %>" class="block text-sm font-medium text-gray-600 mb-1">Stock Inicial</label>
-                                    <asp:TextBox ID="txtStock" runat="server" TextMode="Number" CssClass="w-full rounded-lg border border-gray-300 p-3 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500" placeholder="Ej: 50"></asp:TextBox>
-                                </div>
-                                <div>
-                                    <label for="<%= txtStockMinimo.ClientID %>" class="block text-sm font-medium text-gray-600 mb-1">Stock Mínimo</label>
-                                    <asp:TextBox ID="txtStockMinimo" runat="server" TextMode="Number" CssClass="w-full rounded-lg border border-gray-300 p-3 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500" placeholder="Ej: 10"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +125,7 @@
                     <!-- Botón de Guardar sticky abajo -->
                     <div class="sticky bottom-0 z-10 py-4">
                         <asp:Button ID="btnRegistrar" runat="server" Text="Guardar Producto" OnClick="btnRegistrar_Click"
-                            CssClass="bg-primary flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-4 text-lg font-bold text-white transition-colors duration-300 hover:bg-primary/85" />
+                            CssClass="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary py-4 text-lg font-bold text-white transition-colors duration-300 hover:bg-primary/85" />
                     </div>
                 </ContentTemplate>
                 <Triggers>

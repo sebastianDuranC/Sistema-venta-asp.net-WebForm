@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="flex w-full flex-col justify-between py-4">
         <div class="mb-4 flex items-center justify-between">
-            <h2 class="text-primary text-3xl font-extrabold">Gestion de ventas</h2>
-            <asp:Button CssClass="bg-primary mt-2 inline-block rounded px-4 py-2 font-semibold text-white shadow transition-colors hover:bg-primary/85 hover:cursor-pointer focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2" Text="Crear venta" runat="server" ID="btnRegistrarVenta" OnClick="btnRegistrarVenta_Click" />
+            <h2 class="text-3xl font-extrabold text-primary">Gestion de ventas</h2>
+            <asp:Button CssClass="mt-2 inline-block rounded bg-primary px-4 py-2 font-semibold text-white shadow transition-colors hover:cursor-pointer hover:bg-primary/85 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" Text="Crear venta" runat="server" ID="btnRegistrarVenta" OnClick="btnRegistrarVenta_Click" />
         </div>
     </div>
     <div class="flex rounded-lg bg-white p-4">
@@ -35,11 +35,11 @@
                     <tr>
                         <td class="px-4 py-2"><%# Eval("VentaId") %>  </td>
                         <td class="px-4 py-2"><%# Eval("Fecha") %> </td>
-                        <td class="px-4 py-2"><%# Eval("Total") %> </td>
+                        <td class="px-4 py-2">Bs. <%# Eval("Total") %> </td>
                         <td class="px-4 py-2"><%# Eval("TipoVenta") %> </td>
                         <td class="px-4 py-2"><%# Eval("Cliente") %> </td>
-                        <td class="px-4 py-2"><%# Eval("MontoRecibido") %> </td>
-                        <td class="px-4 py-2"><%# Eval("CambioDevuelto") %> </td>
+                        <td class="px-4 py-2">Bs. <%# Eval("MontoRecibido") %> </td>
+                        <td class="px-4 py-2">Bs. <%# Eval("CambioDevuelto") %> </td>
                         <td class="px-4 py-2"><%# Eval("Vendedor") %> </td>
                         <td class="px-4 py-2"><%# Eval("MetodoPago") %> </td>
                         <td class="px-4 py-2">

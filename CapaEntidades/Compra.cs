@@ -12,9 +12,11 @@ namespace CapaEntidades
         public DateTime Fecha { get; set; }
         public decimal Total { get; set; }
         public int UsuarioId { get; set; }
+        public int ProveedorId { get; set; }
         public bool Estado { get; set; }
 
         public virtual Usuario Usuario { get; set; }
+        public virtual Proveedor Proveedor { get; set; }
         public virtual ICollection<DetalleCompra> DetallesCompra { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaEntidades;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Web.Security;
@@ -19,15 +20,19 @@ namespace CapaPresentacion.Acceso
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsuario.Text.Trim();
-            string password = txtPassword.Text.Trim();
+            Usuario usuario = new Usuario
+            {
+                Nombre = txtUsuario.Text.Trim(),
+                Contra = txtPassword.Text.Trim()
+            };
 
             UsuarioBLL CN_negocio = new UsuarioBLL();
-            if (CN_negocio.ValidarCredencialesUsuario(usuario, password))
+            bool resultado = CN_negocio.ValidarCredencialesUsuario(usuario);
+            if (resultado)
             {
-                FormsAuthentication.SetAuthCookie(usuario, false);
+                FormsAuthentication.SetAuthCookie(usuario.Nombre, false);
                 UsuarioBLL usuarioBLL = new UsuarioBLL();
-                int rolIdDelUsuario = usuarioBLL.ObtenerRolIdNombre(usuario);
+                int rolIdDelUsuario = usuarioBLL.ObtenerRolIdNombre(usuario.Nombre);
                 Session["usuario"] = usuario;
 
                 // Obtener y guardar la lista de rutas permitidas

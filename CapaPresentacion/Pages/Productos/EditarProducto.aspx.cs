@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Linq;
 using System.Collections.Generic;
+using System.Globalization; // Para manejo de decimales con cultura invariante
 
 namespace CapaPresentacion.Pages.Productos
 {
@@ -56,8 +57,7 @@ namespace CapaPresentacion.Pages.Productos
                 DataRow row = producto.Rows[0];
                 hfProductoId.Value = row["Id"].ToString();
                 txtNombre.Text = row["Nombre"].ToString();
-                txtPrecio.Text = row["Precio"] != DBNull.Value ? Convert.ToDecimal(row["Precio"]).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0"; txtStock.Text = row["Stock"] != DBNull.Value ? row["Stock"].ToString() : "0";
-                txtStockMinimo.Text = row["StockMinimo"] != DBNull.Value ? row["StockMinimo"].ToString() : "0";
+                txtPrecio.Text = row["Precio"] != DBNull.Value ? Convert.ToDecimal(row["Precio"]).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0";
                 ddlCategoria.SelectedValue = row["ProductoCategoriaId"].ToString();
 
                 string fotoUrl = row.Table.Columns.Contains("FotoUrl") ? row["FotoUrl"].ToString() : string.Empty;
@@ -81,13 +81,12 @@ namespace CapaPresentacion.Pages.Productos
 
         private Producto MapearFormularioAProducto()
         {
-            int id = 0, stock = 0, stockMinimo = 0, categoriaId = 0;
+            int id = 0, categoriaId = 0;
             decimal precio = 0;
 
             int.TryParse(hfProductoId.Value, out id);
-            decimal.TryParse(txtPrecio.Text, out precio);
-            int.TryParse(txtStock.Text, out stock);
-            int.TryParse(txtStockMinimo.Text, out stockMinimo);
+            string precioTexto = txtPrecio.Text.Trim().Replace(',', '.');
+            decimal.TryParse(precioTexto, NumberStyles.Any, CultureInfo.InvariantCulture, out precio);
             int.TryParse(ddlCategoria.SelectedValue, out categoriaId);
 
             return new Producto
@@ -95,8 +94,6 @@ namespace CapaPresentacion.Pages.Productos
                 Id = id,
                 Nombre = txtNombre.Text.Trim(),
                 Precio = precio,
-                Stock = stock,
-                StockMinimo = stockMinimo,
                 ProductoCategoriaId = categoriaId
             };
         }
@@ -180,7 +177,8 @@ namespace CapaPresentacion.Pages.Productos
             DataRow newRow = dt.NewRow();
             newRow["InsumoId"] = insumoId;
             newRow["InsumoNombre"] = ddlInsumo.SelectedItem.Text;
-            newRow["Cantidad"] = Convert.ToDecimal(txtInsumoCantidad.Text);
+            string cantidadTexto = txtInsumoCantidad.Text.Trim().Replace(',', '.');
+            newRow["Cantidad"] = decimal.Parse(cantidadTexto, CultureInfo.InvariantCulture);
             newRow["Tipo"] = ddlInsumoTipo.SelectedValue;
             dt.Rows.Add(newRow);
 

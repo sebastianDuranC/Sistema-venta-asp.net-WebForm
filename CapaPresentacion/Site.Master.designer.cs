@@ -69,13 +69,13 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemFormularios;
 
         /// <summary>
-        /// Control pnlSubMenuItemRolPermisos.
+        /// Control pnlSubMenuItemNegocio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemRolPermisos;
+        protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemNegocio;
 
         /// <summary>
         /// Control pnlModuleVentas.
@@ -177,22 +177,22 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemUnidadMedida;
 
         /// <summary>
-        /// Control pnlModuleConfiguracion.
+        /// Control pnlSubMenuItemInsumoCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlModuleConfiguracion;
+        protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemInsumoCategoria;
 
         /// <summary>
-        /// Control pnlSubMenuItemNegocio.
+        /// Control pnlSubMenuItemMovimientoInventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemNegocio;
+        protected global::System.Web.UI.WebControls.Panel pnlSubMenuItemMovimientoInventario;
 
         /// <summary>
         /// Control btnCerrarSesion.
@@ -202,6 +202,69 @@ namespace CapaPresentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCerrarSesion;
+
+        /// <summary>
+        /// Control updAlertas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updAlertas;
+
+        /// <summary>
+        /// Control imgAlertbtn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgAlertbtn;
+
+        /// <summary>
+        /// Control pnlRedDot.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlRedDot;
+
+        /// <summary>
+        /// Control pnlAlerts.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAlerts;
+
+        /// <summary>
+        /// Control lblContenidoAlertas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContenidoAlertas;
+
+        /// <summary>
+        /// Control lblNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
+
+        /// <summary>
+        /// Control lblRol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRol;
 
         /// <summary>
         /// Control MainContent.

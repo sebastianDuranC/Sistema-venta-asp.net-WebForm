@@ -24,6 +24,15 @@ namespace CapaPresentacion.Pages.UnidadesMedida
         protected global::System.Web.UI.WebControls.Button btnCrearNuevo;
 
         /// <summary>
+        /// Control updUnidadesMedida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updUnidadesMedida;
+
+        /// <summary>
         /// Control rpttbUnidadMedida.
         /// </summary>
         /// <remarks>

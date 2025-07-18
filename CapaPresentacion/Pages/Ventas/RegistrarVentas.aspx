@@ -39,10 +39,11 @@
                         <ItemTemplate>
                             <div class="producto rounded-lg border p-4 text-center">
                                 <asp:HiddenField ID="idProducto" runat="server" Value='<%# Eval("Id") %>' />
-                                <img src='<%# Eval("FotoUrl") %>' alt='<%# Eval("Nombre") %>' class="mx-auto h-32 rounded-lg bg-contentbg" />
+                                <img src='<%# Eval("FotoUrl") %>' alt='<%# Eval("Nombre") %>' class="mx-auto h-32 rounded-lg bg-contentbg object-cover" />
                                 <h3 class="font-semibold"><%# Eval("Nombre") %></h3>
                                 <p class="text-gray-600">Bs. <%# Eval("Precio", "{0:N2}") %></p>
-                                <asp:Button Text="+" runat="server" class="mt-2 rounded-full border px-3 py-1" data-producto-id='<%# Eval("Id") %>' ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click" />
+                                <p class="text-gray-600">Disponible: <%# Eval("Stock") %></p>
+                                <asp:Button Text="+" runat="server" class="mt-2 w-10/12 cursor-pointer rounded-lg bg-primary py-1 text-white" data-producto-id='<%# Eval("Id") %>' ID="btnAgregarProducto" OnClick="btnAgregarProducto_Click" />
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>

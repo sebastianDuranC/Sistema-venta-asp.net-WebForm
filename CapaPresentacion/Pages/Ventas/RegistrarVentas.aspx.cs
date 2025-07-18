@@ -158,7 +158,6 @@ namespace CapaPresentacion.Pages.Ventas
                                          Id = Convert.ToInt32(row["Id"]),
                                          Nombre = row["Nombre"].ToString(),
                                          Precio = Convert.ToDecimal(row["Precio"]),
-                                         Stock = row["Stock"] != DBNull.Value ? (int?)Convert.ToInt32(row["Stock"]) : null
                                      }).FirstOrDefault();
                 if (producto != null)
                 {
@@ -353,6 +352,7 @@ namespace CapaPresentacion.Pages.Ventas
             {
                 ShowToast(ex.Message, "error");
             }
+            CargarDatosIniciales();
         }
 
         private void LimpiarInputs()

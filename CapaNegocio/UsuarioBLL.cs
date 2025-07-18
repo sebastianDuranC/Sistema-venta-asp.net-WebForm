@@ -38,22 +38,25 @@ namespace CapaNegocio
             }
         }
 
-        public bool ValidarCredencialesUsuario(string usuario, string passwordIngresado)
+        public bool ValidarCredencialesUsuario(Usuario usuario)
         {
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(passwordIngresado))
+            //VALIDACIONES
+            if (string.IsNullOrEmpty(usuario.Nombre) || string.IsNullOrEmpty(usuario.Contra))
             {
                 return false;
             }
-            var datos = usuarioDal.ValidarCredencialesUsuario(usuario); //datos completo del usuario por su nombre
+            var datos = usuarioDal.ValidarCredencialesUsuario(usuario.Nombre); //datos completo del usuario por su nombre
             if (datos == null) //si no hay datos del usuario
             {
                 return false; //usuario no existe
             }
+
+            //VALIDACION DE CONTRASEÑA
             string passwordHash = datos.FirstOrDefault()?.Contra; //contraseña hasheada del usuario
             bool credencialesValidas = false;
             try
             {
-                credencialesValidas = BCrypt.Net.BCrypt.Verify(passwordIngresado, passwordHash); //verifica si la contraseña ingresada coincide con la hasheada
+                credencialesValidas = BCrypt.Net.BCrypt.Verify(usuario.Contra, passwordHash); //verifica si la contraseña ingresada coincide con la hasheada
             }
             catch (Exception)
             {
@@ -91,29 +94,35 @@ namespace CapaNegocio
         {
             if (string.IsNullOrEmpty(usuario.Nombre) || string.IsNullOrEmpty(usuario.Contra) || usuario.RolId == 0 || usuario.NegocioId == 0)
             {
-                return false;
+                throw new ArgumentException("Todos los campos deben ser completados");
             }
 
             // Hashear la contraseña antes de guardarla  
             usuario.Contra = BCrypt.Net.BCrypt.HashPassword(usuario.Contra);
-            try
-            {
-                return usuarioDal.RegistrarUsuario(usuario);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al intentar registrar el usuario: " + ex);
-            }
+
+            return usuarioDal.RegistrarUsuario(usuario);
         }
 
-        public bool EditarUsuario(Usuario usuario)
+        public bool EditarUsuario(Usuario usuario, string contraNueva)
         {
             if (string.IsNullOrEmpty(usuario.Nombre) || string.IsNullOrEmpty(usuario.Contra) || usuario.RolId == 0 || usuario.NegocioId == 0)
             {
-                return false;
+                throw new ArgumentException("Todos los campos deben ser completados");
             }
-            // Hashear la contraseña antes de guardarla  
-            usuario.Contra = BCrypt.Net.BCrypt.HashPassword(usuario.Contra);
+
+            // Hashear la contraseña antes de guardarla
+            var datos = usuarioDal.ValidarCredencialesUsuario(usuario.Nombre); //datos completo del usuario por su nombre
+            string passwordHash = datos.FirstOrDefault()?.Contra; //contraseña hasheada del usuario
+            bool resultado = BCrypt.Net.BCrypt.Verify(usuario.Contra, passwordHash);
+            if (resultado) // si la contraseña ingresada es igual a la hasheada
+            {
+                usuario.Contra = contraNueva; // se asigna la nueva contraseña
+            }else // si la contraseña ingresada es diferente a la hasheada
+            {
+                throw new ArgumentException("La contraseña no es correcta");
+            }
+
+            usuario.Contra = BCrypt.Net.BCrypt.HashPassword(contraNueva);
             try
             {
                 return usuarioDal.EditarUsuario(usuario);

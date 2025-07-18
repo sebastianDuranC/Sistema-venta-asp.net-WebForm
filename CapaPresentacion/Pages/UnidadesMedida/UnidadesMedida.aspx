@@ -4,69 +4,71 @@
     <%-- Encabezado de la página: Título y Botón de Crear --%>
     <div class="flex w-full flex-col justify-between py-4">
         <div class="mb-4 flex items-center justify-between">
-            <h2 class="text-3xl font-extrabold text-primary">Gestion de Unidades de Medida</h2>
+            <h2 class="text-primary text-3xl font-extrabold">Gestion de Unidades de Medida</h2>
             <asp:Button
                 ID="btnCrearNuevo"
                 runat="server"
                 Text="Crear Unidad Medida"
                 OnClick="btnCrearNuevo_Click"
-                CssClass="mt-2 inline-block rounded bg-primary px-4 py-2 font-semibold text-white shadow transition-colors hover:cursor-pointer hover:bg-primary/85 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" />
+                CssClass="bg-primary mt-2 inline-block rounded px-4 py-2 font-semibold text-white shadow transition-colors hover:bg-primary/85 hover:cursor-pointer focus:ring-primary focus:outline-none focus:ring-2 focus:ring-offset-2" />
         </div>
     </div>
 
     <%-- Contenedor principal de la tabla --%>
     <div class="flex rounded-lg bg-white p-4">
         <div class="flex w-full flex-col justify-between">
+            <asp:UpdatePanel ID="updUnidadesMedida" runat="server">
+                <ContentTemplate>
+                    <asp:Repeater runat="server" ID="rpttbUnidadMedida" OnItemCommand="rpttbUnidadMedida_ItemCommand">
+                        <%-- Cabecera de la tabla --%>
+                        <HeaderTemplate>
+                            <table class="w-full table-auto border-collapse overflow-hidden rounded-lg shadow" id="tbUnidadMedida" style="width: 100%">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th class="py-2">#</th>
+                                        <th class="py-2">Nombre</th>
+                                        <th class="py-2">Abreviatura</th>
+                                        <th class="py-2">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
 
-            <asp:Repeater runat="server" ID="rpttbUnidadMedida" OnItemCommand="rpttbUnidadMedida_ItemCommand">
-                <%-- Cabecera de la tabla --%>
-                <HeaderTemplate>
-                    <table class="w-full table-auto border-collapse overflow-hidden rounded-lg shadow" id="tbUnidadMedida" style="width: 100%">
-                        <thead>
-                            <tr class="bg-primary text-white">
-                                <th class="py-2">#</th>
-                                <th class="py-2">Nombre</th>
-                                <th class="py-2">Abreviatura</th>
-                                <th class="py-2">Acciones</th>
+                        <%-- Cuerpo de la tabla (filas de datos) --%>
+                        <ItemTemplate>
+                            <tr class=" transition-colors hover:bg-gray-100">
+                                <td class="px-4 py-2"><%# Eval("Id") %></td>
+                                <td class="px-4 py-2"><%# Eval("Nombre") %></td>
+                                <td class="px-4 py-2"><%# Eval("Abreviatura") %></td>
+
+                                <td class="px-4 py-2">
+                                    <div style="display: flex; gap: 0.5rem;">
+
+                                        <asp:Button runat="server" Text="Ver"
+                                            CommandName="Ver" CommandArgument='<%# Eval("Id") %>'
+                                            CssClass="rounded bg-blue-500 px-3 py-1 text-white transition-colors hover:bg-blue-600 hover:cursor-pointer" />
+
+                                        <asp:Button runat="server" Text="Editar"
+                                            CommandName="Editar" CommandArgument='<%# Eval("Id") %>'
+                                            CssClass="rounded bg-yellow-500 px-3 py-1 text-white transition-colors hover:bg-yellow-600 hover:cursor-pointer" />
+                                        <asp:Button runat="server" Text="Eliminar"
+                                            CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>'
+                                            CssClass="rounded bg-red-500 px-3 py-1 text-white transition-colors hover:bg-red-600 hover:cursor-pointer" />
+
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                </HeaderTemplate>
+                        </ItemTemplate>
 
-                <%-- Cuerpo de la tabla (filas de datos) --%>
-                <ItemTemplate>
-                    <tr class=" transition-colors hover:bg-gray-100">
-                        <td class="px-4 py-2"><%# Eval("Id") %></td>
-                        <td class="px-4 py-2"><%# Eval("Nombre") %></td>
-                        <td class="px-4 py-2"><%# Eval("Abreviatura") %></td>
-
-                        <td class="px-4 py-2">
-                            <div style="display: flex; gap: 0.5rem;">
-
-                                <asp:Button runat="server" Text="Ver"
-                                    CommandName="Ver" CommandArgument='<%# Eval("Id") %>'
-                                    CssClass="rounded bg-blue-500 px-3 py-1 text-white transition-colors hover:bg-blue-600 hover:cursor-pointer" />
-
-                                <asp:Button runat="server" Text="Editar"
-                                    CommandName="Editar" CommandArgument='<%# Eval("Id") %>'
-                                    CssClass="rounded bg-yellow-500 px-3 py-1 text-white transition-colors hover:bg-yellow-600 hover:cursor-pointer" />
-                                <asp:Button runat="server" Text="Eliminar"
-                                    CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>'
-                                    CssClass="rounded bg-red-500 px-3 py-1 text-white transition-colors hover:bg-red-600 hover:cursor-pointer" />
-
-                            </div>
-                        </td>
-                    </tr>
-                </ItemTemplate>
-
-                <%-- Pie de la tabla --%>
-                <FooterTemplate>
-                    </tbody>
+                        <%-- Pie de la tabla --%>
+                        <FooterTemplate>
+                            </tbody>
                     </table>
                
-                </FooterTemplate>
-            </asp:Repeater>
-
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <script>
             // Función para inicializar DataTables en nuestra tabla

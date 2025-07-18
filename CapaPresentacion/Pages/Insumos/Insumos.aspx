@@ -26,6 +26,8 @@
                             <tr class="bg-primary text-white">
                                 <th class="py-2">#</th>
                                 <th class="py-2">Nombre</th>
+                                <th class="py-2">Foto</th>
+                                <th class="py-2">Costo</th>
                                 <th class="py-2">Stock</th>
                                 <th class="py-2">Stock Minimo</th>
                                 <th class="py-2">Categoria</th>
@@ -42,6 +44,10 @@
                     <tr class="transition-colors hover:bg-gray-100">
                         <td class="px-4 py-2"><%# Eval("Id") %></td>
                         <td class="px-4 py-2"><%# Eval("Nombre") %></td>
+                        <td class="h-4 w-4 px-4 py-2">
+                            <asp:Image runat="server" ImageUrl='<%# Eval("FotoUrl") %>'></asp:Image>
+                        </td>
+                        <td class="px-4 py-2">Bs. <%# Eval("Costo") %></td>
                         <td class="px-4 py-2"><%# Eval("Stock") %></td>
                         <td class="px-4 py-2"><%# Eval("StockMinimo") %></td>
                         <td class="px-4 py-2"><%# Eval("InsumoCategoria.Nombre") %></td>

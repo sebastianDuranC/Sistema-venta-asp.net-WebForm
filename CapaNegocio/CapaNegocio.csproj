@@ -58,10 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteBLL.cs" />
+    <Compile Include="ComprasBLL.cs" />
     <Compile Include="DashboardBLL.cs" />
     <Compile Include="DetalleVentaBLL.cs" />
     <Compile Include="InsumoBLL.cs" />
+    <Compile Include="InsumoCategoriaBLL.cs" />
     <Compile Include="MetodoPagoBLL.cs" />
+    <Compile Include="MovimientoInventarioBLL.cs" />
     <Compile Include="NegocioBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
     <Compile Include="ProductoInsumoBLL.cs" />

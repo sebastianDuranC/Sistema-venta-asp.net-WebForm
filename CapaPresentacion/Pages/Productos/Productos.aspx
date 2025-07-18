@@ -27,8 +27,6 @@
                                 <th class="py-2">#</th>
                                 <th class="py-2">Nombre</th>
                                 <th class="py-2">Precio</th>
-                                <th class="py-2">Stock</th>
-                                <th class="py-2">Stock mínimo</th>
                                 <th class="py-2">Categoría</th>
                                 <th class="py-2">Foto</th>
                                 <th class="py-2">Acciones</th>
@@ -43,8 +41,6 @@
                         <td class="px-4 py-2"><%# Eval("Id") %></td>
                         <td class="px-4 py-2"><%# Eval("Nombre") %></td>
                         <td class="px-4 py-2"><%# Eval("Precio", "{0:C}") %></td>
-                        <td class="px-4 py-2"><%# string.IsNullOrEmpty(Eval("Stock")?.ToString()) ? "0" : Eval("Stock") %></td>
-                        <td class="px-4 py-2"><%# string.IsNullOrEmpty(Eval("StockMinimo")?.ToString()) ? "0" : Eval("StockMinimo") %></td>
                         <td class="px-4 py-2"><%# Eval("ProductoCategoria.Nombre") %></td>
                         <td class="px-4 py-2">
                             <div style="display: flex; justify-content: center;">
@@ -68,7 +64,6 @@
                                 <%-- Botón Eliminar --%>
                                 <asp:Button runat="server" Text="Eliminar"
                                     CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>'
-                                    OnClientClick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"
                                     CssClass="rounded bg-red-500 px-3 py-1 text-white transition-colors hover:bg-red-600 hover:cursor-pointer" />
 
                             </div>
@@ -119,55 +114,5 @@
                 "responsive": true
             });
         });
-
-        // Función para confirmar la eliminación del producto
-        function confirmarEliminacionProducto(productoId) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "Esta acción no se puede deshacer",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                backdrop: true
-            }).then((resultado) => {
-                if (resultado.isConfirmed) {
-                    eliminarProducto(productoId);
-                }
-            });
-        }
-
-        // Función para realizar la eliminación del producto
-        function eliminarProducto(productoId) {
-            $.ajax({
-                type: "POST",
-                url: "/Pages/Productos/EliminarProducto.ashx",
-                data: { Id: productoId },
-                dataType: "json",
-                success: function (respuesta) {
-                    if (respuesta.exito) {
-                        Swal.fire({
-                            title: '¡Eliminado!',
-                            text: respuesta.mensaje,
-                            icon: 'success',
-                            timer: 2000
-                        }).then(() => {
-                            // Recargar la página para actualizar la lista
-                            window.location.reload();
-                        });
-                    } else {
-                        Swal.fire('Error', respuesta.mensaje, 'error');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error en la llamada AJAX:', { xhr, status, error });
-                    Swal.fire('Error', 'Error al eliminar el producto: ' + error, 'error');
-                }
-            });
-        }
     </script>
 </asp:Content>

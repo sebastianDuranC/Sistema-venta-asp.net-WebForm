@@ -3,6 +3,7 @@ using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -55,6 +56,7 @@ namespace CapaPresentacion.Pages.Usuarios
         {
             string nombreUsuario = txtUsuario.Text.Trim();
             string contra = txtPassword.Text.Trim();
+            string contraNueva = txtPasswordNew.Text.Trim();
             int rolId = Convert.ToInt32(ddlRol.SelectedValue);
             int usuarioId = Convert.ToInt32(Request.QueryString["Id"]);
 
@@ -62,21 +64,40 @@ namespace CapaPresentacion.Pages.Usuarios
             {
                 Id = usuarioId,
                 Nombre = nombreUsuario,
-                Contra = contra, // Asegúrate de hashear la contraseña antes de guardarla
+                Contra = contra,
                 RolId = rolId,
                 NegocioId = 1
             };
 
-            if (usuarioBLL.EditarUsuario(usuario))
+            try
             {
-                //mostrar mensaje de éxito
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Usuario editado correctamente.'); window.location.href = 'Usuarios.aspx';", true);
+                if (usuarioBLL.EditarUsuario(usuario, contraNueva))
+                {
+                    ShowToast("Editado correctamente", "success", "Usuarios.aspx");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //mostrar mensaje de error
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Error al editar el usuario.');", true);
+                ShowToast(ex.Message, "warning");
             }
+        }
+
+        private void ShowToast(string titulo, string icono, string redirectUrl="")
+        {
+            // 1. Prepara el objeto de configuración para SweetAlert
+            string swalConfig = $@"{{
+                position: 'top-end',
+                icon: '{icono}',
+                title: '{titulo.Replace("'", "\\'")}',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true
+            }}";
+
+            // 2. Llama a Swal.fire() y LUEGO, usando .then(), ejecuta la redirección.
+            string script = $"Swal.fire({swalConfig}).then(() => {{ window.location.href = '{redirectUrl}'; }});";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowToastScript", script, true);
         }
     }
 }

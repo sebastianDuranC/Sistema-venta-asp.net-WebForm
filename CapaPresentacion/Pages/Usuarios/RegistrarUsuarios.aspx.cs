@@ -2,6 +2,7 @@
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -26,6 +27,7 @@ namespace CapaPresentacion.Pages.Usuarios
             ddlRol.DataTextField = "Nombre";
             ddlRol.DataValueField = "Id";
             ddlRol.DataBind();
+            ddlRol.Items.Insert(0, new ListItem("Seleccione un rol", "0")); // Agregar opción por defecto
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -48,16 +50,43 @@ namespace CapaPresentacion.Pages.Usuarios
                 NegocioId = 1
             };
 
-            if (usuarioBLL.RegistrarUsuario(usuario))
+            try
             {
-                //Mostrar mensaje de guardado exitoso y redirigir
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Usuario registrado exitosamente.'); window.location.href = 'Usuarios.aspx';", true);
+                if (usuarioBLL.RegistrarUsuario(usuario))
+                {
+                    ShowToast("¡Registrado exitosamente!", "success");
+                    limpiarInputs();
+                }
+                else
+                {
+                    ShowToast("No se pudo registrar el usuario.", "error");
+                }
             }
-            else
+            catch (ArgumentException ex)
             {
-                //Mostrar mensaje de error
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Error al registrar el usuario.');", true);
+                ShowToast(ex.Message, "warning");
             }
+        }
+
+        private void limpiarInputs()
+        {
+            txtUsuario.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            ddlRol.SelectedIndex = 0;
+        }
+
+        private void ShowToast(string titulo, string icono)
+        {
+            // Escapamos las comillas simples para evitar errores de JavaScript
+            string safeTitle = titulo.Replace("'", "\\'");
+            string script = $"Swal.fire({{ " +
+                $"position: 'top-end'," +
+                $" icon: '{icono}'," +
+                $" title: '{safeTitle}'," +
+                $" showConfirmButton: false," +
+                $" timer: 2500," +
+                $" toast: true}});";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowToastScript", script, true);
         }
     }
 }

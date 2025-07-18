@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Data; // Añadido para Path.GetFileName
+using System.Globalization; // Para manejo de decimales con cultura invariante
 
 namespace CapaPresentacion.Pages.Productos
 {
@@ -73,7 +74,7 @@ namespace CapaPresentacion.Pages.Productos
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Debe seleccionar un insumo.');", true);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(txtInsumoCantidad.Text) || !decimal.TryParse(txtInsumoCantidad.Text, out _))
+            if (string.IsNullOrWhiteSpace(txtInsumoCantidad.Text) || !decimal.TryParse(txtInsumoCantidad.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out _))
             {
                 // Muestra un mensaje para que ingrese una cantidad válida.
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Debe ingresar una cantidad válida.');", true);
@@ -97,7 +98,8 @@ namespace CapaPresentacion.Pages.Productos
             DataRow newRow = dt.NewRow();
             newRow["InsumoId"] = insumoId;
             newRow["InsumoNombre"] = ddlInsumo.SelectedItem.Text; // Guardamos el nombre para mostrarlo
-            newRow["Cantidad"] = Convert.ToDecimal(txtInsumoCantidad.Text);
+            string cantidadTexto = txtInsumoCantidad.Text.Trim().Replace(',', '.');
+            newRow["Cantidad"] = decimal.Parse(cantidadTexto, CultureInfo.InvariantCulture);
             newRow["Tipo"] = ddlInsumoTipo.SelectedValue;
 
             dt.Rows.Add(newRow);
@@ -172,21 +174,9 @@ namespace CapaPresentacion.Pages.Productos
 
             string nombreProducto = "";
             nombreProducto = txtNombre.Text.Trim();
-            decimal precio = Convert.ToDecimal(txtPrecio.Text.Trim());
+            string precioTexto = txtPrecio.Text.Trim().Replace(',', '.');
+            decimal precio = decimal.Parse(precioTexto, CultureInfo.InvariantCulture);
 
-            // Usamos TryParse para Stock y StockMinimo para manejar int? correctamente
-            // y evitar el error si el campo está vacío, sin lanzar una excepción aquí.
-            int? stock = null;
-            if (int.TryParse(txtStock.Text.Trim(), out int tempStock))
-            {
-                stock = tempStock;
-            }
-
-            int? stockMinimo = null;
-            if (int.TryParse(txtStockMinimo.Text.Trim(), out int tempStockMinimo))
-            {
-                stockMinimo = tempStockMinimo;
-            }
             int categoriaId = Convert.ToInt32(ddlCategoria.SelectedValue);
 
 
@@ -195,8 +185,6 @@ namespace CapaPresentacion.Pages.Productos
             {
                 Nombre = nombreProducto,
                 Precio = precio,
-                Stock = stock,
-                StockMinimo = stockMinimo,
                 FotoUrl = urlRelativaBD, 
                 ProductoCategoriaId = categoriaId,
                 Estado = true
@@ -237,8 +225,6 @@ namespace CapaPresentacion.Pages.Productos
         {
             txtNombre.Text = "";
             txtPrecio.Text = "";
-            txtStock.Text = "";
-            txtStockMinimo.Text = "";
             ddlCategoria.SelectedValue = "0";
         }
 

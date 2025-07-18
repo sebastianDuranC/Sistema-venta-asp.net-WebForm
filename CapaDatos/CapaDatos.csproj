@@ -48,9 +48,12 @@
   <ItemGroup>
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="CD_Conexion.cs" />
+    <Compile Include="ComprasDAL.cs" />
     <Compile Include="DashboardDAL.cs" />
     <Compile Include="DetalleVentaDAL.cs" />
+    <Compile Include="InsumoCategoriaDAL.cs" />
     <Compile Include="InsumoDAL.cs" />
+    <Compile Include="MovimientoInventarioDAL.cs" />
     <Compile Include="NegocioDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
     <Compile Include="ProductoInsumoDAL.cs" />
