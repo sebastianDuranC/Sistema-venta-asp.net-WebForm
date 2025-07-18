@@ -32,10 +32,10 @@
                         <HeaderTemplate>
                             <table class="w-full table-auto border-collapse overflow-hidden rounded-lg shadow" id="tbUsuarios" style="width: 100%">
                                 <thead>
-                                    <tr class="bg-primary text-center text-white">
+                                    <tr class="bg-primary text-white">
                                         <th class="py-2">#</th>
                                         <th class="py-2">Nombre</th>
-                                        <th class="py-2">Conttraseña</th>
+                                        <th class="py-2">Contraseña</th>
                                         <th class="py-2">Acciones</th>
                                     </tr>
                                 </thead>

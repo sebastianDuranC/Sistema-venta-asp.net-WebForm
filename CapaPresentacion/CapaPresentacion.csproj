@@ -189,6 +189,9 @@
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\Sweetalert2\sweetalert2.all.min.js" />
     <Content Include="Scripts\Sweetalert2\sweetalert2.min.css" />
+    <Content Include="SQLScripts\BDInsertTablas.sql" />
+    <Content Include="SQLScripts\BDProcedimientosAlmacenados.sql" />
+    <Content Include="SQLScripts\DBTablas.sql" />
     <Content Include="tailwind.config.js" />
     <Content Include="wwwroot\css\tailwind.css" />
     <Content Include="wwwroot\images\ala-pollo.png" />
