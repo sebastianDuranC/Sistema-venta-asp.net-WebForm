@@ -255,7 +255,6 @@
     <Content Include="package.json" />
     <Content Include="Scripts\DataTables\es-ES.json" />
     <Content Include="Pages\Ventas\EliminarVentaHandler.ashx" />
-    <Content Include="Pages\Usuarios\EliminarUsuarioHandler.ashx" />
     <Content Include="Pages\Rol\EliminarRolHandler.ashx" />
     <Content Include="Pages\Clientes\EliminarClienteHandler.ashx" />
     <Content Include="DashboardHandler.ashx" />
@@ -671,9 +670,6 @@
     </Compile>
     <Compile Include="Pages\Usuarios\EliminarUsuario.aspx.designer.cs">
       <DependentUpon>EliminarUsuario.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Usuarios\EliminarUsuarioHandler.ashx.cs">
-      <DependentUpon>EliminarUsuarioHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Usuarios\RegistrarUsuarios.aspx.cs">
       <DependentUpon>RegistrarUsuarios.aspx</DependentUpon>

@@ -69,38 +69,39 @@ namespace CapaPresentacion.Pages.Usuarios
 
             // CABEZERA
             sbHtml.Append($@"
-        <div class='flex items-center p-4 bg-primary text-white rounded-t-lg'>
-            <h2 class='text-xl font-bold'>{titulo}</h2>
-        </div>
-    ");
+            <div class='flex items-center p-4 bg-primary text-white rounded-t-lg'>
+                <img src='/wwwroot/images/icons/icon-info.png' class='w-8 h-8 mr-3' alt='Detalles'/>
+                <h2 class='text-xl font-bold'>{titulo}</h2>
+            </div>
+            ");
 
             // CUERPO POPUP
             sbHtml.Append("<div class='p-6'>");
             foreach (var detalle in detalles)
             {
                 sbHtml.Append($@"
-            <div class='flex justify-between items-center border-b border-gray-200 py-3'>
-                <span class='text-sm font-medium text-gray-600'>{detalle.Key}:</span>
-                <span class='text-base font-semibold text-gray-900 text-right'>{detalle.Value}</span>
-            </div>
-        ");
+                <div class='flex justify-between items-center border-b border-gray-200 py-3'>
+                    <span class='text-sm font-medium text-gray-600'>{detalle.Key}:</span>
+                    <span class='text-base font-semibold text-gray-900 text-right'>{detalle.Value}</span>
+                </div>
+                ");
             }
             sbHtml.Append("</div>");
 
             // COMPORTAMIENTO POPUP SWEETALERT
             string script = $@"
-    Swal.fire({{
-        html: `{sbHtml.ToString()}`,
-        showConfirmButton: true,
-        confirmButtonText: 'Cerrar',
-        confirmButtonColor: '#111827',
-        width: '600px',
-        padding: '0',
-        background: '#fff',
-        customClass: {{
-            popup: 'rounded-lg'
-        }}
-    }});";
+            Swal.fire({{
+                html: `{sbHtml.ToString()}`,
+                showConfirmButton: true,
+                confirmButtonText: 'Cerrar',
+                confirmButtonColor: '#111827',
+                width: '600px',
+                padding: '0',
+                background: '#fff',
+                customClass: {{
+                    popup: 'rounded-lg'
+                }}
+            }});";
 
             // Registrar el script
             ScriptManager.RegisterStartupScript(this, this.GetType(), "MostrarDetallesPopup", script, true);

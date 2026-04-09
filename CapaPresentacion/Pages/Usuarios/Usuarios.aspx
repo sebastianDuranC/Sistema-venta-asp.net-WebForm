@@ -90,37 +90,49 @@
         </div>
     </div>
     <script>
-        // Función para inicializar DataTables en nuestra tabla
-        $(document).ready(function () {
-            $('#tbUsuarios').DataTable({
+        // Función para inicializar DataTables
+        function InicializarDataTable() {
+            // Obtenemos una referencia a la tabla
+            var tabla = $('#tbUsuarios');
 
-                // 1. Opciones de visualización y cantidad de registros
-                "pageLength": 5, // Inicia mostrando 5 registros por página
+            // Destruir cualquier instancia anterior de DataTables.
+            // Esto evita errores si la tabla ya fue inicializada.
+            if ($.fn.DataTable.isDataTable(tabla)) {
+                tabla.DataTable().destroy();
+            }
+
+            // Inicializamos DataTables con una configuración
+            tabla.DataTable({
+                "pageLength": 5,
                 "lengthMenu": [
-                    [5, 10], // Valores internos de DataTables (-1 es 'Todos')
-                    ['5 registros', '10 registros'] // Texto que ve el usuario
+                    [5, 10],
+                    ['5 registros', '10 registros']
                 ],
-
-                // 2. Traducción al español para todos los elementos de la tabla
                 "language": {
-                    "url": "/Scripts/DataTables/es-ES.json", // Asegúrate que esta ruta es correcta
-                    // Opcional: puedes definir textos específicos aquí si el JSON no los tiene
-                    "lengthMenu": "Mostrar _MENU_", // Personaliza el texto del menú de longitud
-                    "search": "Buscar:", // Cambia el texto del label de búsqueda
+                    "url": "/Scripts/DataTables/es-ES.json",
+                    "lengthMenu": "Mostrar _MENU_",
+                    "search": "Buscar:",
                     "info": "Mostrando _START_ a _END_ de _TOTAL_ registros"
                 },
-
-                // 3. Diseño y orden de los controles (La clave para el diseño que buscas)
-                //    l -> lengthMenu (El selector de "Mostrar X registros")
-                //    f -> filtering (El campo de "Buscar")
-                //    t -> table (La tabla en sí)
-                //    i -> info (El texto "Mostrando X a Y de Z registros")
-                //    p -> pagination (Los botones de paginación)
                 "dom": '<"flex justify-between items-center mb-4"lf>t<"flex justify-between items-center mt-4"ip>',
-
-                // 4. Mantenemos el diseño responsivo
                 "responsive": true
             });
+        }
+
+        // Se ejecuta la función en la carga inicial de la página
+        $(document).ready(function () {
+            InicializarDataTable();
         });
-</script>
+
+        // Le decimos al ScriptManager de ASP.NET que vuelva a ejecutar
+        // nuestra función CADA VEZ que un UpdatePanel termine de actualizarse.
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        if (prm != null) {
+            prm.add_endRequest(function (sender, e) {
+                if (e.get_error() == null) {
+                    InicializarDataTable();
+                }
+            });
+        }
+    </script>
 </asp:Content>

@@ -9,29 +9,26 @@
 
     <link href="~/wwwroot/css/tailwind.css" rel="stylesheet" type="text/css" />
     <link href="/wwwroot/images/LOGO-EL-FOGÓN-2025.ico" rel="shortcut icon" type="image/x-icon" />
+    <%-- DATATABLE CSS--%>
     <link href="/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="/Scripts/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-
+    <%-- DATATABLE JS --%>
     <script src="/Scripts/jquery-3.7.1.min.js"></script>
-    <script src="/Scripts/Sweetalert2/sweetalert2.all.min.js"></script>
     <script src="/Scripts/DataTables/jquery.dataTables.min.js"></script>
-    <script src="/Scripts/DataTables/dataTables.buttons.min.js"></script>
-    <script src="/Scripts/DataTables/buttons.html5.min.js"></script>
-    <script src="/Scripts/DataTables/jszip.min.js"></script>
-    <script src="/Scripts/DataTables/pdfmake.min.js"></script>
-    <script src="/Scripts/DataTables/vfs_fonts.js"></script>
+    <%-- SWEETALERT CSS--%>
+    <link href="/Scripts/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <%-- SWEETALERT JS --%>
+    <script src="/Scripts/Sweetalert2/sweetalert2.all.min.js"></script>
+    <%-- CHART - GRAFICAS --%>
     <script src="/Scripts/chart.js"></script>
 
     <style>
         #sidebar {
             transition: transform 0.3s ease-in-out;
         }
-
         .rotate-180 {
             transform: rotate(90deg);
         }
-
         .dropdown-chevron {
             transition: transform 0.2s ease-in-out;
         }
